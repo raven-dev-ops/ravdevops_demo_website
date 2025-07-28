@@ -52,7 +52,6 @@ const Demos = ({ id }) => {
           Interactive Demos
         </h2>
 
-        {/* Grid: 1 column on all small screens, 2 on large */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
           {demoSections.map((demo) =>
             demo.Component ? (
@@ -72,23 +71,23 @@ const Demos = ({ id }) => {
                 <div className="bg-gray-50 p-3 rounded-md border border-gray-100 min-h-[180px] flex items-center justify-center overflow-x-auto">
                   <demo.Component />
                 </div>
-                {/* Buttons: always stacked vertically on mobile */}
-                <div className="flex flex-col xs:flex-row items-center justify-center gap-3 mt-5">
+                {/* Side-by-side buttons on all screens */}
+                <div className="flex flex-row justify-center items-center gap-3 mt-5">
                   <a
                     href={`/pages/${demo.id}`}
-                    className="w-full xs:w-auto bg-raven-blue hover:bg-raven-red text-white font-semibold py-2 px-6 rounded-lg shadow transition text-center"
+                    className="bg-raven-blue hover:bg-raven-red text-white font-semibold py-2 px-6 rounded-lg shadow transition text-center"
                   >
                     Learn
                   </a>
                   <button
                     onClick={() => openQuiz(demo.id)}
-                    className="w-full xs:w-auto bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg shadow transition text-center"
+                    className="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-6 rounded-lg shadow transition text-center"
                   >
                     Quiz
                   </button>
                   <button
                     onClick={scrollToTop}
-                    className="w-full xs:w-auto bg-gray-200 hover:bg-gray-300 text-raven-dark font-semibold py-2 px-6 rounded-lg shadow transition text-center"
+                    className="bg-gray-200 hover:bg-gray-300 text-raven-dark font-semibold py-2 px-6 rounded-lg shadow transition text-center"
                   >
                     Top ↑
                   </button>
