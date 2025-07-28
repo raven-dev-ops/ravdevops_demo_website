@@ -4,8 +4,7 @@ import React, { useEffect } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import { QuizModalProvider } from './quiz/QuizModalContext';
-
+import { QuizModalProvider } from './components/QuizModalContext';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Demos from './components/Demos';
