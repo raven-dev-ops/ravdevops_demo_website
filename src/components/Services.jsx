@@ -1,9 +1,17 @@
-// components/Services.jsx
-
 import React from 'react';
 import { motion } from 'framer-motion';
 
 const servicesList = [
+  { 
+    name: "Project Management: Code Overhaul", 
+    desc: "Step-by-step simulation of a code overhaul project—from initial audit through deployment. See how a professional project is executed.",
+    demoLink: "code-overhaul"
+  },
+  {
+    name: "Code Auditing & Testing",
+    desc: "Automated auditing, test generation, and coverage reporting to boost code quality. Watch the audit and test coverage process in action.",
+    demoLink: "code-audit"
+  },
   { name: "Application Development", desc: "Custom mobile and web apps to digitize workflows and engage customers.", demoLink: "ai-chatbot" },
   { name: "Custom Software Development", desc: "Tailor-made software built from scratch to solve unique business challenges.", demoLink: "workflow-automation" },
   { name: "SaaS Development", desc: "Scalable, cloud-based software-as-a-service platforms for your business idea.", demoLink: "saas-dashboard" },
@@ -59,23 +67,20 @@ const Services = ({ id }) => {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
           variants={containerVariants}
           initial="hidden"
-          whileInView="visible" // Animate when scrolled into view
-          viewport={{ once: true, amount: 0.2 }} // Trigger animation once
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
         >
           {servicesList.map((service, index) => (
             <motion.div
               key={index}
-              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col" // Added flex for button alignment
+              className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col"
               variants={itemVariants}
             >
-              {/* Placeholder Icon - Replace with actual icons if desired */}
-              {/* <div className="text-raven-blue text-4xl mb-4">[Icon]</div> */}
               <h3 className="text-xl font-semibold text-raven-dark mb-2">{service.name}</h3>
-              <p className="text-gray-600 mb-4 flex-grow">{service.desc}</p> {/* flex-grow pushes button down */}
-              {/* Use button for better accessibility and control */}
+              <p className="text-gray-600 mb-4 flex-grow">{service.desc}</p>
               <button
                 onClick={() => scrollToDemo(service.demoLink)}
-                className="mt-auto text-left text-raven-blue hover:text-raven-red font-medium text-sm transition duration-200 self-start" // self-start aligns left
+                className="mt-auto text-left text-raven-blue hover:text-raven-red font-medium text-sm transition duration-200 self-start"
               >
                 See Demo ↓
               </button>
@@ -87,4 +92,4 @@ const Services = ({ id }) => {
   );
 };
 
-export default Services; // Default export
+export default Services;
