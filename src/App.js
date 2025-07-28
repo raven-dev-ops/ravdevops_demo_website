@@ -1,6 +1,6 @@
 // App.js
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Demos from './components/Demos';
@@ -12,6 +12,11 @@ import Contact from './components/Contact';
 import Footer from './components/Footer';
 
 function App() {
+  // Force scroll to top on first render
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   // Basic smooth scroll handler for internal links/buttons
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
