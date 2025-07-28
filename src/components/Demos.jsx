@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useQuizModal } from '../quiz/QuizModalContext';
+import { useQuizModal } from '../components/QuizModalContext';
 
 // Import your demo components from the demos directory
 import CodeOverhaulDemo from '../demos/CodeOverhaulDemo';
