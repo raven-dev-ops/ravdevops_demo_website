@@ -1,4 +1,4 @@
-// components/QuizModalContext.jsx
+// src/quiz/QuizModalContext.jsx
 
 import React, {
   createContext,
@@ -8,96 +8,135 @@ import React, {
   useRef,
   useEffect,
   Suspense,
+  lazy,
 } from "react";
 
-// Lazy load all quiz components for performance!
+// Map of quiz keys to dynamic import functions (add more as you create quizzes)
 const quizImportMap = {
-  "testing-demo": () => import("./TestingDemoQuiz"),
-  "code-overhaul-demo": () => import("./CodeOverhaulDemoQuiz"),
-  "code-testing-demo": () => import("./CodeTestingDemoQuiz"),
-  "it-consulting-demo": () => import("./ITConsultingDemoQuiz"),
-  "leadership-demo": () => import("./LeadershipDemoQuiz"),
-  "project-mgmt-demo": () => import("./ProjectMgmtDemoQuiz"),
-  "tech-writing-demo": () => import("./TechWritingDemoQuiz"),
-  "training-tool-demo": () => import("./TrainingToolDemoQuiz"),
-  "workflow-demo": () => import("./WorkflowDemoQuiz"),
-  // Add new quizzes here as needed...
+  "code-overhaul": () => import("./CodeOverhaulDemoQuiz"),
+  "code-audit": () => import("./CodeTestingDemoQuiz"),
+  "ai-chatbot": () => import("./ChatbotDemoQuiz"),
+  "workflow-automation": () => import("./WorkflowDemoQuiz"),
+  "saas-dashboard": () => import("./SaaSDashboardDemoQuiz"),
+  "test-dashboard": () => import("./TestingDemoQuiz"),
+  "user-guide": () => import("./TechWritingDemoQuiz"),
+  "leadership-training": () => import("./LeadershipDemoQuiz"),
+  "it-assessment": () => import("./ITConsultingDemoQuiz"),
+  "project-timeline": () => import("./ProjectMgmtDemoQuiz"),
+  "onboarding-app": () => import("./TrainingToolDemoQuiz"),
+  // Add more keys as needed!
 };
 
 const QuizModalContext = createContext();
 
+/**
+ * Provider for quiz modal. Wrap your App in this.
+ */
 export function QuizModalProvider({ children }) {
   const [quizKey, setQuizKey] = useState(null);
-  const [QuizComponent, setQuizComponent] = useState(null);
-  const modalRef = useRef(null);
+  const [error, setError] = useState(null);
+  const lastActiveElement = useRef(null);
 
-  // Handle dynamic import of quiz
-  useEffect(() => {
-    let isActive = true;
-    if (quizKey && quizImportMap[quizKey]) {
-      quizImportMap[quizKey]()
-        .then((mod) => {
-          if (isActive) setQuizComponent(() => mod.default);
-        })
-        .catch(() => {
-          if (isActive)
-            setQuizComponent(() => () => (
-              <div className="text-red-600">Quiz failed to load.</div>
-            ));
-        });
-    } else {
-      setQuizComponent(null);
+  // Open quiz by key (call from anywhere)
+  const openQuiz = useCallback((key) => {
+    if (quizImportMap[key]) {
+      lastActiveElement.current = document.activeElement;
+      setQuizKey(key);
+      setError(null);
     }
-    return () => {
-      isActive = false;
-    };
-  }, [quizKey]);
+  }, []);
 
-  // Keyboard: Close modal on ESC
+  // Close modal & restore focus for accessibility
+  const closeQuiz = useCallback(() => {
+    setQuizKey(null);
+    setError(null);
+    setTimeout(() => {
+      if (lastActiveElement.current && lastActiveElement.current.focus) {
+        lastActiveElement.current.focus();
+      }
+    }, 0);
+  }, []);
+
+  // Trap focus inside modal for accessibility
+  const modalRef = useRef(null);
   useEffect(() => {
     if (!quizKey) return;
-    const escListener = (e) => {
-      if (e.key === "Escape") setQuizKey(null);
+    const trapFocus = (e) => {
+      if (!modalRef.current) return;
+      const focusableEls = modalRef.current.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (!focusableEls.length) return;
+      const firstEl = focusableEls[0];
+      const lastEl = focusableEls[focusableEls.length - 1];
+      if (e.key === "Tab") {
+        if (e.shiftKey) {
+          if (document.activeElement === firstEl) {
+            e.preventDefault();
+            lastEl.focus();
+          }
+        } else {
+          if (document.activeElement === lastEl) {
+            e.preventDefault();
+            firstEl.focus();
+          }
+        }
+      } else if (e.key === "Escape") {
+        closeQuiz();
+      }
     };
-    window.addEventListener("keydown", escListener);
-    return () => window.removeEventListener("keydown", escListener);
-  }, [quizKey]);
+    document.addEventListener("keydown", trapFocus);
+    return () => document.removeEventListener("keydown", trapFocus);
+  }, [quizKey, closeQuiz]);
 
-  // Click outside: close modal
-  const handleBackdropClick = (e) => {
-    if (modalRef.current && e.target === modalRef.current) setQuizKey(null);
-  };
-
-  // Open/close handlers
-  const openQuiz = useCallback((key) => setQuizKey(key), []);
-  const closeQuiz = useCallback(() => setQuizKey(null), []);
+  // Lazy-load the component, or show error if not found
+  let LazyQuizComponent = null;
+  if (quizKey && quizImportMap[quizKey]) {
+    LazyQuizComponent = lazy(async () => {
+      try {
+        return await quizImportMap[quizKey]();
+      } catch (err) {
+        setError("This quiz could not be loaded. Please try again later.");
+        throw err;
+      }
+    });
+  }
 
   return (
     <QuizModalContext.Provider value={{ openQuiz, closeQuiz }}>
       {children}
-      {QuizComponent && (
+      {quizKey && (
         <div
-          ref={modalRef}
           className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40 transition-opacity"
-          onMouseDown={handleBackdropClick}
+          aria-modal="true"
+          role="dialog"
         >
           <div
             className="bg-white rounded-lg shadow-lg max-w-lg w-full mx-4 relative animate-fadeIn"
+            ref={modalRef}
             tabIndex={-1}
-            role="dialog"
-            aria-modal="true"
+            aria-label="Quiz modal"
           >
             <button
               onClick={closeQuiz}
               className="absolute top-2 right-3 text-gray-500 hover:text-red-500 text-2xl"
               aria-label="Close quiz modal"
+              autoFocus
             >
               &times;
             </button>
             <div className="p-5">
-              <Suspense fallback={<div className="text-center p-4">Loading quiz…</div>}>
-                <QuizComponent />
-              </Suspense>
+              {error ? (
+                <div className="text-red-600 text-center py-8">{error}</div>
+              ) : LazyQuizComponent ? (
+                <Suspense fallback={<div className="text-center py-8">Loading quiz…</div>}>
+                  <LazyQuizComponent />
+                </Suspense>
+              ) : (
+                <div className="text-gray-500 text-center py-8">
+                  Quiz not found.
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -106,6 +145,9 @@ export function QuizModalProvider({ children }) {
   );
 }
 
+/**
+ * Hook to use the modal (call openQuiz('quiz-key'))
+ */
 export function useQuizModal() {
   return useContext(QuizModalContext);
 }
