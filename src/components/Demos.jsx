@@ -1,20 +1,22 @@
-// components/Demos.jsx
-
 import React from 'react';
 import { motion } from 'framer-motion';
 
 // Import your individual demo components
+import CodeOverhaul from '../components/CodeOverhaul';
+import CodeAudit from '../components/CodeAudit';
 import ChatbotDemo from '../demos/ChatbotDemo';
 import WorkflowDemo from '../demos/WorkflowDemo';
-import SaaSDashboardDemo from '../demos/SaaSDashboardDemo'; // Ensure case matches filename
+import SaaSDashboardDemo from '../demos/SaaSDashboardDemo';
 import TestingDemo from '../demos/TestingDemo';
 import TechWritingDemo from '../demos/TechWritingDemo';
 import LeadershipDemo from '../demos/LeadershipDemo';
-import ITConsultingDemo from '../demos/ITConsultingDemo'; // Ensure this file exists
+import ITConsultingDemo from '../demos/ITConsultingDemo';
 import ProjectMgmtDemo from '../demos/ProjectMgmtDemo';
 import TrainingToolDemo from '../demos/TrainingToolDemo';
 
 const demoSections = [
+    { id: 'code-overhaul', title: 'Project Management: Code Overhaul Simulation', Component: CodeOverhaul, desc: "See a step-by-step simulation of a code overhaul project, from initial audit to deployment. Click 'Start Overhaul' to watch each project phase update in real-time." },
+    { id: 'code-audit', title: 'Code Auditing & Testing: Automated Audit', Component: CodeAudit, desc: "Watch a code audit and test coverage process in action, including static analysis, test generation, and coverage reporting. Click 'Start Audit' to see how code quality is measured." },
     { id: 'ai-chatbot', title: 'Application Development: AI Chatbot', Component: ChatbotDemo, desc: "Try our sample AI Chatbot! Ask it basic questions about services to see conversational AI in action." },
     { id: 'workflow-automation', title: 'Custom Software: Workflow Automation', Component: WorkflowDemo, desc: "See how a simple custom tool can automate a tedious process like inventory checks. (Click to simulate)" },
     { id: 'saas-dashboard', title: 'SaaS Development: Analytics Dashboard', Component: SaaSDashboardDemo, desc: "Explore a mock SaaS dashboard interface showing key metrics and user data visualization." },
@@ -51,17 +53,13 @@ const Demos = ({ id }) => {
                                     {/* Render the dynamically imported component */}
                                     <demo.Component />
                                 </div>
-                                {/* Optional Lead Capture within Demo Area */}
-                                {/* <div className="mt-4 text-center">
-                                    <button className="text-sm text-raven-blue hover:text-raven-red font-medium">Interested in this solution?</button>
-                                </div> */}
                             </motion.div>
                         ) : (
                             // Optional: Render a placeholder if a component is missing
                             <div key={demo.id} id={`demo-${demo.id}`} className="border border-dashed border-gray-300 rounded-lg p-6 md:p-8 text-center text-gray-500">
                                 <h3 className="text-2xl font-semibold text-raven-dark mb-3">{demo.title}</h3>
                                 <p className="mb-6">{demo.desc}</p>
-                                <p>(Demo Component Missing for ID: {demo.id})</p> {/* Helpful debug message */}
+                                <p>(Demo Component Missing for ID: {demo.id})</p>
                              </div>
                          )
                     ))}
@@ -71,4 +69,4 @@ const Demos = ({ id }) => {
     );
 };
 
-export default Demos; // Default export
+export default Demos;

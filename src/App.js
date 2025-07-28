@@ -1,6 +1,8 @@
 import React from 'react';
 import Hero from './components/Hero';
 import Services from './components/Services';
+import CodeOverhaul from './components/CodeOverhaul';
+import CodeAudit from './components/CodeAudit';
 import Demos from './components/Demos';
 import Solutions from './components/Solutions';
 import Process from './components/Process';
@@ -14,34 +16,25 @@ function App() {
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
     if (element) {
-      // Adjust for fixed header height if you have one
-      // const headerOffset = 80; // Example offset
-      // const elementPosition = element.getBoundingClientRect().top;
-      // const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-      // window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
-
-      // Simpler version without offset:
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll to top of section
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
 
   return (
-    // Ensure className is applied for potential global styles
     <div className="App">
-      {/* Optional: Simple Nav - uncomment if needed
-      <nav className="sticky top-0 bg-white shadow-md z-50 p-4 hidden md:block">
-        <ul className="flex justify-center space-x-6">
-          <li><button onClick={() => scrollToSection('hero')} className="hover:text-raven-blue">Home</button></li>
-          <li><button onClick={() => scrollToSection('services')} className="hover:text-raven-blue">Services</button></li>
-          <li><button onClick={() => scrollToSection('demos')} className="hover:text-raven-blue">Demos</button></li>
-          <li><button onClick={() => scrollToSection('solutions')} className="hover:text-raven-blue">Solutions</button></li>
-          <li><button onClick={() => scrollToSection('process')} className="hover:text-raven-blue">Process</button></li>
-          <li><button onClick={() => scrollToSection('why-raven')} className="hover:text-raven-blue">Why Us</button></li>
-          <li><button onClick={() => scrollToSection('pricing')} className="hover:text-raven-blue">Pricing</button></li>
-          <li><button onClick={() => scrollToSection('contact')} className="hover:text-raven-blue">Contact</button></li>
-        </ul>
-      </nav> */}
+      {/* --- TOP DEMOS --- */}
+      <div className="bg-gray-50 py-8 border-b border-gray-200">
+        <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-2">
+          <div className="flex-1 min-w-[320px]">
+            <CodeOverhaul />
+          </div>
+          <div className="flex-1 min-w-[320px]">
+            <CodeAudit />
+          </div>
+        </div>
+      </div>
 
+      {/* --- REST OF SITE --- */}
       <Hero id="hero" scrollToContact={() => scrollToSection('contact')} />
       <Services id="services" />
       <Demos id="demos" />
@@ -51,10 +44,8 @@ function App() {
       <Pricing id="pricing" />
       <Contact id="contact" />
       <Footer />
-      {/* Optional floating badge */}
-      {/* <VeteranBadge /> */}
     </div>
   );
 }
 
-export default App; // Ensure default export
+export default App;
