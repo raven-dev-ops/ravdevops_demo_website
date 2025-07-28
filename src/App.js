@@ -4,13 +4,13 @@ import React, { useEffect } from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from 'react-error-boundary';
 
+// Site Sections (in homepage order)
 import Hero from './components/Hero';
+import WhyRaven from './components/WhyRaven';
+import Solutions from './components/Solutions';
+import Pricing from './components/Pricing';
 import Services from './components/Services';
 import Demos from './components/Demos';
-import Solutions from './components/Solutions';
-import Process from './components/Process';
-import WhyRaven from './components/WhyRaven';
-import Pricing from './components/Pricing';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
