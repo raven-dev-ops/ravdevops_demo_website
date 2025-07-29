@@ -33,11 +33,17 @@ const variants = {
   enter: (direction) => ({
     x: direction > 0 ? 300 : -300,
     opacity: 0,
+    position: "absolute", // Prevents stacking artifacts
   }),
-  center: { x: 0, opacity: 1 },
+  center: {
+    x: 0,
+    opacity: 1,
+    position: "relative",
+  },
   exit: (direction) => ({
     x: direction < 0 ? 300 : -300,
     opacity: 0,
+    position: "absolute", // Prevents stacking artifacts
   }),
 };
 
@@ -56,8 +62,8 @@ const TestimonialCarousel = () => {
 
   return (
     <div className="relative w-full max-w-2xl mx-auto mt-10">
-      <div className="h-[220px] flex items-center justify-center"> {/* Set a fixed/tall-enough height! */}
-        <AnimatePresence initial={false} custom={direction}>
+      <div className="relative w-full flex flex-col items-center justify-center">
+        <AnimatePresence initial={false} custom={direction} mode="wait">
           <motion.div
             key={page}
             custom={direction}
@@ -65,9 +71,14 @@ const TestimonialCarousel = () => {
             initial="enter"
             animate="center"
             exit="exit"
-            transition={{ type: "spring", stiffness: 400, damping: 40 }}
+            transition={{
+              type: "spring",
+              stiffness: 400,
+              damping: 40,
+            }}
+            layout // This line makes the height animate smoothly!
             className={`w-full p-6 rounded-lg shadow bg-gradient-to-r ${testimonial.colorFrom} ${testimonial.colorTo} border-l-4 border-raven-blue text-center flex flex-col justify-center items-center`}
-            style={{ minHeight: 170, maxHeight: 220 }}
+            style={{ minHeight: 120 }}
           >
             <p className="text-gray-700 text-lg italic">{testimonial.quote}</p>
             <p className="mt-2 text-sm font-semibold text-gray-600">{testimonial.author}</p>
