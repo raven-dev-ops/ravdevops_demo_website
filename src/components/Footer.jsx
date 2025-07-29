@@ -1,7 +1,6 @@
 // components/Footer.jsx
 
 import React from 'react';
-import veteranBadge from '../assets/american_veteran_badge.png';
 
 const socials = [
   {
@@ -28,9 +27,8 @@ const Footer = () => {
           </p>
         </div>
         
-        {/* Social + Badge */}
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-2">
-          {/* Social Links */}
+        {/* Social Links */}
+        <div className="flex justify-center space-x-4 mb-2">
           {socials.map((social) => (
             <a
               key={social.name}
@@ -44,14 +42,6 @@ const Footer = () => {
               <span className="sr-only">{social.name}</span>
             </a>
           ))}
-          {/* Veteran badge */}
-          <img
-            src={veteranBadge}
-            alt="Veteran-Owned Business"
-            className="h-9 w-auto rounded bg-white border border-gray-200 shadow ml-0 sm:ml-3"
-            style={{ maxWidth: 48 }}
-            loading="lazy"
-          />
         </div>
 
         {/* Info */}
