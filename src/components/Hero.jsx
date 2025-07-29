@@ -42,7 +42,7 @@ const Hero = ({ id, scrollToContact }) => {
           transition={{ duration: 0.6, delay: 0.08 }}
           className="text-4xl md:text-5xl lg:text-6xl font-bold text-raven-dark mb-4 leading-tight"
         >
-          American <span className="text-raven-blue">Software</span> Solutions.
+          Artificial Intelligence <span className="text-raven-blue">Software</span> Solutions = A.S.S.
         </motion.h1>
 
         <motion.p
