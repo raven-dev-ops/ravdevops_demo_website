@@ -1,4 +1,4 @@
-// demos/CodeTesting.jsx
+// demos/CodeTestingDemo.jsx
 
 import React, { useState } from 'react';
 
