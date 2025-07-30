@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* --- DELETE ANY LINE THAT LOOKS LIKE --- */
-/* @tailwindcss something;  <-- REMOVE THIS */
 
 /* Your custom base styles go AFTER the directives */
 body {
