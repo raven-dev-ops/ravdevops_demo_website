@@ -108,7 +108,7 @@ const SaaSDashboardDemo = () => {
             </div>
             <div className="bg-green-50 p-3 rounded text-center border border-green-100">
               <div className="text-xs text-green-600 uppercase font-semibold">MRR</div>
-              <div className="text-2xl font-bold text-green-700">${data.revenue}</div>
+              <div className="text-2xl font-bold text-green-700">{'$' + data.revenue}</div>
             </div>
             <div className="bg-purple-50 p-3 rounded text-center border border-purple-100">
               <div className="text-xs text-purple-600 uppercase font-semibold">Growth %</div>
