@@ -1,6 +1,6 @@
 // components/ChatBot.jsx
 
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChatBubbleOvalLeftEllipsisIcon, XMarkIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 
@@ -25,6 +25,8 @@ const ChatBot = ({
   const [email, setEmail] = useState('');
   const [selectedMeetingType, setSelectedMeetingType] = useState('');
   const [loading, setLoading] = useState(false);
+  const [messages, setMessages] = useState([]);
+  const listEndRef = useRef(null);
 
   const options = useMemo(
     () => (servicesList && servicesList.length ? servicesList : DEFAULT_SERVICES),
@@ -73,15 +75,36 @@ const ChatBot = ({
         if (saved.name) setName(saved.name);
         if (saved.email) setEmail(saved.email);
         if (saved.selectedMeetingType) setSelectedMeetingType(saved.selectedMeetingType);
+        if (Array.isArray(saved.messages)) setMessages(saved.messages);
+        if (typeof saved.step === 'number') setStep(saved.step);
       }
     } catch {}
   }, []);
 
   // Persist chat state during session
   useEffect(() => {
-    const snapshot = { reason, selectedServices, name, email, selectedMeetingType };
+    const snapshot = { reason, selectedServices, name, email, selectedMeetingType, messages, step };
     try { sessionStorage.setItem('chatbot_state', JSON.stringify(snapshot)); } catch {}
-  }, [reason, selectedServices, name, email, selectedMeetingType]);
+  }, [reason, selectedServices, name, email, selectedMeetingType, messages, step]);
+
+  // Seed greeting and first prompt when opening and empty
+  useEffect(() => {
+    if (open && messages.length === 0) {
+      setMessages([{ id: 'greet', role: 'bot', text: 'Hi! 👋 What brings you to the website today?' }]);
+      setStep(1);
+    }
+  }, [open, messages.length]);
+
+  // Auto-scroll conversation to bottom
+  useEffect(() => {
+    if (listEndRef.current) {
+      listEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [messages]);
+
+  const appendMessage = (role, text) => {
+    setMessages((prev) => [...prev, { id: `${Date.now()}-${Math.random()}`, role, text }]);
+  };
 
   const toggleService = (svc) => {
     setSelectedServices((prev) =>
@@ -120,6 +143,9 @@ const ChatBot = ({
       };
       openCalendlyUrl(url, prefill);
       setStep(5);
+      const labelMap = { zoom: 'Zoom', teams: 'Microsoft Teams', google: 'Google Meet', phone: 'Phone Call' };
+      appendMessage('user', `Preferred meeting: ${labelMap[meetingType] || meetingType}`);
+      appendMessage('bot', 'Great — opening the scheduler so you can pick a time.');
     } catch (e) {
       openCalendlyUrl(calendlyUrl);
       setStep(5);
@@ -148,6 +174,17 @@ const ChatBot = ({
             </div>
 
             <div className="p-4 space-y-4">
+              {/* Conversation window */}
+              <div className="h-64 overflow-y-auto pr-1 space-y-2 border border-gray-100 rounded-md p-2 bg-gray-50">
+                {messages.map((m) => (
+                  <div key={m.id} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`${m.role === 'user' ? 'bg-raven-blue text-white' : 'bg-white text-gray-800 border border-gray-200'} px-3 py-2 rounded-2xl max-w-[85%] shadow-sm`}>
+                      {m.text}
+                    </div>
+                  </div>
+                ))}
+                <div ref={listEndRef} />
+              </div>
               {step === 1 && (
                 <div>
                   <div className="text-sm text-gray-800 font-medium mb-2">
