@@ -55,7 +55,7 @@ function App() {
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <div className="App bg-gray-50 min-h-screen flex flex-col">
           <Helmet>
-            <title>RAV DevOps — Veteran-Owned, US-Based Tech Solutions</title>
+            <title>RAV DevOps — US-Based Tech Solutions</title>
             <meta
               name="description"
               content="Veteran-owned, US-based DevOps, cloud, analytics, and custom software to eliminate inefficiencies and drive growth."
@@ -73,9 +73,6 @@ function App() {
           <main role="main" className="flex-grow max-w-7xl mx-auto w-full px-2 sm:px-6 lg:px-8">
             <Hero
               id="hero"
-              onBookConsultation={() => goToContactWith('Consultation')}
-              onRequestDemo={() => goToContactWith('Demo Request')}
-              onJoinRetainer={() => goToContactWith('CI Retainer Program')}
               scrollToSection={scrollToSection}
             />
             <Services id="services" />
