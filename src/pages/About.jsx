@@ -2,6 +2,31 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import SeoHead from '../components/SeoHead';
 import damonPortrait from '../assets/damonheath_portrait.png';
+import charityPortrait from '../assets/charityolivas_portrait.png';
+
+const staffProfiles = [
+  {
+    name: 'Damon Heath',
+    title: 'Lead Software Engineer',
+    image: damonPortrait,
+    bullets: [
+      'Veteran-owned, America-first engineering partner focused on building secure, reliable systems for U.S. teams operating in high-stakes environments.',
+      'Cloud architectures on Heroku, Netlify, and container platforms with documented runbooks instead of fragile one-off scripts.',
+      'Containerization with Docker and pragmatic GitHub Actions pipelines that keep builds, tests, and deploys predictable and repeatable.',
+      'Full-stack delivery across Next.js, Django, and Discord automation, with observability, logging, and security designed in from day one.',
+    ],
+  },
+  {
+    name: 'Charity Olivas',
+    title: 'Chief Secretary',
+    image: charityPortrait,
+    bullets: [
+      'Leads administrative operations so engineering and client work stay organized and on schedule.',
+      'Coordinates communication, documentation, and meeting logistics across internal and client teams.',
+      'Maintains records and processes that keep engagements running smoothly from first contact through delivery.',
+    ],
+  },
+];
 
 const milestones = [
   {
@@ -52,6 +77,14 @@ const milestones = [
 
 export default function About() {
   const [openTimelineYear, setOpenTimelineYear] = React.useState(null);
+  const [activeStaffIndex, setActiveStaffIndex] = React.useState(0);
+
+  const totalStaff = staffProfiles.length;
+  const activeStaff = staffProfiles[activeStaffIndex];
+  const isEven = activeStaffIndex % 2 === 0;
+
+  const goPrevStaff = () => setActiveStaffIndex((prev) => (prev - 1 + totalStaff) % totalStaff);
+  const goNextStaff = () => setActiveStaffIndex((prev) => (prev + 1) % totalStaff);
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 lg:px-6">
@@ -69,37 +102,61 @@ export default function About() {
         </p>
       </header>
 
-      <section className="grid gap-2 md:grid-cols-2 md:items-stretch">
-        <div className="flex h-full justify-center md:justify-end">
-          <div className="h-full overflow-hidden rounded-3xl border border-raven-border/70 bg-raven-card/80 p-2 shadow-soft-glow flex items-center justify-center">
+      <section className="grid gap-6 md:grid-cols-2 md:items-center">
+        <div
+          className={`flex h-full justify-center md:justify-center ${
+            isEven ? 'md:order-1' : 'md:order-2'
+          }`}
+        >
+          <div className="flex h-56 w-56 items-center justify-center overflow-hidden rounded-full border border-raven-border/70 bg-raven-card/80 p-2 shadow-soft-glow sm:h-64 sm:w-64">
             <img
-              src={damonPortrait}
-              alt="Portrait of Damon Heath, Raven Development Operations"
-              className="h-auto max-h-80 w-full max-w-md rounded-2xl object-cover md:max-w-lg"
+              src={activeStaff.image}
+              alt={`Portrait of ${activeStaff.name}, ${activeStaff.title}`}
+              className="h-full w-full rounded-full object-cover"
             />
           </div>
         </div>
-        <div className="h-full space-y-6">
-          <div className="h-full rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6">
-            <h2 className="text-2xl font-semibold text-white">What I bring</h2>
+        <div
+          className={`flex h-full flex-col justify-between space-y-6 ${
+            isEven ? 'md:order-2' : 'md:order-1'
+          }`}
+        >
+          <div className="rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6">
+            <h2 className="text-2xl font-semibold text-white">{activeStaff.name}</h2>
+            <p className="mt-1 text-sm font-semibold uppercase tracking-[0.2em] text-raven-cyan">
+              {activeStaff.title}
+            </p>
             <ul className="mt-4 space-y-2 text-sm text-slate-300">
-              <li>
-                Veteran-owned, America-first engineering partner focused on building secure, reliable systems for U.S. teams
-                operating in high-stakes environments.
-              </li>
-              <li>
-                Cloud architectures on Heroku, Netlify, and container platforms with documented runbooks instead of fragile
-                one-off scripts.
-              </li>
-              <li>
-                Containerization with Docker and pragmatic GitHub Actions pipelines that keep builds, tests, and deploys
-                predictable and repeatable.
-              </li>
-              <li>
-                Full-stack delivery across Next.js, Django, and Discord automation, with observability, logging, and security
-                designed in from day one.
-              </li>
+              {activeStaff.bullets.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
+          </div>
+          <div className="flex items-center justify-center gap-3 md:justify-start">
+            <button
+              type="button"
+              onClick={goPrevStaff}
+              className="rounded-full border border-raven-border/70 bg-raven-card px-3 py-1 text-xs text-slate-100 hover:border-raven-accent/70"
+            >
+              {'<'}
+            </button>
+            <div className="flex items-center gap-1">
+              {staffProfiles.map((profile, index) => (
+                <span
+                  key={profile.name}
+                  className={`h-1.5 w-1.5 rounded-full ${
+                    index === activeStaffIndex ? 'bg-raven-accent' : 'bg-slate-600'
+                  }`}
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              onClick={goNextStaff}
+              className="rounded-full border border-raven-border/70 bg-raven-card px-3 py-1 text-xs text-slate-100 hover:border-raven-accent/70"
+            >
+              {'>'}
+            </button>
           </div>
         </div>
       </section>
