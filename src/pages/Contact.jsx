@@ -100,25 +100,17 @@ export default function Contact() {
 
         <div className="space-y-6 rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6">
           <div>
-            <h2 className="text-2xl font-semibold text-white">Calendly</h2>
-            <p className="mt-2 text-sm text-slate-300">Book a DevOps discovery video call directly from your browser, or choose a phone call.</p>
+            <h2 className="text-2xl font-semibold text-white">Schedule with Calendly</h2>
+            <p className="mt-2 text-sm text-slate-300">
+              Book a DevOps discovery call at a time that works for you, via video or phone.
+            </p>
           </div>
-          <div className="rounded-xl border border-raven-border/60 bg-raven-surface/60 p-4 space-y-4">
+          <div className="space-y-4 rounded-xl border border-raven-border/60 bg-raven-surface/60 p-4">
             <iframe
               title="Calendly discovery video call"
               src="https://calendly.com/ravendevops/discovery-meeting"
               className="h-[520px] w-full rounded-lg border-0"
             />
-            <div className="flex flex-wrap gap-3 text-sm">
-              <a
-                href="https://calendly.com/ravendevops/discovery-meeting"
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center rounded-full border border-raven-border/70 bg-raven-card px-4 py-2 font-semibold text-slate-100 hover:border-raven-accent/80"
-              >
-                Prefer a phone call? Book here
-              </a>
-            </div>
           </div>
           <p className="text-sm text-slate-400">
             Prefer email? Reach out via{' '}
