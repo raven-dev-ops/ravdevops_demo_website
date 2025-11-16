@@ -70,10 +70,10 @@ const trustedLogos = [
       'Built a MongoDB-backed Discord bot that automated admin workflows for a gaming community of more than 90,000 concurrent players.',
   },
   {
-    name: 'Galactic Phantom Taskforce Server',
+    name: 'Colonial KC',
     src: trusted3ColonialKc,
     review:
-      'Created a clan site with veteran playbooks, elite training resources, database-backed leaderboards, merch-store integration, Twitch developer API hooks, and application-routing webhooks.',
+      'Built a web-based assessment tool with 40 targeted questions, automated scoring, instructor email reports, an at-a-glance results matrix, optional self-emailing of results, and notifications whenever a new assessment is completed.',
   },
 ];
 
