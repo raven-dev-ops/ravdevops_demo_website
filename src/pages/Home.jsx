@@ -32,6 +32,13 @@ const trust = [
   'Government and public sector pilots',
 ];
 
+const trustTagClasses = [
+  'border-raven-accent/70 bg-raven-accent/10 text-raven-accent',
+  'border-raven-cyan/70 bg-raven-cyan/10 text-raven-cyan',
+  'border-raven-amber/70 bg-raven-amber/10 text-raven-amber',
+  'border-raven-border/70 bg-raven-surface/80 text-slate-200',
+];
+
 const trustedLogos = [
   {
     name: 'Stirling',
@@ -90,11 +97,11 @@ function TrustedByCarousel({ index }) {
   return (
     <div className="mt-6 mb-6 flex flex-col items-center gap-4">
       <div className="flex w-full max-w-xl flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
-        <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-raven-border/70 bg-raven-surface/70 shadow-soft-glow sm:h-32 sm:w-32">
+        <div className="flex h-24 w-40 items-center justify-center overflow-hidden rounded-xl border border-raven-border/70 bg-raven-surface/70 shadow-soft-glow sm:h-28 sm:w-52">
           <img
             src={current.src}
             alt={current.name}
-            className="h-16 w-16 rounded-full object-contain sm:h-20 sm:w-20"
+            className="h-full w-auto object-contain"
           />
         </div>
         <div className="flex flex-col text-center sm:text-left gap-1.5">
@@ -211,14 +218,17 @@ export default function Home() {
         <h2 className="text-2xl font-bold text-white">Trusted by</h2>
         <TrustedByCarousel index={trustedIndex} />
         <div className="mt-6 flex flex-wrap justify-center gap-3 text-slate-300">
-          {trust.map((item) => (
-            <span
-              key={item}
-              className="rounded-full border border-raven-border/60 bg-raven-surface/60 px-4 py-2 text-sm"
-            >
-              {item}
-            </span>
-          ))}
+          {trust.map((item, index) => {
+            const colorClass = trustTagClasses[index % trustTagClasses.length];
+            return (
+              <span
+                key={item}
+                className={`rounded-full px-4 py-2 text-sm ${colorClass}`}
+              >
+                {item}
+              </span>
+            );
+          })}
         </div>
         <div className="mt-6 flex items-center justify-center gap-3">
           <button
