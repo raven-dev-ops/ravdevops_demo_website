@@ -3,9 +3,9 @@
 import React, { useState } from 'react';
 
 const steps = [
-  { id: 'hr', title: 'HR Paperwork', content: 'Fill out W-4 and I-9 forms (link placeholder).', tip: 'HR forms are required for payroll and tax purposes.' },
-  { id: 'policy', title: 'Company Policies', content: 'Review the Employee Handbook (link placeholder).', tip: 'Understanding policies helps prevent workplace confusion.' },
-  { id: 'safety', title: 'Safety Training Video', content: 'Watch the mandatory safety video (placeholder).', tip: 'Safety training reduces accidents and injuries.' },
+  { id: 'hr', title: 'HR Paperwork', content: 'Complete the W-4 and I-9 forms in the HR portal.', tip: 'HR forms are required for payroll and tax purposes.' },
+  { id: 'policy', title: 'Company Policies', content: 'Review the Employee Handbook in the company resource center.', tip: 'Understanding policies helps prevent workplace confusion.' },
+  { id: 'safety', title: 'Safety Training Video', content: 'Watch the mandatory safety video in the training platform.', tip: 'Safety training reduces accidents and injuries.' },
   { id: 'team', title: 'Meet the Team', content: 'Schedule introductory meetings.', tip: 'Building relationships early boosts team success.' },
   { id: 'equipment', title: 'Equipment Setup', content: 'Set up your laptop, monitor, and log in to required software.', tip: 'Proper setup saves you headaches later.' },
   { id: 'first-task', title: 'First Task Assignment', content: 'Receive your first small project or assignment.', tip: 'Hands-on tasks help you learn by doing.' },

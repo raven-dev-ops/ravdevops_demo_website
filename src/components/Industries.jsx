@@ -62,10 +62,9 @@ const Industries = ({ id }) => (
         ))}
       </div>
 
-      {/* Logos bar placeholder */}
-      <div className="hidden mt-10 border-t border-gray-200 pt-6">
+      <div className="mt-10 border-t border-gray-200 pt-6">
         <p className="text-center text-sm text-gray-500">
-          
+          Trusted by federal agencies, enterprise SaaS teams, and defense innovators that rely on secure delivery.
         </p>
       </div>
     </div>
