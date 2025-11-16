@@ -3,9 +3,10 @@ import { portfolioItems } from '../data/portfolio';
 import SeoHead from '../components/SeoHead';
 
 function PortfolioCarousel({ images, title }) {
+  const [index, setIndex] = React.useState(0);
+
   if (!images || images.length === 0) return null;
 
-  const [index, setIndex] = React.useState(0);
   const total = images.length;
 
   const goPrev = () => setIndex((prev) => (prev - 1 + total) % total);
@@ -62,7 +63,7 @@ export default function Portfolio() {
         <p className="text-sm uppercase tracking-[0.3em] text-raven-cyan">Portfolio</p>
         <h1 className="text-4xl font-bold text-white">Case studies from shipped systems</h1>
         <p className="text-lg text-slate-300">
-          Engineering work focused on automation, infrastructure, and reliability — not just the UI.
+          Engineering work focused on automation, infrastructure, and reliability - not just the UI.
         </p>
       </header>
 
@@ -111,3 +112,4 @@ export default function Portfolio() {
     </div>
   );
 }
+
