@@ -25,15 +25,19 @@ const tiers = [
 const faqs = [
   {
     q: 'Do you do one-off projects?',
-    a: 'Yes—assessments, CI/CD builds, and reliability sprints are scoped to deliver quickly.',
+    a: 'Yes—assessments, CI/CD builds, and reliability sprints are scoped to deliver quickly. A common one-off engagement is standing up CI/CD for a single Next.js or Django service, hardening secrets, and delivering a zero-downtime deploy you can own going forward.',
   },
   {
     q: "What's your typical engagement length?",
-    a: 'Most sprints run 2–4 weeks; fractional partnerships are month-to-month with quarterly checkpoints.',
+    a: 'Most sprints run 2–4 weeks; fractional partnerships are month-to-month with quarterly checkpoints. For example, a 3-week modernization sprint might cover assessment and CI/CD hardening in week 1, IaC and cloud hardening in week 2, and observability, runbooks, and handover in week 3.',
   },
   {
-    q: 'What tools do you prefer?',
-    a: 'GitHub, GitHub Actions, Docker, Terraform, and cloud platforms like Netlify, Heroku, and AWS/GCP.',
+    q: 'What tools and stacks do you prefer?',
+    a: 'I work with GitHub, GitHub Actions, Docker, Kubernetes, Terraform, and cloud platforms like Netlify, Heroku, AWS, and GCP. On the application side I regularly support TypeScript and JavaScript frontends, Python and Node.js backends, REST/JSON APIs, and frameworks like Next.js and Django.',
+  },
+  {
+    q: 'How does payment work?',
+    a: 'For fixed-scope projects, 100% of the fee is retained up front and released when you accept the agreed deliverables. For fractional DevOps partnerships, the $2,700/month retainer is billed at the start of each month, with scope and roadmap reviewed together each quarter.',
   },
 ];
 
