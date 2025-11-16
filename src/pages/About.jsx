@@ -17,7 +17,7 @@ const milestones = [
     text: 'Launched helldivers2_clan_website to support a Helldivers 2 clan community with a lightweight, maintainable web presence.',
   },
   {
-    year: 'Apr–May 2025',
+    year: 'Apr-May 2025',
     text: 'Started the e-commerce-frontend and e-commerce-backend repos as a full-stack reference, pairing modern frontend patterns with an API-driven backend.',
   },
   {
@@ -57,7 +57,10 @@ export default function About() {
           <div className="rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6">
             <h2 className="text-2xl font-semibold text-white">What I bring</h2>
             <ul className="mt-4 space-y-2 text-sm text-slate-300">
-              <li>Veteran-owned, America-first DevOps support focused on real-world outcomes for U.S. teams.</li>
+              <li>
+                Veteran-owned small business putting America first with DevOps support focused on real-world outcomes for U.S.
+                teams.
+              </li>
               <li>Cloud deployments across Heroku, Netlify, and container platforms.</li>
               <li>Containerization with Docker and pragmatic GitHub Actions automation.</li>
               <li>Full-stack experience across Next.js, Django, and Discord bots with observability and security baked in.</li>
@@ -67,7 +70,7 @@ export default function About() {
             <h2 className="text-2xl font-semibold text-white">How I work</h2>
             <p className="mt-3 text-sm text-slate-300">
               Every engagement starts with context: what uptime, cost, and velocity goals matter to you and the people you serve.
-              As a veteran-owned, America-first small business, I build transparent plans, instrument systems for visibility, and
+              As a veteran-owned business putting America first, I build transparent plans, instrument systems for visibility, and
               leave teams with documentation they can trust long after the engagement ends.
             </p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm text-raven-cyan">

@@ -114,7 +114,7 @@ function TermsContent() {
       <section className="space-y-2 text-sm text-slate-300">
         <h2 className="text-lg font-semibold text-white">Scope of services</h2>
         <p>
-          Raven Development Operations provides DevOps-focused consulting—such as CI/CD automation, infrastructure as code,
+          Raven Development Operations provides DevOps-focused consulting such as CI/CD automation, infrastructure as code,
           observability, and related engineering support. Specific deliverables, timelines, and fees are defined in writing for
           each engagement (for example, in a proposal, statement of work, or email agreement).
         </p>
@@ -159,7 +159,7 @@ function TermsContent() {
       <section className="space-y-2 text-sm text-slate-300">
         <h2 className="text-lg font-semibold text-white">Warranties and limitations</h2>
         <p>
-          Services are provided on an “as is” basis. I aim for reliable, secure systems, but I cannot guarantee zero defects,
+          Services are provided on an "as is" basis. I aim for reliable, secure systems, but I cannot guarantee zero defects,
           zero incidents, or specific business outcomes. To the extent permitted by law, any liability arising out of an
           engagement is limited to the fees paid for the relevant work.
         </p>
@@ -175,3 +175,4 @@ function TermsContent() {
     </>
   );
 }
+

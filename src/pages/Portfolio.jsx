@@ -62,7 +62,7 @@ export default function Portfolio() {
         <p className="text-sm uppercase tracking-[0.3em] text-raven-cyan">Portfolio</p>
         <h1 className="text-4xl font-bold text-white">Case studies from shipped systems</h1>
         <p className="text-lg text-slate-300">
-          Engineering work focused on automation, infrastructure, and reliability - not just the UI.
+          Engineering work focused on automation, infrastructure, and reliability — not just the UI.
         </p>
       </header>
 

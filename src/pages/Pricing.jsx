@@ -15,7 +15,7 @@ const tiers = [
   {
     name: 'DevOps Modernization Sprint',
     price: 'Starts at $15,200',
-    description: 'Assessment + 2–3 week implementation across pipelines, infra, and observability.',
+    description: 'Assessment plus a 2-3 week implementation across pipelines, infrastructure, and observability.',
     bullets: ['Roadmap + quick wins', 'IaC + cloud hardening', 'Dashboards + alert tuning'],
     image: tier2Image,
   },
@@ -31,11 +31,11 @@ const tiers = [
 const faqs = [
   {
     q: 'Do you do one-off projects?',
-    a: 'Yes—assessments, CI/CD builds, and reliability sprints are scoped to deliver quickly. A common one-off engagement is standing up CI/CD for a single Next.js or Django service, hardening secrets, and delivering a zero-downtime deploy you can own going forward.',
+    a: 'Yes - assessments, CI/CD builds, and reliability sprints are scoped to deliver quickly. A common one-off engagement is standing up CI/CD for a single Next.js or Django service, hardening secrets, and delivering a zero-downtime deploy you can own going forward.',
   },
   {
     q: "What's your typical engagement length?",
-    a: 'Most sprints run 2–4 weeks; fractional partnerships are month-to-month with quarterly checkpoints. For example, a 3-week modernization sprint might cover assessment and CI/CD hardening in week 1, IaC and cloud hardening in week 2, and observability, runbooks, and handover in week 3.',
+    a: 'Most sprints run 2-4 weeks; fractional partnerships are month-to-month with quarterly checkpoints. For example, a 3-week modernization sprint might cover assessment and CI/CD hardening in week 1, IaC and cloud hardening in week 2, and observability, runbooks, and handover in week 3.',
   },
   {
     q: 'What tools and stacks do you prefer?',
@@ -111,3 +111,4 @@ export default function Pricing() {
     </div>
   );
 }
+

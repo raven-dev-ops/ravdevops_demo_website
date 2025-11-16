@@ -75,8 +75,10 @@ export default function Home() {
               <div className="mt-1 h-2 w-2 rounded-full bg-raven-accent" />
               <div>
                 <p className="text-sm text-slate-400">Pipeline snapshot</p>
-                <p className="text-lg font-semibold text-white">Main branch · Zero-downtime deploy</p>
-                <p className="text-sm text-slate-300">Tests → Build image → Push to registry → Deploy → Health checks</p>
+                <p className="text-lg font-semibold text-white">Main branch -> zero-downtime deploy</p>
+                <p className="text-sm text-slate-300">
+                  Tests -> Build image -> Push to registry -> Deploy -> Health checks
+                </p>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
@@ -155,3 +157,4 @@ export default function Home() {
     </div>
   );
 }
+
