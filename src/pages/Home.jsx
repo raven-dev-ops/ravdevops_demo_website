@@ -88,16 +88,16 @@ function TrustedByCarousel({ index }) {
   const current = trustedLogos[index % total];
 
   return (
-    <div className="mt-4 mb-4 flex scale-[1.5] flex-col items-center gap-4 origin-top">
-      <div className="flex w-full max-w-xl flex-col items-center gap-3 sm:flex-row sm:items-center sm:gap-4">
+    <div className="mt-6 mb-6 flex flex-col items-center gap-4">
+      <div className="flex w-full max-w-xl flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6">
         <div className="flex h-24 w-24 items-center justify-center overflow-hidden rounded-full border border-raven-border/70 bg-raven-surface/70 shadow-soft-glow sm:h-32 sm:w-32">
           <img
             src={current.src}
             alt={current.name}
-            className="h-full w-full object-cover"
+            className="h-16 w-16 rounded-full object-contain sm:h-20 sm:w-20"
           />
         </div>
-        <div className="flex flex-col text-center sm:text-left">
+        <div className="flex flex-col text-center sm:text-left gap-1.5">
           <p className="text-sm font-semibold text-white">{current.name}</p>
           <p className="text-xs text-slate-300">{current.review}</p>
         </div>
@@ -210,7 +210,7 @@ export default function Home() {
       <section className="rounded-2xl border border-raven-border/60 bg-raven-card/60 p-6">
         <h2 className="text-2xl font-bold text-white">Trusted by</h2>
         <TrustedByCarousel index={trustedIndex} />
-        <div className="mt-4 flex flex-wrap justify-center gap-3 text-slate-300">
+        <div className="mt-6 flex flex-wrap justify-center gap-3 text-slate-300">
           {trust.map((item) => (
             <span
               key={item}
