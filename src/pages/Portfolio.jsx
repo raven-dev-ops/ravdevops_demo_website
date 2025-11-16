@@ -71,6 +71,7 @@ export default function Portfolio() {
         {portfolioItems.map((item) => (
           <article
             key={item.slug}
+            id={item.slug}
             className="flex h-full flex-col gap-4 rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6"
           >
             <PortfolioCarousel images={item.screenshots} title={item.title} />
@@ -112,4 +113,3 @@ export default function Portfolio() {
     </div>
   );
 }
-

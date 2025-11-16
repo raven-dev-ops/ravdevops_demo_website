@@ -4,29 +4,55 @@ import SeoHead from '../components/SeoHead';
 import damonPortrait from '../assets/damonheath_portrait.png';
 
 const milestones = [
-  { year: '2016', text: 'Shipped first production deployment and learned to tame on-call pages.' },
-  { year: '2019', text: 'Led containerization pushes for Python and Django services with CI gating.' },
-  { year: '2022', text: 'Built Discord automation systems with monitoring, rate limits, and cloud hooks.' },
-  { year: '2024', text: 'Started Raven Development Operations to help teams move faster with confidence.' },
+  {
+    year: '2016',
+    title: 'First production deployment',
+    text: 'Shipped first production deployment and learned to tame on-call pages.',
+  },
+  {
+    year: '2019',
+    title: 'Python and Django containerization',
+    text: 'Led containerization pushes for Python and Django services with CI gating.',
+  },
+  {
+    year: '2022',
+    title: 'Discord automation and monitoring',
+    text: 'Built Discord automation systems with monitoring, rate limits, and cloud hooks.',
+    portfolioSlug: 'helldivers-bot',
+  },
+  {
+    year: '2024',
+    title: 'Raven Development Operations launched',
+    text: 'Started Raven Development Operations to help teams move faster with confidence.',
+  },
   {
     year: 'Apr 2025',
+    title: 'Raven DevOps demo website',
     text: 'Created the ravdevops_demo_website repo and began iterating on this marketing site, CI/CD, and deployment pipeline.',
   },
   {
     year: 'Apr 2025',
+    title: 'Galactic Phantom Division website',
     text: 'Launched helldivers2_clan_website to support a Helldivers 2 clan community with a lightweight, maintainable web presence.',
+    portfolioSlug: 'galactic-phantom-division',
   },
   {
     year: 'Apr-May 2025',
+    title: 'Art Bay e-commerce stack',
     text: 'Started the e-commerce-frontend and e-commerce-backend repos as a full-stack reference, pairing modern frontend patterns with an API-driven backend.',
+    portfolioSlug: 'art-bay-frontend',
   },
   {
     year: 'Nov 2025',
+    title: 'Helldivers 2 Discord OCR LFG bot',
     text: 'Added helldivers2_discord_ocr_lfg_clan_bot, combining Discord automation with OCR to streamline clan LFG and operations.',
+    portfolioSlug: 'helldivers-bot',
   },
 ];
 
 export default function About() {
+  const [openTimelineYear, setOpenTimelineYear] = React.useState(null);
+
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 lg:px-6">
       <SeoHead
@@ -45,11 +71,11 @@ export default function About() {
 
       <section className="grid gap-8 md:grid-cols-2 md:items-stretch">
         <div className="flex h-full justify-center md:justify-start">
-          <div className="h-full overflow-hidden rounded-3xl border border-raven-border/70 bg-raven-card/80 p-2 shadow-soft-glow">
+          <div className="h-full overflow-hidden rounded-3xl border border-raven-border/70 bg-raven-card/80 p-2 shadow-soft-glow flex items-center justify-center">
             <img
               src={damonPortrait}
               alt="Portrait of Damon Heath, Raven Development Operations"
-              className="h-full w-full max-w-lg rounded-2xl object-cover md:max-w-xl"
+              className="h-auto max-h-80 w-full max-w-md rounded-2xl object-cover md:max-w-lg"
             />
           </div>
         </div>
@@ -81,12 +107,39 @@ export default function About() {
       <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6">
         <h2 className="text-2xl font-semibold text-white">Timeline</h2>
         <div className="mt-4 grid gap-3 md:grid-cols-2">
-          {milestones.map((mile) => (
-            <div key={mile.year} className="rounded-xl border border-raven-border/60 bg-raven-surface/50 p-4">
-              <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">{mile.year}</p>
-              <p className="mt-2 text-sm text-slate-200">{mile.text}</p>
-            </div>
-          ))}
+          {milestones.map((mile) => {
+            const isOpen = openTimelineYear === mile.year;
+            return (
+              <div key={mile.year} className="rounded-xl border border-raven-border/60 bg-raven-surface/50 p-4">
+                <button
+                  type="button"
+                  onClick={() => setOpenTimelineYear(isOpen ? null : mile.year)}
+                  className="flex w-full items-center justify-between text-left"
+                >
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">{mile.year}</p>
+                    {mile.title && (
+                      <p className="mt-1 text-sm font-semibold text-slate-100">{mile.title}</p>
+                    )}
+                  </div>
+                  <span className="text-xs text-slate-400">{isOpen ? '−' : '+'}</span>
+                </button>
+                {isOpen && (
+                  <div className="mt-2 space-y-2">
+                    <p className="text-sm text-slate-200">{mile.text}</p>
+                    {mile.portfolioSlug && (
+                      <Link
+                        to={`/portfolio#${mile.portfolioSlug}`}
+                        className="inline-flex text-xs font-semibold text-raven-cyan hover:text-white"
+                      >
+                        View related portfolio work
+                      </Link>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
       </section>
 

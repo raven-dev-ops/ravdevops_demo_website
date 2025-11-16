@@ -27,9 +27,21 @@ const trust = [
 ];
 
 const trustedLogos = [
-  { name: 'Art Bay', src: '/logos/art-bay.png' },
-  { name: 'Galactic Phantom Division', src: '/logos/galactic-phantom-division.png' },
-  { name: 'Helldivers 2 Discord Bot', src: '/logos/helldivers-bot.png' },
+  {
+    name: 'Art Bay',
+    src: '/logos/art-bay.png',
+    review: '“Raven helped us stabilize deploys and ship features faster with confidence.”',
+  },
+  {
+    name: 'Galactic Phantom Division',
+    src: '/logos/galactic-phantom-division.png',
+    review: '“Reliable automation and clear runbooks turned our game nights into smooth operations.”',
+  },
+  {
+    name: 'Helldivers 2 Discord Bot',
+    src: '/logos/helldivers-bot.png',
+    review: '“Production-minded Discord infrastructure that just works, even under heavy load.”',
+  },
 ];
 
 const tech = ['Docker', 'Kubernetes', 'GitHub Actions', 'AWS', 'Azure', 'GCP', 'Django', 'Next.js', 'MongoDB', 'Stripe'];
@@ -57,15 +69,15 @@ function TrustedByCarousel() {
   const goNext = () => setIndex((prev) => (prev + 1) % total);
 
   return (
-    <div className="mt-4 flex flex-col items-center gap-4 md:flex-row md:justify-between">
-      <div className="flex flex-1 items-center justify-center gap-4 md:justify-start">
+    <div className="mt-4 flex flex-col items-center gap-3">
+      <div className="flex w-full max-w-xl items-center justify-center gap-4">
         <div className="flex items-center justify-center rounded-2xl border border-raven-border/60 bg-raven-surface/60 px-6 py-4 shadow-soft-glow">
           <img src={current.src} alt={current.name} className="h-10 w-auto object-contain sm:h-12" />
         </div>
-        <p className="text-sm text-slate-300">
-          Recent work with{' '}
-          <span className="font-semibold text-white">{current.name}</span>
-        </p>
+        <div className="flex flex-col">
+          <p className="text-sm font-semibold text-white">{current.name}</p>
+          <p className="text-xs text-slate-300">{current.review}</p>
+        </div>
       </div>
       <div className="flex items-center gap-3">
         <button
