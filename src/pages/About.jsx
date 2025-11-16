@@ -58,28 +58,29 @@ export default function About() {
             <h2 className="text-2xl font-semibold text-white">What I bring</h2>
             <ul className="mt-4 space-y-2 text-sm text-slate-300">
               <li>
-                Veteran-owned, America-first small business focused on building secure, reliable systems for U.S. teams that
-                need their technology to work under pressure.
+                Veteran-owned, America-first engineering partner focused on building secure, reliable systems for U.S. teams
+                operating in high-stakes environments.
               </li>
               <li>
-                Practical cloud deployments across Heroku, Netlify, and container platforms with clear runbooks instead of
-                fragile one-off scripts.
+                Cloud architectures on Heroku, Netlify, and container platforms with documented runbooks instead of fragile
+                one-off scripts.
               </li>
               <li>
-                Containerization with Docker and pragmatic GitHub Actions automation that keeps builds, tests, and deploys
-                predictable.
+                Containerization with Docker and pragmatic GitHub Actions pipelines that keep builds, tests, and deploys
+                predictable and repeatable.
               </li>
               <li>
-                Full-stack experience across Next.js, Django, and Discord bots, with observability, logging, and security baked
-                in from day one.
+                Full-stack delivery across Next.js, Django, and Discord automation, with observability, logging, and security
+                designed in from day one.
               </li>
             </ul>
             <h3 className="mt-6 text-lg font-semibold text-white">How I work</h3>
             <p className="mt-3 text-sm text-slate-300">
-              Every engagement starts with context: what uptime, cost, compliance, and velocity goals matter most to you and the
-              people you serve. From there, I design small, testable changes instead of big-bang migrations. As a veteran-owned
-              business putting America first, I build transparent plans, instrument systems for visibility, and leave teams with
-              documentation, dashboards, and runbooks they can trust long after the engagement ends.
+              Every engagement starts with context: the uptime, cost, compliance, and delivery expectations that matter most to
+              your organization. From there, I design small, testable changes instead of risky big-bang migrations. As a
+              veteran-owned business putting America first, I provide transparent plans, instrument systems for visibility, and
+              leave your team with clear documentation, dashboards, and runbooks they can rely on long after the engagement
+              ends.
             </p>
             <div className="mt-4 flex flex-wrap gap-3 text-sm text-raven-cyan">
               <a href="https://github.com/raven-dev-ops" target="_blank" rel="noreferrer" className="hover:text-white">
