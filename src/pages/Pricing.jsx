@@ -88,7 +88,7 @@ export default function Pricing() {
               ))}
             </ul>
             <a
-              href="https://calendly.com/damon-heath-ravdevops/discovery-meeting"
+              href="https://calendly.com/ravendevops/discovery-meeting"
               className="mt-auto inline-flex justify-center rounded-full bg-gradient-to-r from-raven-accent to-raven-cyan px-4 py-2 text-sm font-semibold text-black shadow-soft-glow"
             >
               Book a call

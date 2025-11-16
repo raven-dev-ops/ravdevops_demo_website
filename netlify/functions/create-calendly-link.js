@@ -15,7 +15,7 @@ const EXPLICIT_MAP = {
 const DEFAULT_URL =
   process.env.CALENDY_URL_DEFAULT ||
   process.env.CALENDLY_URL_DEFAULT ||
-  'https://calendly.com/damon-heath-ravdevops/discovery-meeting';
+  'https://calendly.com/ravendevops';
 
 function apiRequest(method, path, token, body) {
   const payload = body ? JSON.stringify(body) : null;

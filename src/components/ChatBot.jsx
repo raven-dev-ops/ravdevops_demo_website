@@ -12,7 +12,7 @@ const DEFAULT_SERVICES = [
 ];
 
 const ChatBot = ({
-  calendlyUrl = 'https://calendly.com/damon-heath-ravdevops/discovery-meeting',
+  calendlyUrl = 'https://calendly.com/ravendevops/discovery-meeting',
   onOpenContact,
   servicesList,
   defaultOpen = false,

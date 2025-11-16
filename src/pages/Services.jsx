@@ -64,7 +64,7 @@ export default function Services() {
         </div>
         <div className="mt-8 flex flex-wrap justify-center gap-4">
           <a
-            href="https://calendly.com/damon-heath-ravdevops/discovery-meeting"
+            href="https://calendly.com/ravendevops/discovery-meeting"
             className="rounded-full bg-gradient-to-r from-raven-accent to-raven-cyan px-6 py-3 text-base font-semibold text-black shadow-soft-glow"
           >
             Book a discovery call

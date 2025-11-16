@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { ArrowTopRightOnSquareIcon, SunIcon, MoonIcon } from '@heroicons/react/24/outline';
+import ravenHomeLogo from '../../assets/raven_home_logo.png';
 
 const navItems = [
   { to: '/', label: 'Home' },
@@ -17,9 +18,11 @@ export default function Header({ theme, toggleTheme }) {
     <header className="sticky top-0 z-30 backdrop-blur border-b border-raven-border/70 bg-raven-navy/80">
       <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 lg:px-6">
         <Link to="/" className="flex items-center gap-3 text-lg font-semibold text-white">
-          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-br from-raven-cyan to-raven-accent text-black font-bold">
-            RD
-          </div>
+          <img
+            src={ravenHomeLogo}
+            alt="Raven Development Operations logo"
+            className="h-10 w-10 rounded-2xl border border-raven-border/70 object-contain shadow-soft-glow"
+          />
           <div>
             <p className="leading-tight">Raven Development Operations</p>
             <p className="text-xs text-slate-400">DevOps Consulting & Automation</p>

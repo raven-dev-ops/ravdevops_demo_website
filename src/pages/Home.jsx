@@ -22,6 +22,7 @@ const benefits = [
 const trust = ['Solo developers', 'Indie studios', 'Small product teams'];
 
 const tech = ['Docker', 'Kubernetes', 'GitHub Actions', 'AWS', 'Azure', 'GCP', 'Django', 'Next.js', 'MongoDB', 'Stripe'];
+const languages = ['Python', 'JavaScript', 'TypeScript'];
 
 export default function Home() {
   return (
@@ -40,10 +41,10 @@ export default function Home() {
             <img
               src={ravenHomeLogo}
               alt="Raven Development Operations logo"
-              className="hidden h-14 w-14 rounded-2xl border border-raven-border/70 bg-raven-card/80 object-contain shadow-soft-glow sm:block"
+              className="hidden h-24 w-24 rounded-2xl border border-raven-border/70 object-contain shadow-soft-glow sm:block"
             />
             <h1 className="text-4xl font-bold leading-tight text-white md:text-5xl">
-              Fractional DevOps with clear timelines and milestones.
+              Fractional DevOps with clear timelines
             </h1>
           </div>
           <p className="text-lg text-slate-300">
@@ -52,7 +53,7 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap gap-4">
             <a
-              href="https://calendly.com/damon-heath-ravdevops/discovery-meeting"
+              href="https://calendly.com/ravendevops/discovery-meeting"
               target="_blank"
               rel="noreferrer"
               className="rounded-full bg-gradient-to-r from-raven-accent to-raven-cyan px-6 py-3 text-base font-semibold text-black shadow-soft-glow hover:from-raven-accent/90 hover:to-raven-cyan/90"
@@ -116,17 +117,40 @@ export default function Home() {
       <section className="space-y-4">
         <div className="flex items-center justify-between gap-4">
           <h2 className="text-2xl font-bold text-white">Tech stack</h2>
-          <p className="text-sm text-slate-400">Tooling I ship and operate with.</p>
+          <p className="text-sm text-slate-400">Tooling and languages I ship with.</p>
         </div>
-        <div className="flex flex-wrap gap-3">
-          {tech.map((item) => (
-            <span
-              key={item}
-              className="rounded-full border border-raven-border/60 bg-raven-card/80 px-4 py-2 text-sm font-medium text-slate-200"
-            >
-              {item}
-            </span>
-          ))}
+        <div className="grid gap-4 md:grid-cols-[2fr,1fr]">
+          <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">
+              Platforms & tooling
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {tech.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-raven-border/60 bg-raven-card/80 px-4 py-2 text-sm font-medium text-slate-200"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-amber">Languages</p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {languages.map((lang) => (
+                <span
+                  key={lang}
+                  className="rounded-full border border-raven-border/60 bg-raven-surface/80 px-4 py-2 text-sm font-medium text-slate-200"
+                >
+                  {lang}
+                </span>
+              ))}
+            </div>
+            <p className="mt-3 text-xs text-slate-400">
+              Strong bias toward typed, well-tested services.
+            </p>
+          </div>
         </div>
       </section>
     </div>
