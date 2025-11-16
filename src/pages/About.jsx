@@ -98,7 +98,8 @@ export default function About() {
         <h1 className="text-4xl font-bold text-white">DevOps-focused engineer based in Kansas City, MO</h1>
         <p className="text-lg text-slate-300">
           I help CTOs, founders, and product teams modernize delivery pipelines, cloud infrastructure, and observability so they
-          can ship without heroics.
+          can ship without heroics. Raven Development Operations is no longer a solo practice—we are a growing team ready to serve
+          your project needs.
         </p>
       </header>
 
@@ -132,7 +133,7 @@ export default function About() {
               ))}
             </ul>
           </div>
-          <div className="flex items-center justify-center gap-3 md:justify-start">
+          <div className="flex items-center justify-center gap-3">
             <button
               type="button"
               onClick={goPrevStaff}
