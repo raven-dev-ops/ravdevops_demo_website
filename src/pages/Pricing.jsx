@@ -83,64 +83,56 @@ export default function Pricing() {
             tier.featured ? 'md:order-2' : index === 0 ? 'md:order-1' : 'md:order-3';
 
           return (
-          <div
-            key={tier.name}
-            className={`flex h-full flex-col gap-4 rounded-2xl border p-6 ${orderClass} ${
-              tier.featured
-                ? 'border-raven-accent/80 bg-raven-card shadow-soft-glow'
-                : 'border-raven-border/70 bg-raven-card/70'
-            }`}
-          >
-            {tier.image && (
-              <div className="flex justify-center">
-                <img
-                  src={tier.image}
-                  alt={tier.name}
-                  className="mb-4 h-32 w-auto object-contain"
-                />
-              </div>
-            )}
-            <div className="flex h-full flex-col gap-4">
-              <div>
-                {tier.featured && (
-                  <p className="mb-2 inline-flex rounded-full bg-raven-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-raven-accent">
-                    Recommended
-                  </p>
+            <Link
+              key={tier.name}
+              to={`/contact?interest=${encodeURIComponent(tier.name)}`}
+              className={`group block ${orderClass}`}
+            >
+              <div
+                className={`flex h-full flex-col gap-4 rounded-2xl border p-6 transition transform group-hover:scale-105 group-hover:shadow-soft-glow ${
+                  tier.featured
+                    ? 'border-raven-accent/80 bg-raven-card group-hover:border-raven-accent'
+                    : 'border-raven-border/70 bg-raven-card/70 group-hover:border-raven-accent/70'
+                }`}
+              >
+                {tier.image && (
+                  <div className="flex justify-center">
+                    <img
+                      src={tier.image}
+                      alt={tier.name}
+                      className="mb-4 h-32 w-auto object-contain"
+                    />
+                  </div>
                 )}
-                {!tier.featured && (
-                  <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">Engagement</p>
-                )}
-                <h2 className="text-2xl font-semibold text-white">{tier.name}</h2>
-                <p className="text-sm text-slate-300">{tier.description}</p>
+                <div className="flex h-full flex-col gap-4">
+                  <div>
+                    {tier.featured && (
+                      <p className="mb-2 inline-flex rounded-full bg-raven-accent/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-raven-accent">
+                        Recommended
+                      </p>
+                    )}
+                    {!tier.featured && (
+                      <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">Engagement</p>
+                    )}
+                    <h2 className="text-2xl font-semibold text-white group-hover:text-raven-accent">
+                      {tier.name}
+                    </h2>
+                    <p className="text-sm text-slate-300">{tier.description}</p>
+                  </div>
+                  <p className="text-xl font-bold text-raven-accent">{tier.price}</p>
+                  <ul className="space-y-2 text-sm text-slate-200">
+                    {tier.bullets.map((bullet) => (
+                      <li key={bullet} className="flex items-start gap-2">
+                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
+                        <span>{bullet}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <p className="text-xl font-bold text-raven-accent">{tier.price}</p>
-              <ul className="space-y-2 text-sm text-slate-200">
-                {tier.bullets.map((bullet) => (
-                  <li key={bullet} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
-                    <span>{bullet}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        );
+            </Link>
+          );
         })}
-      </div>
-
-      <div className="flex flex-wrap justify-center gap-4">
-        <a
-          href="https://calendly.com/ravdevops/discovery-meeting"
-          className="inline-flex justify-center rounded-full bg-gradient-to-r from-raven-accent to-raven-cyan px-6 py-3 text-base font-semibold text-black shadow-soft-glow"
-        >
-          Book a discovery call
-        </a>
-        <Link
-          to="/portfolio"
-          className="inline-flex justify-center rounded-full border border-raven-border/70 bg-raven-card px-6 py-3 text-base font-semibold text-slate-100 hover:border-raven-accent/70"
-        >
-          View portfolio
-        </Link>
       </div>
 
       <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6">

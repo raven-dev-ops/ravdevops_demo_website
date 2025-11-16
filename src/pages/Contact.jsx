@@ -1,8 +1,17 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import SeoHead from '../components/SeoHead';
 import contactBanner from '../assets/contact_form_banner.png';
 
 export default function Contact() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const interest = searchParams.get('interest');
+
+  const projectDefault = interest
+    ? `I'm interested in the "${interest}" engagement and would like to discuss whether it fits my needs.`
+    : '';
+
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 lg:px-6">
       <SeoHead
@@ -73,6 +82,7 @@ export default function Contact() {
               <textarea
                 name="project"
                 rows="4"
+                defaultValue={projectDefault}
                 className="mt-2 w-full rounded-xl border border-raven-border/70 bg-raven-surface/70 px-3 py-2 text-sm text-white focus:border-raven-accent focus:outline-none"
               />
             </label>
