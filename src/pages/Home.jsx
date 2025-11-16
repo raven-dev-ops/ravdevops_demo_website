@@ -32,21 +32,24 @@ const languages = ['Python', 'JavaScript', 'TypeScript'];
 
 function TrustedByCarousel() {
   const [index, setIndex] = React.useState(0);
-
-  if (!trustedLogos || trustedLogos.length === 0) return null;
-
   const total = trustedLogos.length;
-  const current = trustedLogos[index];
-
-  const goPrev = () => setIndex((prev) => (prev - 1 + total) % total);
-  const goNext = () => setIndex((prev) => (prev + 1) % total);
 
   React.useEffect(() => {
+    if (total <= 1) return undefined;
+
     const id = setInterval(() => {
       setIndex((prev) => (prev + 1) % total);
     }, 5000);
+
     return () => clearInterval(id);
   }, [total]);
+
+  if (!trustedLogos || total === 0) return null;
+
+  const current = trustedLogos[index % total];
+
+  const goPrev = () => setIndex((prev) => (prev - 1 + total) % total);
+  const goNext = () => setIndex((prev) => (prev + 1) % total);
 
   return (
     <div className="mt-4 flex flex-col items-center gap-4 sm:flex-row sm:justify-between">
