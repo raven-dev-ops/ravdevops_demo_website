@@ -109,8 +109,7 @@ export default function About() {
         <h1 className="text-4xl font-bold text-white">DevOps-focused team based in Kansas City, MO</h1>
         <p className="text-lg text-slate-300">
           We partner with CTOs, founders, and product teams to modernize delivery pipelines, cloud infrastructure, and observability
-          so they can ship without heroics. Raven Development Operations has grown from a solo practice into a focused team that
-          blends senior engineering experience, operational support, and an AI assistant to serve your project needs.
+          so they can ship without heroics.
         </p>
       </header>
 
@@ -129,7 +128,7 @@ export default function About() {
           </div>
         </div>
         <div
-          className={`flex h-full flex-col justify-between space-y-6 ${
+          className={`flex h-full flex-col justify-center ${
             isEven ? 'md:order-2' : 'md:order-1'
           }`}
         >
@@ -144,34 +143,34 @@ export default function About() {
               ))}
             </ul>
           </div>
-          <div className="flex items-center justify-center gap-3">
-            <button
-              type="button"
-              onClick={goPrevStaff}
-              className="rounded-full border border-raven-border/70 bg-raven-card px-3 py-1 text-xs text-slate-100 hover:border-raven-accent/70"
-            >
-              {'<'}
-            </button>
-            <div className="flex items-center gap-1">
-              {staffProfiles.map((profile, index) => (
-                <span
-                  key={profile.name}
-                  className={`h-1.5 w-1.5 rounded-full ${
-                    index === activeStaffIndex ? 'bg-raven-accent' : 'bg-slate-600'
-                  }`}
-                />
-              ))}
-            </div>
-            <button
-              type="button"
-              onClick={goNextStaff}
-              className="rounded-full border border-raven-border/70 bg-raven-card px-3 py-1 text-xs text-slate-100 hover:border-raven-accent/70"
-            >
-              {'>'}
-            </button>
-          </div>
         </div>
       </section>
+      <div className="flex items-center justify-center gap-3">
+        <button
+          type="button"
+          onClick={goPrevStaff}
+          className="rounded-full border border-raven-border/70 bg-raven-card px-3 py-1 text-xs text-slate-100 hover:border-raven-accent/70"
+        >
+          {'<'}
+        </button>
+        <div className="flex items-center gap-1">
+          {staffProfiles.map((profile, index) => (
+            <span
+              key={profile.name}
+              className={`h-1.5 w-1.5 rounded-full ${
+                index === activeStaffIndex ? 'bg-raven-accent' : 'bg-slate-600'
+              }`}
+            />
+          ))}
+        </div>
+        <button
+          type="button"
+          onClick={goNextStaff}
+          className="rounded-full border border-raven-border/70 bg-raven-card px-3 py-1 text-xs text-slate-100 hover:border-raven-accent/70"
+        >
+          {'>'}
+        </button>
+      </div>
 
       <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6">
         <h2 className="text-2xl font-semibold text-white">Timeline</h2>
@@ -229,4 +228,3 @@ export default function About() {
     </div>
   );
 }
-
