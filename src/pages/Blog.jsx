@@ -92,8 +92,13 @@ export default function Blog() {
                   })}
                 </div>
               </div>
-                <h2 className="text-2xl font-semibold text-white group-hover:text-raven-accent">{post.title}</h2>
-                <p className="text-sm text-slate-300">{post.excerpt}</p>
+                {Array.isArray(post.bullets) && post.bullets.length > 0 && (
+                  <ul className="mt-3 space-y-1 text-sm text-slate-300 list-disc list-inside">
+                    {post.bullets.slice(0, 3).map((item) => (
+                      <li key={item}>{item}</li>
+                    ))}
+                  </ul>
+                )}
               </article>
             </Link>
           );

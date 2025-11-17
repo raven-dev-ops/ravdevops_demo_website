@@ -10,6 +10,7 @@ const staffProfiles = [
     name: 'Damon Heath',
     title: 'Lead Software Engineer',
     image: damonPortrait,
+    funFact: 'Fun fact: I play the cello.',
     bullets: [
       'Veteran-owned, America-first engineering partner focused on building secure, reliable systems for U.S. teams operating in high-stakes environments.',
       'Cloud architectures on Heroku, Netlify, and container platforms with documented runbooks instead of fragile one-off scripts.',
@@ -20,6 +21,7 @@ const staffProfiles = [
     name: 'Charity Olivas',
     title: 'Chief Secretary',
     image: charityPortrait,
+    funFact: 'Fun fact: I love tacos.',
     bullets: [
       'Leads administrative operations so engineering and client work stay organized and on schedule.',
       'Coordinates communication, documentation, and meeting logistics across internal and client teams.',
@@ -181,6 +183,9 @@ export default function About() {
                 <li key={item}>{item}</li>
               ))}
             </ul>
+            {activeStaff.funFact && (
+              <p className="mt-3 text-xs italic text-slate-400">{activeStaff.funFact}</p>
+            )}
           </div>
         </div>
       </section>
