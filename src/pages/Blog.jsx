@@ -44,34 +44,33 @@ export default function Blog() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {filtered.map((post) => (
-          <article
+          <Link
             key={post.slug}
-            className="flex h-full flex-col gap-4 rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6"
+            to={`/blog/${post.slug}`}
+            className="group block"
           >
-            {post.image && (
-              <div className="overflow-hidden rounded-xl border border-raven-border/60 bg-raven-card/80">
-                <img src={post.image} alt={post.title} className="h-40 w-full object-cover" />
-              </div>
-            )}
-            <div className="flex items-center justify-between">
-              <span className="text-xs uppercase tracking-[0.2em] text-raven-cyan">{post.date}</span>
-              <div className="flex flex-wrap gap-2 text-xs text-slate-300">
-                {post.tags.map((tag) => (
-                  <span key={tag} className="rounded-full border border-raven-border/60 bg-raven-surface/60 px-2 py-1">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <h2 className="text-2xl font-semibold text-white">{post.title}</h2>
-            <p className="text-sm text-slate-300">{post.excerpt}</p>
-            <Link
-              to={`/blog/${post.slug}`}
-              className="mt-auto text-sm font-semibold text-raven-cyan hover:text-white"
+            <article
+              className="flex h-full flex-col gap-4 rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6 transition transform hover:scale-105 hover:border-raven-accent/80 hover:bg-raven-card hover:shadow-soft-glow"
             >
-              Read post
-            </Link>
-          </article>
+              {post.image && (
+                <div className="overflow-hidden rounded-xl border border-raven-border/60 bg-raven-card/80">
+                  <img src={post.image} alt={post.title} className="h-40 w-full object-cover" />
+                </div>
+              )}
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-[0.2em] text-raven-cyan">{post.date}</span>
+                <div className="flex flex-wrap gap-2 text-xs text-slate-300">
+                  {post.tags.map((tag) => (
+                    <span key={tag} className="rounded-full border border-raven-border/60 bg-raven-surface/60 px-2 py-1">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <h2 className="text-2xl font-semibold text-white group-hover:text-raven-accent">{post.title}</h2>
+              <p className="text-sm text-slate-300">{post.excerpt}</p>
+            </article>
+          </Link>
         ))}
       </div>
 
@@ -96,4 +95,3 @@ export default function Blog() {
     </div>
   );
 }
-

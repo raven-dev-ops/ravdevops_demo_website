@@ -14,15 +14,15 @@ import trusted6Rowe from '../assets/trusted6_rowe.png';
 const benefits = [
   {
     title: 'Faster releases',
-    text: 'CI/CD automation, reliable branching, and preview deploys that keep PRs moving.',
+    text: 'CI/CD automation, reliable branching, and preview deploys that keep PRs moving without adding full-time DevOps headcount.',
   },
   {
     title: 'Fewer outages',
-    text: 'Observability, SRE guardrails, and change management tuned for your team.',
+    text: 'Observability, SRE guardrails, and change management tuned for your team so incidents are rarer, shorter, and less expensive.',
   },
   {
     title: 'Lower infra waste',
-    text: 'Cloud cost reviews, right-sized environments, and policy-backed automation.',
+    text: 'Cloud cost reviews, right-sized environments, and policy-backed automation that improve ROI versus hiring and ramping an in-house DevOps team.',
   },
 ];
 
@@ -220,8 +220,10 @@ export default function Home() {
             key={benefit.title}
             className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6 shadow-inner shadow-black/10"
           >
-            <CheckCircleIcon className="mb-3 h-6 w-6 text-raven-accent" />
-            <h3 className="text-xl font-semibold text-white">{benefit.title}</h3>
+            <div className="mb-3 flex items-center gap-2">
+              <CheckCircleIcon className="h-6 w-6 text-raven-accent" />
+              <h3 className="text-xl font-semibold text-white">{benefit.title}</h3>
+            </div>
             <p className="mt-2 text-sm text-slate-300">{benefit.text}</p>
           </div>
         ))}
