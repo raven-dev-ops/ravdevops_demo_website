@@ -33,9 +33,9 @@ const trust = [
 ];
 
 const trustTagClasses = [
-  'border-raven-accent/70 bg-raven-accent/10 text-raven-accent',
-  'border-raven-cyan/70 bg-raven-cyan/10 text-raven-cyan',
-  'border-raven-amber/70 bg-raven-amber/10 text-raven-amber',
+  'border-pink-500/80 bg-pink-500/10 text-pink-200',
+  'border-pink-500/80 bg-pink-500/10 text-pink-200',
+  'border-pink-500/80 bg-pink-500/10 text-pink-200',
   'border-raven-border/70 bg-raven-surface/80 text-slate-200',
 ];
 

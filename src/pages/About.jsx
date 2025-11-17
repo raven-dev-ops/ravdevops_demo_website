@@ -88,13 +88,32 @@ const milestones = [
 export default function About() {
   const [openTimelineYear, setOpenTimelineYear] = React.useState(null);
   const [activeStaffIndex, setActiveStaffIndex] = React.useState(0);
+  const [nextRotationDelay, setNextRotationDelay] = React.useState(5000);
 
   const totalStaff = staffProfiles.length;
   const activeStaff = staffProfiles[activeStaffIndex];
   const isEven = activeStaffIndex % 2 === 0;
 
-  const goPrevStaff = () => setActiveStaffIndex((prev) => (prev - 1 + totalStaff) % totalStaff);
-  const goNextStaff = () => setActiveStaffIndex((prev) => (prev + 1) % totalStaff);
+  const goPrevStaff = () => {
+    setActiveStaffIndex((prev) => (prev - 1 + totalStaff) % totalStaff);
+    setNextRotationDelay(15000);
+  };
+
+  const goNextStaff = () => {
+    setActiveStaffIndex((prev) => (prev + 1) % totalStaff);
+    setNextRotationDelay(15000);
+  };
+
+  React.useEffect(() => {
+    if (totalStaff <= 1) return undefined;
+
+    const id = setTimeout(() => {
+      setActiveStaffIndex((prev) => (prev + 1) % totalStaff);
+      setNextRotationDelay(5000);
+    }, nextRotationDelay);
+
+    return () => clearTimeout(id);
+  }, [activeStaffIndex, nextRotationDelay, totalStaff]);
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 lg:px-6">

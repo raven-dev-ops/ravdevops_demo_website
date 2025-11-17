@@ -29,12 +29,28 @@ export default function BlogPost() {
       <div className="space-y-2">
         <p className="text-xs uppercase tracking-[0.3em] text-raven-cyan">{post.date}</p>
         <h1 className="text-4xl font-bold text-white">{post.title}</h1>
-        <div className="flex flex-wrap gap-2 text-xs text-slate-400">
-          {post.tags.map((tag) => (
-            <span key={tag} className="rounded-full border border-raven-border/60 bg-raven-surface/60 px-3 py-1">
-              {tag}
-            </span>
-          ))}
+        <div className="flex flex-wrap gap-2 text-xs">
+          {post.tags.map((tag) => {
+            let tagClasses = 'rounded-full border px-3 py-1';
+
+            if (tag === 'CI/CD') {
+              tagClasses += ' border-emerald-400/70 bg-emerald-500/10 text-emerald-300';
+            } else if (tag === 'Cloud') {
+              tagClasses += ' border-sky-400/70 bg-sky-500/10 text-sky-300';
+            } else if (tag === 'SRE') {
+              tagClasses += ' border-amber-400/70 bg-amber-500/10 text-amber-200';
+            } else if (tag === 'Tooling') {
+              tagClasses += ' border-violet-400/70 bg-violet-500/10 text-violet-300';
+            } else {
+              tagClasses += ' border-raven-border/60 bg-raven-surface/60 text-slate-200';
+            }
+
+            return (
+              <span key={tag} className={tagClasses}>
+                {tag}
+              </span>
+            );
+          })}
         </div>
       </div>
       {post.image && (
@@ -49,4 +65,3 @@ export default function BlogPost() {
     </article>
   );
 }
-

@@ -8,11 +8,30 @@ const tags = ['All', 'CI/CD', 'Cloud', 'SRE', 'Tooling'];
 
 export default function Blog() {
   const [activeTag, setActiveTag] = useState('All');
+  const [query, setQuery] = useState('');
 
   const filtered = useMemo(() => {
-    if (activeTag === 'All') return blogPosts;
-    return blogPosts.filter((post) => post.tags.includes(activeTag));
-  }, [activeTag]);
+    let posts = blogPosts;
+
+    if (activeTag !== 'All') {
+      posts = posts.filter((post) => post.tags.includes(activeTag));
+    }
+
+    const trimmed = query.trim().toLowerCase();
+    if (!trimmed) return posts;
+
+    return posts.filter((post) => {
+      const haystack = [
+        post.title,
+        post.excerpt,
+        ...(post.tags || []),
+      ]
+        .join(' ')
+        .toLowerCase();
+
+      return haystack.includes(trimmed);
+    });
+  }, [activeTag, query]);
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12 lg:px-6">
@@ -26,6 +45,16 @@ export default function Blog() {
         <h1 className="text-4xl font-bold text-white">Shipping notes from the DevOps desk</h1>
         <p className="text-lg text-slate-300">CI/CD, cloud, SRE, and tooling practices you can apply right away.</p>
       </header>
+
+      <div className="flex justify-center">
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search posts by title, topic, or tag…"
+          className="w-full max-w-md rounded-full border border-raven-border/70 bg-raven-card/60 px-4 py-2 text-sm text-slate-100 placeholder:text-slate-400 shadow-inner shadow-black/20 focus:border-raven-accent focus:outline-none"
+        />
+      </div>
 
       <div className="flex flex-wrap justify-center gap-3">
         {tags.map((tag) => {
@@ -114,11 +143,11 @@ export default function Blog() {
       <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div className="flex items-start gap-4">
-            <div className="hidden h-16 w-16 overflow-hidden rounded-lg bg-black/40 sm:block">
+            <div className="hidden sm:block">
               <img
                 src={service1Banner}
                 alt="Raven Development Operations"
-                className="h-full w-full object-cover"
+                className="h-20 w-20 object-cover"
               />
             </div>
             <div>

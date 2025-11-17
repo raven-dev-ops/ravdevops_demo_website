@@ -2,72 +2,7 @@ import React from 'react';
 import { portfolioItems } from '../data/portfolio';
 import SeoHead from '../components/SeoHead';
 
-function PortfolioCarousel({ images, title, isActive, onImageClick }) {
-  const [index, setIndex] = React.useState(0);
-
-  if (!images || images.length === 0) return null;
-
-  const total = images.length;
-
-  const goPrev = () => setIndex((prev) => (prev - 1 + total) % total);
-  const goNext = () => setIndex((prev) => (prev + 1) % total);
-
-  return (
-    <div
-      className={[
-        'relative mb-4 overflow-hidden rounded-2xl border bg-raven-card/80 transition transform',
-        isActive ? 'scale-105 border-raven-accent/80 shadow-soft-glow' : 'border-raven-border/70',
-      ].join(' ')}
-    >
-      <img
-        src={images[index]}
-        alt={`${title} screenshot ${index + 1}`}
-        className="h-56 w-full cursor-pointer object-cover sm:h-64"
-        onClick={(e) => {
-          e.stopPropagation();
-          if (onImageClick) onImageClick(index);
-        }}
-      />
-      {total > 1 && (
-        <>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              goPrev();
-            }}
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full border border-transparent bg-black/50 px-2 py-1 text-xs text-white shadow-md transition transform hover:scale-110 hover:border-raven-accent/80 hover:bg-black/70 hover:shadow-soft-glow"
-          >
-            {'<'}
-          </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              goNext();
-            }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full border border-transparent bg-black/50 px-2 py-1 text-xs text-white shadow-md transition transform hover:scale-110 hover:border-raven-accent/80 hover:bg-black/70 hover:shadow-soft-glow"
-          >
-            {'>'}
-          </button>
-        </>
-      )}
-      {total > 1 && (
-        <div className="absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-1">
-          {images.map((image, i) => (
-            <span
-              key={image || i}
-              className={`h-1.5 w-1.5 rounded-full ${i === index ? 'bg-raven-accent' : 'bg-white/40'}`}
-            />
-          ))}
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function Portfolio() {
-  const [hoveredSlug, setHoveredSlug] = React.useState(null);
   const [lightbox, setLightbox] = React.useState(null);
   const [query, setQuery] = React.useState('');
 
@@ -163,8 +98,6 @@ export default function Portfolio() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {visibleItems.map((item) => {
-          const isActive = hoveredSlug === item.slug;
-
           return (
             <article
               key={item.slug}
@@ -178,23 +111,39 @@ export default function Portfolio() {
                   handleCardClick(item.github);
                 }
               }}
-              onMouseEnter={() => setHoveredSlug(item.slug)}
-              onMouseLeave={() => {
-                setHoveredSlug(null);
-              }}
-              className={[
-                'flex h-full cursor-pointer flex-col gap-4 rounded-2xl border p-6 transition transform',
-                isActive
-                  ? 'scale-105 border-raven-accent/80 bg-raven-card shadow-soft-glow'
-                  : 'border-raven-border/70 bg-raven-card/70',
-              ].join(' ')}
+              className="flex h-full cursor-pointer flex-col gap-4 rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6 transition"
             >
-              <PortfolioCarousel
-                images={item.screenshots}
-                title={item.title}
-                isActive={isActive}
-                onImageClick={(startIndex) => openLightbox(item, startIndex)}
-              />
+              {item.screenshots && item.screenshots.length > 0 && (
+                <div className="mb-3">
+                  <div className="relative overflow-hidden rounded-2xl border border-raven-border/70 bg-raven-card/80">
+                    <img
+                      src={item.screenshots[0]}
+                      alt={`${item.title} screenshot 1`}
+                      className="h-56 w-full object-cover sm:h-64"
+                    />
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openLightbox(item, 0);
+                      }}
+                      className="absolute inset-0 flex items-center justify-center bg-black/50 text-xs font-semibold uppercase tracking-[0.2em] text-slate-100 transition transform hover:scale-105 hover:bg-black/60 hover:text-raven-accent"
+                    >
+                      Click to view gallery
+                    </button>
+                  </div>
+                  {item.screenshots.length > 1 && (
+                    <div className="mt-2 flex justify-center gap-1">
+                      {item.screenshots.map((image, i) => (
+                        <span
+                          key={image || i}
+                          className={`h-1.5 w-1.5 rounded-full ${i === 0 ? 'bg-raven-accent' : 'bg-white/40'}`}
+                        />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              )}
               <h2 className="text-2xl font-semibold text-white">{item.title}</h2>
               <p className="text-sm text-slate-300">{item.description}</p>
               <div className="flex flex-wrap gap-2 text-xs text-slate-200">

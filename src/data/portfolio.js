@@ -17,8 +17,8 @@ import helldiverSiteSs4 from '../assets/helldiver2_website_ss_4.png';
 
 export const portfolioItems = [
   {
-    title: 'Galactic Phantom Division Website',
-    slug: 'galactic-phantom-division',
+    title: 'Galactic Phantom Taskforce Website',
+    slug: 'galactic-phantom-taskforce',
     description:
       'Helldivers clan platform with authentication, Discord automation, and cloud deployment built for resilience.',
     tech: ['Next.js', 'TypeScript', 'MongoDB', 'NextAuth', 'Docker', 'Heroku'],
@@ -31,7 +31,7 @@ export const portfolioItems = [
     screenshots: [helldiverSiteSs1, helldiverSiteSs2, helldiverSiteSs3, helldiverSiteSs4],
   },
   {
-    title: 'Art Bay Backend (Django)',
+    title: 'Art Bay Backend',
     slug: 'ecommerce-backend',
     description:
       'Modular Django backbone for storefronts with payments, orders, and CI-ready Docker images.',
@@ -45,7 +45,7 @@ export const portfolioItems = [
     screenshots: [artbayBackendSs1, artbayBackendSs2, artbayBackendSs3, artbayBackendSs4],
   },
   {
-    title: 'Art Bay Frontend (Next.js Storefront)',
+    title: 'Art Bay Frontend',
     slug: 'art-bay-frontend',
     description:
       'Headless storefront with Stripe, JWT auth, and DRF integration shipped to Netlify.',
