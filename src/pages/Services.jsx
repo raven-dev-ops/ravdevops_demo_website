@@ -45,6 +45,7 @@ export default function Services() {
   );
 
   const closeModal = () => setActiveStep(null);
+  const previewStep = selectedStep || steps[0];
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-12 lg:px-6">
@@ -102,6 +103,17 @@ export default function Services() {
 
       <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-8">
         <h2 className="text-2xl font-bold text-white">How engagements work</h2>
+
+        <div className="mt-4 overflow-hidden rounded-2xl border border-black/60 bg-black">
+          <video
+            src={previewStep.videoSrc}
+            controls
+            className="h-56 w-full bg-black object-contain sm:h-64"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
         <div className="mt-6 grid gap-4 md:grid-cols-5">
           {steps.map((step) => (
             <button
@@ -114,20 +126,6 @@ export default function Services() {
               <p className="mt-2 text-sm font-semibold text-white">{step.title}</p>
             </button>
           ))}
-        </div>
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <a
-            href="https://calendly.com/ravdevops/discovery-meeting"
-            className="rounded-full bg-gradient-to-r from-raven-accent to-raven-cyan px-6 py-3 text-base font-semibold text-black shadow-soft-glow"
-          >
-            Book a discovery call
-          </a>
-          <Link
-            to="/pricing"
-            className="rounded-full border border-raven-border/70 bg-raven-card px-6 py-3 text-base font-semibold text-slate-100 hover:border-raven-accent/70"
-          >
-            View pricing
-          </Link>
         </div>
       </section>
 

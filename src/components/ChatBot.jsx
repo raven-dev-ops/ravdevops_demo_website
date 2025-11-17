@@ -11,6 +11,7 @@ const ChatBot = ({ defaultOpen = false }) => {
   const [wobble, setWobble] = useState(false);
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
+  const [blurbVisible, setBlurbVisible] = useState(false);
   const listEndRef = useRef(null);
 
   // Timed behavior:
@@ -58,6 +59,16 @@ const ChatBot = ({ defaultOpen = false }) => {
       setWobble(true);
       setTimeout(() => setWobble(false), 600);
     }, 5000);
+    return () => clearInterval(interval);
+  }, [bubbleVisible, open]);
+
+  // Show "CAWW!" blurb every 30s while bubble visible and chat is closed
+  useEffect(() => {
+    if (!bubbleVisible || open) return undefined;
+    const interval = setInterval(() => {
+      setBlurbVisible(true);
+      setTimeout(() => setBlurbVisible(false), 2000);
+    }, 30000);
     return () => clearInterval(interval);
   }, [bubbleVisible, open]);
 
@@ -155,24 +166,41 @@ const ChatBot = ({ defaultOpen = false }) => {
         )}
       </AnimatePresence>
 
-      {bubbleVisible && (
-        <motion.button
-          className="flex items-center justify-center rounded-full bg-raven-blue p-3 text-white shadow-lg hover:bg-blue-800"
-          onClick={() => setOpen((v) => !v)}
-          aria-expanded={open}
-          aria-label="Open chat bot"
-          animate={wobble ? { rotate: [0, -6, 6, -6, 0] } : {}}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="h-12 w-12 overflow-hidden rounded-full bg-black/30">
-            <img
-              src={ravenAssistantIcon}
-              alt="Raven AI Assistant"
-              className="h-full w-full object-cover"
-            />
-          </div>
-        </motion.button>
-      )}
+      <div className="flex flex-col items-end gap-2">
+        <AnimatePresence>
+          {bubbleVisible && !open && blurbVisible && (
+            <motion.div
+              key="raven-caww"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              transition={{ duration: 0.25 }}
+              className="mb-1 rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white shadow-lg"
+            >
+              CAWW!
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {bubbleVisible && (
+          <motion.button
+            className="flex items-center justify-center rounded-full bg-red-600 p-3 text-white shadow-lg hover:bg-red-700"
+            onClick={() => setOpen((v) => !v)}
+            aria-expanded={open}
+            aria-label="Open chat bot"
+            animate={wobble ? { rotate: [0, -6, 6, -6, 0] } : {}}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="h-12 w-12 overflow-hidden rounded-full bg-black/30">
+              <img
+                src={ravenAssistantIcon}
+                alt="Raven AI Assistant"
+                className="h-full w-full object-cover"
+              />
+            </div>
+          </motion.button>
+        )}
+      </div>
     </div>
   );
 };

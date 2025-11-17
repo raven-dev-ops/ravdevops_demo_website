@@ -2,7 +2,7 @@ import React from 'react';
 import { portfolioItems } from '../data/portfolio';
 import SeoHead from '../components/SeoHead';
 
-function PortfolioCarousel({ images, title }) {
+function PortfolioCarousel({ images, title, onArrowHoverChange }) {
   const [index, setIndex] = React.useState(0);
 
   if (!images || images.length === 0) return null;
@@ -11,6 +11,14 @@ function PortfolioCarousel({ images, title }) {
 
   const goPrev = () => setIndex((prev) => (prev - 1 + total) % total);
   const goNext = () => setIndex((prev) => (prev + 1) % total);
+
+  const handleArrowEnter = () => {
+    if (onArrowHoverChange) onArrowHoverChange(true);
+  };
+
+  const handleArrowLeave = () => {
+    if (onArrowHoverChange) onArrowHoverChange(false);
+  };
 
   return (
     <div className="relative mb-4 overflow-hidden rounded-2xl border border-raven-border/70 bg-raven-card/80">
@@ -27,7 +35,9 @@ function PortfolioCarousel({ images, title }) {
               e.stopPropagation();
               goPrev();
             }}
-            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 px-2 py-1 text-xs text-white hover:bg-black/70"
+            onMouseEnter={handleArrowEnter}
+            onMouseLeave={handleArrowLeave}
+            className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 px-2 py-1 text-xs text-white transition-transform hover:scale-110 hover:bg-black/70"
           >
             {'<'}
           </button>
@@ -37,7 +47,9 @@ function PortfolioCarousel({ images, title }) {
               e.stopPropagation();
               goNext();
             }}
-            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 px-2 py-1 text-xs text-white hover:bg-black/70"
+            onMouseEnter={handleArrowEnter}
+            onMouseLeave={handleArrowLeave}
+            className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 px-2 py-1 text-xs text-white transition-transform hover:scale-110 hover:bg-black/70"
           >
             {'>'}
           </button>
@@ -85,44 +97,66 @@ export default function Portfolio() {
       </header>
 
       <div className="grid gap-6 md:grid-cols-2">
-        {portfolioItems.map((item) => (
-          <article
-            key={item.slug}
-            id={item.slug}
-            role="button"
-            tabIndex={0}
-            onClick={() => handleCardClick(item.github)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleCardClick(item.github);
-              }
-            }}
-            className="flex h-full cursor-pointer flex-col gap-4 rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6 transition transform hover:scale-105 hover:border-raven-accent/80 hover:bg-raven-card hover:shadow-soft-glow"
-          >
-            <PortfolioCarousel images={item.screenshots} title={item.title} />
-            <h2 className="text-2xl font-semibold text-white">{item.title}</h2>
-            <p className="text-sm text-slate-300">{item.description}</p>
-            <div className="flex flex-wrap gap-2 text-xs text-slate-200">
-              {item.tech.map((tech) => (
-                <span key={tech} className="rounded-full border border-raven-border/60 bg-raven-surface/60 px-3 py-1">
-                  {tech}
-                </span>
-              ))}
-            </div>
-            <div>
-              <h3 className="text-sm font-semibold text-white">DevOps outcomes</h3>
-              <ul className="mt-2 space-y-2 text-sm text-slate-300">
-                {item.outcomes.map((outcome) => (
-                  <li key={outcome} className="flex items-start gap-2">
-                    <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
-                    <span>{outcome}</span>
-                  </li>
+        {portfolioItems.map((item) => {
+          const [hovered, setHovered] = React.useState(false);
+          const [arrowHover, setArrowHover] = React.useState(false);
+          const isActive = hovered && !arrowHover;
+
+          return (
+            <article
+              key={item.slug}
+              id={item.slug}
+              role="button"
+              tabIndex={0}
+              onClick={() => handleCardClick(item.github)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleCardClick(item.github);
+                }
+              }}
+              onMouseEnter={() => setHovered(true)}
+              onMouseLeave={() => {
+                setHovered(false);
+                setArrowHover(false);
+              }}
+              className={`flex h-full cursor-pointer flex-col gap-4 rounded-2xl border p-6 transition transform ${
+                isActive
+                  ? 'scale-105 border-raven-accent/80 bg-raven-card hover:shadow-soft-glow'
+                  : 'border-raven-border/70 bg-raven-card/70'
+              }`}
+            >
+              <PortfolioCarousel
+                images={item.screenshots}
+                title={item.title}
+                onArrowHoverChange={setArrowHover}
+              />
+              <h2 className="text-2xl font-semibold text-white">{item.title}</h2>
+              <p className="text-sm text-slate-300">{item.description}</p>
+              <div className="flex flex-wrap gap-2 text-xs text-slate-200">
+                {item.tech.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full border border-raven-border/60 bg-raven-surface/60 px-3 py-1"
+                  >
+                    {tech}
+                  </span>
                 ))}
-              </ul>
-            </div>
-          </article>
-        ))}
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-white">DevOps outcomes</h3>
+                <ul className="mt-2 space-y-2 text-sm text-slate-300">
+                  {item.outcomes.map((outcome) => (
+                    <li key={outcome} className="flex items-start gap-2">
+                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
+                      <span>{outcome}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </article>
+          );
+        })}
       </div>
     </div>
   );

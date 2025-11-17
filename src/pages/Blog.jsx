@@ -77,19 +77,38 @@ export default function Blog() {
       <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6">
         <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
           <div>
-            <h3 className="text-xl font-semibold text-white">Join my newsletter</h3>
-            <p className="text-sm text-slate-300">Get updates on CI/CD, cloud automation, and DevOps maturity guides.</p>
+            <div className="flex items-center gap-3">
+              <div className="h-8 w-8 overflow-hidden rounded-full border border-raven-border/70 bg-black/40">
+                <img
+                  src={ravenHomeLogo}
+                  alt="Raven Development Operations logo"
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <h3 className="text-xl font-semibold text-white">Join my newsletter</h3>
+            </div>
+            <p className="mt-2 text-sm text-slate-300">
+              Get updates on CI/CD, cloud automation, and DevOps maturity guides.
+            </p>
           </div>
-          <form className="flex flex-wrap gap-3">
+          <div className="group flex flex-wrap items-center gap-3">
             <input
               type="email"
-              placeholder="Email address"
-              className="w-full rounded-full border border-raven-border/70 bg-raven-surface/70 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:border-raven-accent focus:outline-none md:w-64"
+              placeholder="Email address (coming soon)"
+              disabled
+              className="w-full cursor-not-allowed rounded-full border border-raven-border/40 bg-raven-surface/40 px-4 py-3 text-sm text-slate-400 placeholder:text-slate-500 md:w-64"
             />
-            <button className="rounded-full bg-gradient-to-r from-raven-accent to-raven-cyan px-6 py-3 text-sm font-semibold text-black shadow-soft-glow">
+            <button
+              type="button"
+              disabled
+              className="cursor-not-allowed rounded-full bg-slate-600/40 px-6 py-3 text-sm font-semibold text-slate-300 shadow-inner shadow-black/30"
+            >
               Get updates
             </button>
-          </form>
+            <span className="w-full text-xs text-slate-500 opacity-0 transition-opacity group-hover:opacity-100">
+              Coming soon!
+            </span>
+          </div>
         </div>
       </section>
     </div>
