@@ -70,6 +70,9 @@ function PortfolioCarousel({ images, title, onArrowHoverChange }) {
 }
 
 export default function Portfolio() {
+  const [hoveredSlug, setHoveredSlug] = React.useState(null);
+  const [arrowHoverSlug, setArrowHoverSlug] = React.useState(null);
+
   const handleCardClick = (github) => {
     if (!github) return;
     if (typeof window === 'undefined') return;
@@ -98,9 +101,7 @@ export default function Portfolio() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {portfolioItems.map((item) => {
-          const [hovered, setHovered] = React.useState(false);
-          const [arrowHover, setArrowHover] = React.useState(false);
-          const isActive = hovered && !arrowHover;
+          const isActive = hoveredSlug === item.slug && arrowHoverSlug !== item.slug;
 
           return (
             <article
@@ -115,10 +116,10 @@ export default function Portfolio() {
                   handleCardClick(item.github);
                 }
               }}
-              onMouseEnter={() => setHovered(true)}
+              onMouseEnter={() => setHoveredSlug(item.slug)}
               onMouseLeave={() => {
-                setHovered(false);
-                setArrowHover(false);
+                setHoveredSlug(null);
+                setArrowHoverSlug(null);
               }}
               className={`flex h-full cursor-pointer flex-col gap-4 rounded-2xl border p-6 transition transform ${
                 isActive
@@ -129,7 +130,9 @@ export default function Portfolio() {
               <PortfolioCarousel
                 images={item.screenshots}
                 title={item.title}
-                onArrowHoverChange={setArrowHover}
+                onArrowHoverChange={(isHovering) =>
+                  setArrowHoverSlug(isHovering ? item.slug : null)
+                }
               />
               <h2 className="text-2xl font-semibold text-white">{item.title}</h2>
               <p className="text-sm text-slate-300">{item.description}</p>

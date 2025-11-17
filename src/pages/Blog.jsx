@@ -2,6 +2,7 @@ import React, { useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts';
 import SeoHead from '../components/SeoHead';
+import ravenHomeLogo from '../assets/raven_home_logo.png';
 
 const tags = ['All', 'CI/CD', 'Cloud', 'SRE', 'Tooling'];
 
