@@ -105,9 +105,6 @@ function TrustedByCarousel({ index }) {
 
   const current = trustedLogos[index % total];
   const isColonial = current.name === 'Colonial KC';
-  const isRowe = current.name === 'Rowe & Oak Coffee Co.';
-  const isGalactic = current.name === 'Galactic Phantom Taskforce';
-  const hasCircleFrame = isRowe || isGalactic;
   const logoSizeClass = isColonial ? 'h-24 sm:h-28' : 'h-32 sm:h-36';
 
   return (
@@ -121,15 +118,13 @@ function TrustedByCarousel({ index }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           className="flex w-full max-w-2xl flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-7"
-        >
-          <div className="flex items-center justify-center">
-            <img
-              src={current.src}
-              alt={current.name}
-              className={`${logoSizeClass} w-auto object-contain ${
-                hasCircleFrame ? 'rounded-full border border-raven-border/70' : ''
-              }`}
-            />
+          >
+            <div className="flex items-center justify-center">
+              <img
+                src={current.src}
+                alt={current.name}
+                className={`${logoSizeClass} w-auto object-contain`}
+              />
           </div>
           <div className="flex flex-col gap-2 text-center sm:text-left">
             <p className="text-lg font-semibold text-white">{current.name}</p>
