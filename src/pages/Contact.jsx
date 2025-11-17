@@ -103,7 +103,7 @@ export default function Contact() {
           <div className="flex h-full flex-col rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6 transition transform hover:-translate-y-0.5 hover:border-raven-accent/70 hover:shadow-soft-glow">
             <iframe
               title="Calendly discovery video call"
-              src="https://calendly.com/charityolivas/discovery-call"
+              src="https://calendly.com/charityolivas/discovery-call?background_color=020617&text_color=f9fafb&primary_color=22C55E"
               className="h-full w-full rounded-lg border-0"
             />
           </div>
