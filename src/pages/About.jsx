@@ -67,12 +67,12 @@ const milestones = [
   },
   {
     year: 'Apr 2025',
-    title: 'Galactic Phantom Division website',
+    title: 'Galactic Phantom Taskforce website',
     text: 'Launched helldivers2_clan_website to support a Helldivers 2 clan community with a lightweight, maintainable web presence.',
-    portfolioSlug: 'galactic-phantom-division',
+    portfolioSlug: 'galactic-phantom-taskforce',
   },
   {
-    year: 'Apr-May 2025',
+    year: 'Apr–May 2025',
     title: 'Art Bay e-commerce stack',
     text: 'Started the e-commerce-frontend and e-commerce-backend repos as a full-stack reference, pairing modern frontend patterns with an API-driven backend.',
     portfolioSlug: 'art-bay-frontend',
@@ -138,20 +138,6 @@ export default function About() {
           We partner with CTOs, founders, and product teams to modernize delivery pipelines, cloud infrastructure, and observability
           so they can ship without heroics.
         </p>
-        <ul className="mx-auto mt-4 flex max-w-3xl flex-col items-center space-y-2 text-sm text-slate-300">
-          <li className="flex w-full max-w-xl items-start gap-2 text-left">
-            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
-            <span>DevOps-first partner focused on CI/CD, infrastructure, and reliability—not just UI polish.</span>
-          </li>
-          <li className="flex w-full max-w-xl items-start gap-2 text-left">
-            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
-            <span>Full-stack experience across Next.js, Django, Discord automation, and cloud platforms like Heroku and Netlify.</span>
-          </li>
-          <li className="flex w-full max-w-xl items-start gap-2 text-left">
-            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
-            <span>Flexible engagements from focused audits to ongoing fractional DevOps support for growing teams.</span>
-          </li>
-        </ul>
       </header>
 
       <section className="grid min-h-[300px] gap-4 md:grid-cols-2 md:items-center">
@@ -190,6 +176,7 @@ export default function About() {
           </div>
         </div>
       </section>
+
       <div className="flex items-center justify-center gap-3">
         <button
           type="button"
@@ -261,3 +248,4 @@ export default function About() {
     </div>
   );
 }
+
