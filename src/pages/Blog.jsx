@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts';
 import SeoHead from '../components/SeoHead';
@@ -7,7 +7,6 @@ import { SearchContext } from '../hooks/SearchContext';
 
 export default function Blog() {
   const { query } = useContext(SearchContext);
-  const [imageHoverSlug, setImageHoverSlug] = useState(null);
 
   const filtered = useMemo(() => {
     const posts = blogPosts;
@@ -42,12 +41,8 @@ export default function Blog() {
 
       <div className="grid gap-6 md:grid-cols-2">
         {filtered.map((post) => {
-          const isImageHovered = imageHoverSlug === post.slug;
           const baseCardClass =
-            'flex h-full flex-col gap-4 rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6 transition';
-          const hoverCardClass = !isImageHovered
-            ? ' transform hover:scale-105 hover:border-raven-accent/80 hover:bg-raven-card hover:shadow-soft-glow'
-            : '';
+            'flex h-full flex-col gap-4 rounded-2xl border border-raven-border/70 bg-raven-card/70 p-6 transition transform hover:scale-105 hover:border-raven-accent/80 hover:bg-raven-card hover:shadow-soft-glow';
 
           return (
             <Link
@@ -55,13 +50,9 @@ export default function Blog() {
               to={`/blog/${post.slug}`}
               className="group block"
             >
-              <article className={baseCardClass + hoverCardClass}>
+              <article className={baseCardClass}>
                 {post.image && (
-                  <div
-                    className="overflow-hidden rounded-xl border border-raven-border/60 bg-raven-card/80"
-                    onMouseEnter={() => setImageHoverSlug(post.slug)}
-                    onMouseLeave={() => setImageHoverSlug(null)}
-                  >
+                  <div className="overflow-hidden rounded-xl border border-raven-border/60 bg-raven-card/80">
                     <img src={post.image} alt={post.title} className="h-40 w-full object-cover" />
                   </div>
                 )}
