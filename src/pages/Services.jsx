@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { serviceAreas } from '../data/services';
 import SeoHead from '../components/SeoHead';
 
