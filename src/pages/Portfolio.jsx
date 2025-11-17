@@ -142,7 +142,10 @@ export default function Portfolio() {
                       className="relative z-10 h-full w-full object-cover"
                     />
                     <div className="pointer-events-none absolute inset-x-0 top-0 z-40 flex justify-start p-3">
-                      <span className="inline-flex rounded-full bg-black/70 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em] text-white">
+                      <span
+                        className="inline-flex rounded-full bg-black/70 px-4 py-1.5 text-sm font-semibold uppercase tracking-[0.2em]"
+                        style={{ color: '#ffffff' }}
+                      >
                         {item.title}
                       </span>
                     </div>

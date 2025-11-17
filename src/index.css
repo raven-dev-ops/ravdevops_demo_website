@@ -88,7 +88,8 @@ a {
 :root:not(.dark) .bg-raven-card\/70,
 :root:not(.dark) .bg-raven-card\/80,
 :root:not(.dark) .bg-raven-card\/95 {
-  background-color: rgba(255, 255, 255, 0.9);
+  /* slightly darker than pure white to increase contrast */
+  background-color: rgba(209, 213, 219, 0.95); /* approx slate-300 */
 }
 
 :root:not(.dark) .bg-raven-surface\/40,
@@ -98,7 +99,8 @@ a {
 :root:not(.dark) .bg-raven-surface\/80,
 :root:not(.dark) .bg-raven-navy\/70,
 :root:not(.dark) .bg-raven-navy\/80 {
-  background-color: rgba(248, 250, 252, 0.9); /* slate-50-ish */
+  /* match container shade so panels feel cohesive in light mode */
+  background-color: rgba(209, 213, 219, 0.95); /* approx slate-300 */
 }
 
 :root:not(.dark) .border-raven-border\/70,

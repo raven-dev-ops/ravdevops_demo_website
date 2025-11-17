@@ -185,7 +185,7 @@ export default function Services() {
                   backgroundPosition: 'center',
                 }}
               >
-                <div className="absolute inset-0 bg-black/60" />
+                <div className="absolute inset-0 dark:bg-black/60" />
                 <div className="relative flex h-full w-full items-center justify-center px-8">
                   <div className="flex flex-col items-center gap-3">
                     <img

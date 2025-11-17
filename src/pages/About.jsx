@@ -7,14 +7,13 @@ import service1Banner from '../assets/service1_banner.png';
 
 const staffProfiles = [
   {
-    name: 'Damon Heath',
-    title: 'Lead Software Engineer',
-    image: damonPortrait,
-    funFact: 'Fun fact: I play the cello.',
+    name: 'Raven',
+    title: 'AI Assistant',
+    image: service1Banner,
     bullets: [
-      'Veteran-owned, America-first engineering partner focused on building secure, reliable systems for U.S. teams operating in high-stakes environments.',
-      'Cloud architectures on Heroku, Netlify, and container platforms with documented runbooks instead of fragile one-off scripts.',
-      'Full-stack delivery across Next.js, Django, and Discord automation, with observability, logging, and security designed in from day one.',
+      'Supports the team with research, documentation drafts, and structured checklists so projects stay organized.',
+      'Helps explore implementation options and edge cases so proposals, roadmaps, and designs are grounded and thorough.',
+      'Assists with writing and reviewing content—from technical notes to user-facing copy—to keep communication clear.',
     ],
   },
   {
@@ -29,13 +28,14 @@ const staffProfiles = [
     ],
   },
   {
-    name: 'Raven',
-    title: 'AI Assistant',
-    image: service1Banner,
+    name: 'Damon Heath',
+    title: 'Lead Software Engineer',
+    image: damonPortrait,
+    funFact: 'Fun fact: I play the cello.',
     bullets: [
-      'Supports the team with research, documentation drafts, and structured checklists so projects stay organized.',
-      'Helps explore implementation options and edge cases so proposals, roadmaps, and designs are grounded and thorough.',
-      'Assists with writing and reviewing content—from technical notes to user-facing copy—to keep communication clear.',
+      'Veteran-owned, America-first engineering partner focused on building secure, reliable systems for U.S. teams operating in high-stakes environments.',
+      'Cloud architectures on Heroku, Netlify, and container platforms with documented runbooks instead of fragile one-off scripts.',
+      'Full-stack delivery across Next.js, Django, and Discord automation, with observability, logging, and security designed in from day one.',
     ],
   },
 ];
@@ -152,47 +152,50 @@ export default function About() {
         })}
       </section>
 
-      <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6">
-        <h2 className="text-2xl font-semibold text-white">Timeline</h2>
-        <div className="mt-4 grid gap-3 md:grid-cols-2">
-          {milestones.map((mile) => {
-            const isOpen = openTimelineYear === mile.year;
-            return (
-              <div
-                key={mile.year}
-                className="rounded-xl border border-raven-border/60 bg-raven-surface/50 p-4 transition-transform transition-colors duration-150 hover:-translate-y-0.5 hover:border-raven-accent/80 hover:bg-raven-surface/80 hover:shadow-soft-glow"
-              >
-                <button
-                  type="button"
-                  onClick={() => setOpenTimelineYear(isOpen ? null : mile.year)}
-                  className="flex w-full items-center justify-between text-left"
+      {false && (
+        <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6">
+          <h2 className="text-2xl font-semibold text-white">Timeline</h2>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {milestones.map((mile) => {
+              const isOpen = openTimelineYear === mile.year;
+              return (
+                <div
+                  key={mile.year}
+                  className="rounded-xl border border-raven-border/60 bg-raven-surface/50 p-4 transition-transform transition-colors duration-150 hover:-translate-y-0.5 hover:border-raven-accent/80 hover:bg-raven-surface/80 hover:shadow-soft-glow"
                 >
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">{mile.year}</p>
-                    {mile.title && (
-                      <p className="mt-1 text-sm font-semibold text-slate-100">{mile.title}</p>
-                    )}
-                  </div>
-                  <span className="text-xs text-slate-400">{isOpen ? '−' : '+'}</span>
-                </button>
-                {isOpen && (
-                  <div className="mt-2 space-y-2">
-                    <p className="text-sm text-slate-200">{mile.text}</p>
-                    {mile.portfolioSlug && (
-                      <Link
-                        to={`/portfolio#${mile.portfolioSlug}`}
-                        className="inline-flex text-xs font-semibold text-raven-cyan hover:text-white"
-                      >
-                        View related portfolio work
-                      </Link>
-                    )}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+                  <button
+                    type="button"
+                    onClick={() => setOpenTimelineYear(isOpen ? null : mile.year)}
+                    className="flex w-full items-center justify-between text-left"
+                  >
+                    <div>
+                      <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">{mile.year}</p>
+                      {mile.title && (
+                        <p className="mt-1 text-sm font-semibold text-slate-100">{mile.title}</p>
+                      )}
+                    </div>
+                    <span className="text-xs text-slate-400">{isOpen ? '−' : '+'}</span>
+                  </button>
+                  {isOpen && (
+                    <div className="mt-2 space-y-2">
+                      <p className="text-sm text-slate-200">{mile.text}</p>
+                      {mile.portfolioSlug && (
+                        <Link
+                          to={`/portfolio#${mile.portfolioSlug}`}
+                          className="inline-flex text-xs font-semibold text-raven-cyan hover:text-white"
+                        >
+                          View related portfolio work
+                        </Link>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      )}
     </div>
   );
 }
+
