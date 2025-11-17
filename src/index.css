@@ -88,8 +88,8 @@ a {
 :root:not(.dark) .bg-raven-card\/70,
 :root:not(.dark) .bg-raven-card\/80,
 :root:not(.dark) .bg-raven-card\/95 {
-  /* slightly darker than pure white to increase contrast */
-  background-color: rgba(209, 213, 219, 0.95); /* approx slate-300 */
+  /* light card shade in light mode */
+  background-color: rgba(243, 244, 246, 0.95); /* approx slate-100 */
 }
 
 :root:not(.dark) .bg-raven-surface\/40,
@@ -100,7 +100,48 @@ a {
 :root:not(.dark) .bg-raven-navy\/70,
 :root:not(.dark) .bg-raven-navy\/80 {
   /* match container shade so panels feel cohesive in light mode */
-  background-color: rgba(209, 213, 219, 0.95); /* approx slate-300 */
+  background-color: rgba(243, 244, 246, 0.95); /* approx slate-100 */
+}
+
+/* Light mode tag pill contrast tweaks */
+:root:not(.dark) .border-emerald-400\/70 {
+  border-color: #059669; /* emerald-500 */
+}
+:root:not(.dark) .bg-emerald-500\/10 {
+  background-color: rgba(16, 185, 129, 0.2); /* emerald-500 at ~20% */
+}
+:root:not(.dark) .text-emerald-300 {
+  color: #047857; /* emerald-700-ish */
+}
+
+:root:not(.dark) .border-sky-400\/70 {
+  border-color: #0ea5e9; /* sky-500 */
+}
+:root:not(.dark) .bg-sky-500\/10 {
+  background-color: rgba(14, 165, 233, 0.2);
+}
+:root:not(.dark) .text-sky-300 {
+  color: #0369a1; /* sky-700-ish */
+}
+
+:root:not(.dark) .border-amber-400\/70 {
+  border-color: #f59e0b; /* amber-500 */
+}
+:root:not(.dark) .bg-amber-500\/10 {
+  background-color: rgba(245, 158, 11, 0.2);
+}
+:root:not(.dark) .text-amber-200 {
+  color: #92400e; /* amber-800-ish */
+}
+
+:root:not(.dark) .border-violet-400\/70 {
+  border-color: #8b5cf6; /* violet-500 */
+}
+:root:not(.dark) .bg-violet-500\/10 {
+  background-color: rgba(139, 92, 246, 0.2);
+}
+:root:not(.dark) .text-violet-300 {
+  color: #5b21b6; /* violet-700-ish */
 }
 
 :root:not(.dark) .border-raven-border\/70,
