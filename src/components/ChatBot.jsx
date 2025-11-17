@@ -12,6 +12,9 @@ const ChatBot = ({ defaultOpen = false }) => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [blurbVisible, setBlurbVisible] = useState(false);
+  const [isResponding, setIsResponding] = useState(false);
+  const [status, setStatus] = useState('idle'); // idle | active | muted | standby
+  const [lastInteraction, setLastInteraction] = useState(() => Date.now());
   const listEndRef = useRef(null);
 
   // Timed behavior:
@@ -42,8 +45,10 @@ const ChatBot = ({ defaultOpen = false }) => {
   useEffect(() => {
     if (open && messages.length === 0) {
       setMessages([{ id: 'greet', role: 'bot', text: 'CAWWW! How can I help you today?' }]);
+      setStatus('active');
+      setLastInteraction(Date.now());
     }
-  }, [open, messages.length]);
+  }, [open, messages.length, setStatus]);
 
   // Auto-scroll conversation to bottom
   useEffect(() => {
@@ -54,26 +59,38 @@ const ChatBot = ({ defaultOpen = false }) => {
 
   // Wobble the bubble every 5s once visible and chat closed
   useEffect(() => {
-    if (!bubbleVisible || open) return undefined;
+    if (!bubbleVisible || open || status === 'muted' || status === 'standby') return undefined;
     const interval = setInterval(() => {
       setWobble(true);
       setTimeout(() => setWobble(false), 600);
     }, 5000);
     return () => clearInterval(interval);
-  }, [bubbleVisible, open]);
+  }, [bubbleVisible, open, status]);
 
   // Show "CAWW!" blurb every 30s while bubble visible and chat is closed
   useEffect(() => {
-    if (!bubbleVisible || open) return undefined;
+    if (!bubbleVisible || open || status === 'muted' || status === 'standby') return undefined;
     const interval = setInterval(() => {
       setBlurbVisible(true);
       setTimeout(() => setBlurbVisible(false), 2000);
     }, 30000);
     return () => clearInterval(interval);
-  }, [bubbleVisible, open]);
+  }, [bubbleVisible, open, status]);
+
+  // Standby mode after 90s of no interaction (when chat is closed and not muted)
+  useEffect(() => {
+    if (!bubbleVisible || status === 'muted') return undefined;
+    const interval = setInterval(() => {
+      if (!open && Date.now() - lastInteraction >= 90000) {
+        setStatus('standby');
+      }
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [bubbleVisible, open, lastInteraction, status]);
 
   const appendMessage = (role, text) => {
-    setMessages((prev) => [...prev, { id: `${Date.now()}-${Math.random()}`, role, text }]);
+    const timestamp = new Date();
+    setMessages((prev) => [...prev, { id: `${timestamp.getTime()}-${Math.random()}`, role, text, timestamp }]);
   };
 
   const handleSend = () => {
@@ -81,7 +98,18 @@ const ChatBot = ({ defaultOpen = false }) => {
     if (!text) return;
     appendMessage('user', text);
     setUserInput('');
-    appendMessage('bot', "Thanks for sharing. If you'd like to go deeper, feel free to describe your stack, timelines, or constraints.");
+    setIsResponding(true);
+    setStatus('active');
+    setLastInteraction(Date.now());
+
+    setTimeout(() => {
+      appendMessage(
+        'bot',
+        "Thanks for sharing. If you'd like to go deeper, feel free to describe your stack, timelines, or constraints.",
+      );
+      setIsResponding(false);
+      setLastInteraction(Date.now());
+    }, 3000);
   };
 
   return (
@@ -109,7 +137,10 @@ const ChatBot = ({ defaultOpen = false }) => {
               </div>
               <button
                 aria-label="Close chat"
-                onClick={() => setOpen(false)}
+                onClick={() => {
+                  setOpen(false);
+                  setStatus('muted');
+                }}
                 className="p-1 hover:opacity-90"
               >
                 <XMarkIcon className="h-5 w-5" />
@@ -118,24 +149,51 @@ const ChatBot = ({ defaultOpen = false }) => {
 
             <div className="space-y-4 p-4">
               <div className="h-64 space-y-2 overflow-y-auto rounded-md border border-gray-100 bg-gray-50 p-2 pr-1 dark:border-raven-border/70 dark:bg-raven-surface/80">
-                {messages.map((m) => (
-                  <div
-                    key={m.id}
-                    className={`flex ${m.role === 'bot' ? 'justify-start' : 'justify-end'}`}
-                  >
+                {messages.map((m) => {
+                  const timeLabel = m.timestamp
+                    ? m.timestamp.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+                    : '';
+                  const isBot = m.role === 'bot';
+                  return (
                     <div
-                      className={`max-w-[85%] rounded-lg px-3 py-2 text-xs ${
-                        m.role === 'bot'
-                          ? 'bg-raven-blue/10 text-slate-800 dark:bg-raven-blue/20 dark:text-slate-100'
-                          : 'bg-raven-blue text-white'
-                      }`}
+                      key={m.id}
+                      className={`flex ${isBot ? 'justify-start' : 'justify-end'}`}
                     >
-                      {m.text}
+                      <div className="flex max-w-[85%] items-start gap-2">
+                        {isBot && (
+                          <div className="mt-0.5 h-6 w-6 overflow-hidden rounded-full bg-black/40">
+                            <img
+                              src={ravenAssistantIcon}
+                              alt="Raven AI Assistant"
+                              className="h-full w-full object-cover"
+                            />
+                          </div>
+                        )}
+                        <div
+                          className={`flex flex-col rounded-lg px-3 py-2 text-xs ${
+                            isBot
+                              ? 'bg-raven-blue/10 text-slate-800 dark:bg-raven-blue/20 dark:text-slate-100'
+                              : 'bg-raven-blue text-white'
+                          }`}
+                        >
+                          <span>{m.text}</span>
+                          {timeLabel && (
+                            <span className="mt-1 self-end text-[10px] opacity-70">{timeLabel}</span>
+                          )}
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  );
+                })}
                 <div ref={listEndRef} />
               </div>
+
+              {isResponding && (
+                <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-300">
+                  <span className="h-2 w-2 animate-pulse rounded-full bg-raven-blue" />
+                  <span>Responding...</span>
+                </div>
+              )}
 
               <div className="flex items-center gap-2 pt-1">
                 <input
@@ -168,7 +226,7 @@ const ChatBot = ({ defaultOpen = false }) => {
 
       <div className="flex flex-col items-end gap-2">
         <AnimatePresence>
-          {bubbleVisible && !open && blurbVisible && (
+          {bubbleVisible && !open && blurbVisible && status !== 'muted' && status !== 'standby' && (
             <motion.div
               key="raven-caww"
               initial={{ opacity: 0, y: 8 }}
@@ -184,8 +242,25 @@ const ChatBot = ({ defaultOpen = false }) => {
 
         {bubbleVisible && (
           <motion.button
-            className="flex items-center justify-center rounded-full bg-red-600 p-3 text-white shadow-lg hover:bg-red-700"
-            onClick={() => setOpen((v) => !v)}
+            className={`flex items-center justify-center rounded-full p-3 text-white shadow-lg transition ${
+              status === 'muted'
+                ? 'bg-sky-500 hover:bg-sky-500 animate-pulse'
+                : status === 'active'
+                ? 'bg-emerald-500 hover:bg-emerald-500'
+                : status === 'standby'
+                ? 'bg-yellow-500 hover:bg-yellow-500 animate-pulse'
+                : 'bg-red-600 hover:bg-red-700'
+            }`}
+            onClick={() => {
+              const nextOpen = !open;
+              setOpen(nextOpen);
+              if (nextOpen) {
+                setStatus('active');
+                setLastInteraction(Date.now());
+              } else {
+                setStatus('muted');
+              }
+            }}
             aria-expanded={open}
             aria-label="Open chat bot"
             animate={wobble ? { rotate: [0, -6, 6, -6, 0] } : {}}
