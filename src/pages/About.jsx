@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import SeoHead from '../components/SeoHead';
 import damonPortrait from '../assets/damonheath_portrait.png';
 import charityPortrait from '../assets/charityolivas_portrait.png';
+import service1Banner from '../assets/service1_banner.png';
 
 const staffProfiles = [
   {
@@ -24,6 +25,16 @@ const staffProfiles = [
       'Leads administrative operations so engineering and client work stay organized and on schedule.',
       'Coordinates communication, documentation, and meeting logistics across internal and client teams.',
       'Maintains records and processes that keep engagements running smoothly from first contact through delivery.',
+    ],
+  },
+  {
+    name: 'Raven',
+    title: 'AI Assistant',
+    image: service1Banner,
+    bullets: [
+      'Supports the team with research, documentation drafts, and structured checklists so projects stay organized.',
+      'Helps explore implementation options and edge cases so proposals, roadmaps, and designs are grounded and thorough.',
+      'Assists with writing and reviewing content—from technical notes to user-facing copy—to keep communication clear.',
     ],
   },
 ];
@@ -90,16 +101,16 @@ export default function About() {
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 lg:px-6">
       <SeoHead
         title="About Raven Development Operations | DevOps consultant in Kansas City, MO"
-        description="DevOps-focused engineer delivering CI/CD automation, cloud infrastructure, observability, and full-stack experience."
+        description="DevOps-focused team delivering CI/CD automation, cloud infrastructure, observability, and full-stack experience."
         path="/about"
       />
       <header className="space-y-4 text-center">
         <p className="text-sm uppercase tracking-[0.3em] text-raven-cyan">About</p>
-        <h1 className="text-4xl font-bold text-white">DevOps-focused engineer based in Kansas City, MO</h1>
+        <h1 className="text-4xl font-bold text-white">DevOps-focused team based in Kansas City, MO</h1>
         <p className="text-lg text-slate-300">
-          I help CTOs, founders, and product teams modernize delivery pipelines, cloud infrastructure, and observability so they
-          can ship without heroics. Raven Development Operations is no longer a solo practice—we are a growing team ready to serve
-          your project needs.
+          We partner with CTOs, founders, and product teams to modernize delivery pipelines, cloud infrastructure, and observability
+          so they can ship without heroics. Raven Development Operations has grown from a solo practice into a focused team that
+          blends senior engineering experience, operational support, and an AI assistant to serve your project needs.
         </p>
       </header>
 
@@ -218,3 +229,4 @@ export default function About() {
     </div>
   );
 }
+

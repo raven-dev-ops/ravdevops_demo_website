@@ -105,11 +105,11 @@ function TrustedByCarousel({ index }) {
         <img
           src={current.src}
           alt={current.name}
-          className="h-20 w-20 rounded-md object-contain sm:h-24 sm:w-24"
+          className="h-24 w-24 rounded-md object-contain sm:h-28 sm:w-28"
         />
         <div className="flex flex-col text-center sm:text-left gap-1.5">
-          <p className="text-sm font-semibold text-white">{current.name}</p>
-          <p className="text-xs text-slate-300">{current.review}</p>
+          <p className="text-base font-semibold text-white">{current.name}</p>
+          <p className="text-sm text-slate-300">{current.review}</p>
         </div>
       </div>
     </div>
