@@ -119,7 +119,7 @@ function TrustedByCarousel({ index }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.4 }}
-          className="flex w-full max-w-2xl flex-col items-center gap-5 overflow-hidden sm:h-48 sm:flex-row sm:items-center sm:gap-7"
+          className="flex w-full max-w-2xl flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-7"
         >
           <div
             className={`flex items-center justify-center p-2 ${
@@ -134,7 +134,7 @@ function TrustedByCarousel({ index }) {
           </div>
           <div className="flex flex-col gap-2 text-center sm:text-left">
             <p className="text-lg font-semibold text-white">{current.name}</p>
-            <p className="max-h-28 overflow-y-auto text-base text-slate-300">{current.review}</p>
+            <p className="text-base text-slate-300">{current.review}</p>
           </div>
         </motion.div>
       </AnimatePresence>
