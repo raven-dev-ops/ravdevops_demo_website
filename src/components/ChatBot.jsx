@@ -44,7 +44,13 @@ const ChatBot = ({ defaultOpen = false }) => {
   // Seed greeting when the chat first opens and is empty
   useEffect(() => {
     if (open && messages.length === 0) {
-      setMessages([{ id: 'greet', role: 'bot', text: 'CAWWW! How can I help you today?' }]);
+      const timestamp = new Date();
+      setMessages([{
+        id: 'greet',
+        role: 'bot',
+        text: 'CAWWW! How can I help you today?',
+        timestamp,
+      }]);
       setStatus('active');
       setLastInteraction(Date.now());
     }
@@ -266,12 +272,13 @@ const ChatBot = ({ defaultOpen = false }) => {
             animate={wobble ? { rotate: [0, -6, 6, -6, 0] } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-transparent dark:border-raven-border/60">
-              <div className="h-10 w-10 overflow-hidden rounded-full">
+            <div className="relative flex h-12 w-12 items-center justify-center">
+              <div className="absolute inset-0 rounded-full border-2 border-raven-blue/70 opacity-90" />
+              <div className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-full bg-slate-900">
                 <img
                   src={ravenAssistantIcon}
                   alt="Raven AI Assistant"
-                  className="h-full w-full object-cover"
+                  className="h-9 w-9 object-cover"
                 />
               </div>
             </div>

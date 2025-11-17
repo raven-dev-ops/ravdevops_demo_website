@@ -12,13 +12,18 @@ export default function Layout({ children }) {
 
   const toggleTheme = () => setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
 
+  const wrapperClasses =
+    theme === 'dark'
+      ? 'min-h-screen text-slate-100'
+      : 'min-h-screen text-slate-900';
+
   const mainClasses =
     theme === 'dark'
-      ? 'min-h-screen bg-gradient-to-b from-raven-navy/95 via-raven-card/40 to-raven-navy/95'
-      : 'min-h-screen bg-gradient-to-b from-raven-navy/80 via-raven-card/30 to-raven-navy/80';
+      ? 'bg-gradient-to-b from-raven-navy/95 via-raven-card/40 to-raven-navy/95'
+      : 'bg-gradient-to-b from-raven-navy/70 via-raven-card/25 to-raven-navy/60';
 
   return (
-    <div className="text-slate-100">
+    <div className={wrapperClasses}>
       <Header theme={theme} toggleTheme={toggleTheme} />
       <main className={mainClasses}>{children}</main>
       <Footer />

@@ -1,6 +1,7 @@
 import React from 'react';
 import { serviceAreas } from '../data/services';
 import SeoHead from '../components/SeoHead';
+import ravenHomeLogo from '../assets/raven_home_logo.png';
 
 const steps = [
   {
@@ -99,14 +100,24 @@ export default function Services() {
         <h2 className="text-2xl font-bold text-white">How engagements work</h2>
 
         <div className="video-frame mt-4">
-          <div className="video-frame-inner border border-black/60">
-            <video
-              src={previewStep.videoSrc}
-              controls
-              className="h-full w-full object-cover"
-            >
-              Your browser does not support the video tag.
-            </video>
+          <div className="video-frame-inner border border-black/60 bg-black/70">
+            {previewStep.videoSrc ? (
+              <video
+                src={previewStep.videoSrc}
+                controls
+                className="h-full w-full object-cover"
+              >
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-black/40">
+                <img
+                  src={ravenHomeLogo}
+                  alt="Raven Development Operations"
+                  className="h-24 w-24 rounded-full object-contain opacity-80"
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -122,11 +133,9 @@ export default function Services() {
                 className={[
                   'flex flex-col items-center rounded-xl border border-raven-border/60 bg-raven-surface/50 p-4 text-center transition transform focus:outline-none focus-visible:ring-2 focus-visible:ring-raven-accent/70',
                   isActive
-                    ? 'scale-105 border-raven-accent/80 bg-raven-surface/80 shadow-soft-glow'
+                    ? 'scale-105 border-raven-accent bg-raven-surface/90 shadow-soft-glow ring-1 ring-raven-accent/80'
                     : 'hover:-translate-y-0.5 hover:scale-105 hover:border-raven-accent hover:shadow-soft-glow',
-                ]
-                  .filter(Boolean)
-                  .join(' ')}
+                ].join(' ')}
               >
                 <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">Step {step.number}</p>
                 <p className="mt-2 text-sm font-semibold text-white">{step.title}</p>
@@ -138,4 +147,3 @@ export default function Services() {
     </div>
   );
 }
-
