@@ -121,7 +121,7 @@ export default function Portfolio() {
                   onMouseEnter={() => setImageHoverSlug(item.slug)}
                   onMouseLeave={() => setImageHoverSlug(null)}
                 >
-                  <div className="relative h-56 w-full overflow-hidden rounded-2xl border border-raven-border/70 bg-raven-card/80 transition hover:outline hover:outline-2 hover:outline-raven-accent sm:h-64">
+                  <div className="relative h-56 w-full overflow-hidden rounded-2xl border border-raven-border/70 bg-white/90 transition hover:outline hover:outline-2 hover:outline-raven-accent dark:bg-raven-card/80 sm:h-64">
                     {item.screenshots[2] && (
                       <img
                         src={item.screenshots[2]}
@@ -152,7 +152,7 @@ export default function Portfolio() {
                         e.stopPropagation();
                         openLightbox(item, 0);
                       }}
-                      className="absolute inset-0 z-30 flex items-center justify-center bg-black/50 text-xs font-semibold uppercase tracking-[0.2em] text-slate-100 transition transform hover:scale-105 hover:bg-black/60 hover:text-raven-accent"
+                      className="absolute inset-0 z-30 flex items-center justify-center bg-black/40 text-xs font-semibold uppercase tracking-[0.2em] text-slate-100 transition transform hover:scale-105 hover:bg-black/60 hover:text-raven-accent dark:bg-black/50"
                     >
                       Click to view gallery
                     </button>

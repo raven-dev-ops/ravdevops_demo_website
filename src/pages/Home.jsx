@@ -116,11 +116,13 @@ function TrustedByCarousel({ index }) {
           transition={{ duration: 0.4 }}
           className="flex w-full max-w-2xl flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-7"
         >
-          <img
-            src={current.src}
-            alt={current.name}
-            className="h-28 w-28 rounded-md object-contain sm:h-32 sm:w-32"
-          />
+          <div className="flex h-28 w-28 items-center justify-center rounded-md bg-slate-900/80 dark:bg-black/40 sm:h-32 sm:w-32">
+            <img
+              src={current.src}
+              alt={current.name}
+              className="max-h-full max-w-full object-contain"
+            />
+          </div>
           <div className="flex flex-col gap-2 text-center sm:text-left">
             <p className="text-lg font-semibold text-white">{current.name}</p>
             <p className="text-base text-slate-300">{current.review}</p>
@@ -199,9 +201,9 @@ export default function Home() {
         path="/"
       />
 
-      <section className="grid gap-10 rounded-3xl border border-raven-border/60 bg-gradient-to-br from-raven-card/80 to-raven-surface/60 p-8 shadow-soft-glow md:grid-cols-2 md:items-center">
+      <section className="grid gap-10 rounded-3xl border border-raven-border/60 bg-white/90 p-8 shadow-soft-glow dark:bg-gradient-to-br dark:from-raven-card/80 dark:to-raven-surface/60 md:grid-cols-2 md:items-center">
         <div className="space-y-6">
-          <p className="inline-flex rounded-full border border-raven-border/70 bg-raven-card px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">
+          <p className="inline-flex rounded-full border border-raven-border/70 bg-white/80 text-slate-900 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan dark:bg-raven-card dark:text-slate-100">
             Raven Development Operations
           </p>
           <div className="flex items-center gap-4">
@@ -235,10 +237,10 @@ export default function Home() {
             </Link>
           </div>
         </div>
-        <div className="relative overflow-hidden rounded-3xl border border-raven-border/60 bg-raven-card/80 p-6">
+        <div className="relative overflow-hidden rounded-3xl border border-raven-border/60 bg-white/90 dark:bg-raven-card/80 p-6">
           <div className="absolute inset-0 bg-gradient-to-br from-raven-cyan/10 via-raven-accent/5 to-transparent blur-3xl" />
           <div className="relative space-y-4">
-            <div className="flex items-start gap-3 rounded-2xl border border-raven-border/70 bg-raven-surface/70 p-4">
+            <div className="flex items-start gap-3 rounded-2xl border border-raven-border/70 bg-slate-50/90 dark:bg-raven-surface/70 p-4">
               <div className="mt-1 h-2 w-2 rounded-full bg-raven-accent" />
               <div>
                 <p className="text-sm text-slate-400">Pipeline snapshot</p>
@@ -252,7 +254,7 @@ export default function Home() {
               {['PR previews', 'Policy as code', 'Observability', 'Cost guardrails'].map((item) => (
                 <div
                   key={item}
-                  className="rounded-xl border border-raven-border/60 bg-raven-card/80 p-4 text-sm text-slate-200"
+                  className="rounded-xl border border-raven-border/60 bg-slate-50/90 text-slate-800 p-4 dark:bg-raven-card/80 dark:text-slate-200"
                 >
                   {item}
                 </div>
@@ -266,7 +268,7 @@ export default function Home() {
         {benefits.map((benefit) => (
           <div
             key={benefit.title}
-            className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6 shadow-inner shadow-black/10"
+            className="rounded-2xl border border-raven-border/70 bg-white/90 p-6 shadow-inner shadow-black/10 dark:bg-raven-card/60"
           >
             <div className="mb-3 flex items-center gap-2">
               <CheckCircleIcon className="h-6 w-6 text-raven-accent" />
@@ -279,7 +281,7 @@ export default function Home() {
 
       <section className="space-y-4">
         <div className="grid gap-4 md:grid-cols-3">
-          <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
+          <div className="rounded-2xl border border-raven-border/70 bg-white/90 p-4 dark:bg-raven-card/60">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">
               Tooling
             </p>
@@ -294,7 +296,7 @@ export default function Home() {
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition transform hover:outline hover:outline-2 hover:outline-raven-accent ${
                     activePill === item
                       ? 'scale-105 border-raven-accent bg-raven-accent/20 text-raven-accent shadow-soft-glow outline outline-2 outline-raven-accent'
-                      : 'border-raven-accent/60 bg-raven-accent/10 text-raven-accent hover:border-raven-accent/80 hover:bg-raven-accent/15'
+                      : 'border-raven-accent bg-raven-accent/10 text-raven-accent hover:border-raven-accent/80 hover:bg-raven-accent/15'
                   }`}
                 >
                   <span>{item}</span>
@@ -316,7 +318,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
+          <div className="rounded-2xl border border-raven-border/70 bg-white/90 p-4 dark:bg-raven-card/60">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">
               Platforms
             </p>
@@ -330,8 +332,8 @@ export default function Home() {
                   onMouseLeave={() => handlePillLeave(item)}
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition transform hover:outline hover:outline-2 hover:outline-violet-300 ${
                     activePill === item
-                      ? 'scale-105 border-violet-400 bg-violet-500/20 text-violet-200 shadow-soft-glow outline outline-2 outline-violet-300'
-                      : 'border-violet-400/60 bg-violet-500/10 text-violet-200 hover:border-violet-400/80 hover:bg-violet-500/15'
+                      ? 'scale-105 border-violet-500 bg-violet-500/20 text-violet-200 shadow-soft-glow outline outline-2 outline-violet-300'
+                      : 'border-violet-500 bg-violet-500/10 text-violet-200 hover:border-violet-400/80 hover:bg-violet-500/15'
                   }`}
                 >
                   <span>{item}</span>
@@ -353,7 +355,7 @@ export default function Home() {
               ))}
             </div>
           </div>
-          <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
+          <div className="rounded-2xl border border-raven-border/70 bg-white/90 p-4 dark:bg-raven-card/60">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">Languages</p>
             <div className="mt-3 flex flex-wrap gap-3">
               {languages.map((lang) => (
@@ -366,7 +368,7 @@ export default function Home() {
                   className={`rounded-full border px-4 py-2 text-sm font-medium transition transform hover:outline hover:outline-2 hover:outline-amber-300 ${
                     activePill === lang
                       ? 'scale-105 border-raven-amber bg-raven-amber/20 text-raven-amber shadow-soft-glow outline outline-2 outline-amber-300'
-                      : 'border-raven-amber/60 bg-raven-amber/10 text-raven-amber hover:border-raven-amber/80 hover:bg-raven-amber/15'
+                      : 'border-raven-amber bg-raven-amber/10 text-raven-amber hover:border-raven-amber/80 hover:bg-raven-amber/15'
                   }`}
                 >
                   <span>{lang}</span>
@@ -391,7 +393,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="rounded-2xl border border-raven-border/60 bg-raven-card/60 p-6">
+      <section className="rounded-2xl border border-raven-border/60 bg-white/90 p-6 dark:bg-raven-card/60">
         <h2 className="text-2xl font-bold text-white">Trusted by</h2>
         <TrustedByCarousel index={trustedIndex} />
         <div className="mt-6 flex flex-wrap justify-center gap-3 text-slate-300">

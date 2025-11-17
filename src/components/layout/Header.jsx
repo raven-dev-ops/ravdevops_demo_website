@@ -11,6 +11,7 @@ const navItems = [
   { to: '/about', label: 'About' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/contact', label: 'Contact' },
+  { label: 'Partners', comingSoon: true },
 ];
 
 export default function Header({ theme, toggleTheme }) {
@@ -21,17 +22,29 @@ export default function Header({ theme, toggleTheme }) {
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 lg:px-6">
         <nav className="flex flex-wrap items-center gap-4 text-sm font-medium text-slate-200">
           {navItems.map((item) => (
-            <NavLink
-              key={item.to}
-              to={item.to}
-              className={({ isActive }) =>
-                `border-b-2 border-transparent pb-1 transition-colors hover:text-white ${
-                  isActive ? 'border-raven-accent text-white' : 'text-slate-300'
-                }`
-              }
-            >
-              {item.label}
-            </NavLink>
+            item.comingSoon ? (
+              <div
+                key={item.label}
+                className="relative group cursor-default border-b-2 border-transparent pb-1 text-slate-300 transition-colors hover:text-white"
+              >
+                <span>{item.label}</span>
+                <span className="pointer-events-none absolute left-1/2 top-full mt-1 -translate-x-1/2 whitespace-nowrap rounded-full bg-raven-card/90 px-3 py-1 text-[10px] font-semibold text-slate-100 opacity-0 shadow-soft-glow transition-opacity group-hover:opacity-100">
+                  Coming soon!
+                </span>
+              </div>
+            ) : (
+              <NavLink
+                key={item.to}
+                to={item.to}
+                className={({ isActive }) =>
+                  `border-b-2 border-transparent pb-1 transition-colors hover:text-white ${
+                    isActive ? 'border-raven-accent text-white' : 'text-slate-300'
+                  }`
+                }
+              >
+                {item.label}
+              </NavLink>
+            )
           ))}
         </nav>
 
