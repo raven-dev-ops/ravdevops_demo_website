@@ -78,19 +78,8 @@ const trustedLogos = [
   },
 ];
 
-const tech = [
-  'Docker',
-  'Kubernetes',
-  'GitHub Actions',
-  'AWS',
-  'Azure',
-  'GCP',
-  'Django',
-  'Next.js',
-  'MongoDB',
-  'Stripe',
-];
-
+const platforms = ['AWS', 'Azure', 'GCP', 'Django', 'Next.js', 'MongoDB', 'Stripe'];
+const tooling = ['Docker', 'Kubernetes', 'GitHub Actions'];
 const languages = ['Python', 'JavaScript', 'TypeScript'];
 
 function TrustedByCarousel({ index }) {
@@ -272,13 +261,28 @@ export default function Home() {
       </section>
 
       <section className="space-y-4">
-        <div className="grid gap-4 md:grid-cols-[2fr,1fr]">
+        <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">
-              Platforms & tooling
+              Platforms
             </p>
             <div className="mt-3 flex flex-wrap gap-3">
-              {tech.map((item) => (
+              {platforms.map((item) => (
+                <span
+                  key={item}
+                  className="rounded-full border border-raven-border/60 bg-raven-card/80 px-4 py-2 text-sm font-medium text-slate-200"
+                >
+                  {item}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">
+              Tooling
+            </p>
+            <div className="mt-3 flex flex-wrap gap-3">
+              {tooling.map((item) => (
                 <span
                   key={item}
                   className="rounded-full border border-raven-border/60 bg-raven-card/80 px-4 py-2 text-sm font-medium text-slate-200"

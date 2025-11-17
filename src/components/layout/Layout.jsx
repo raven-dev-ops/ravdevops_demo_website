@@ -15,10 +15,10 @@ export default function Layout({ children }) {
   const mainClasses =
     theme === 'dark'
       ? 'min-h-screen bg-gradient-to-b from-raven-navy/95 via-raven-card/40 to-raven-navy/95'
-      : 'min-h-screen bg-white/80';
+      : 'min-h-screen bg-gradient-to-b from-raven-navy/80 via-raven-card/30 to-raven-navy/80';
 
   return (
-    <div className={theme === 'dark' ? 'text-slate-100' : 'bg-white text-slate-900'}>
+    <div className="text-slate-100">
       <Header theme={theme} toggleTheme={toggleTheme} />
       <main className={mainClasses}>{children}</main>
       <Footer />
