@@ -90,7 +90,7 @@ function TrustedByCarousel({ index }) {
   const current = trustedLogos[index % total];
 
   return (
-    <div className="mt-6 mb-6 flex flex-col items-center gap-4">
+    <div className="mt-7 mb-7 flex flex-col items-center gap-5">
       <AnimatePresence mode="wait">
         <motion.div
           key={current.name}
@@ -98,16 +98,16 @@ function TrustedByCarousel({ index }) {
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -8 }}
           transition={{ duration: 0.4 }}
-          className="flex w-full max-w-xl flex-col items-center gap-4 sm:flex-row sm:items-center sm:gap-6"
+          className="flex w-full max-w-2xl flex-col items-center gap-5 sm:flex-row sm:items-center sm:gap-7"
         >
           <img
             src={current.src}
             alt={current.name}
-            className="h-24 w-24 rounded-md object-contain sm:h-28 sm:w-28"
+            className="h-28 w-28 rounded-md object-contain sm:h-32 sm:w-32"
           />
-          <div className="flex flex-col text-center sm:text-left gap-1.5">
-            <p className="text-base font-semibold text-white">{current.name}</p>
-            <p className="text-sm text-slate-300">{current.review}</p>
+          <div className="flex flex-col gap-2 text-center sm:text-left">
+            <p className="text-lg font-semibold text-white">{current.name}</p>
+            <p className="text-base text-slate-300">{current.review}</p>
           </div>
         </motion.div>
       </AnimatePresence>
@@ -270,7 +270,7 @@ export default function Home() {
               {platforms.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-raven-border/60 bg-raven-card/80 px-4 py-2 text-sm font-medium text-slate-200"
+                  className="rounded-full border border-raven-cyan/60 bg-raven-cyan/10 px-4 py-2 text-sm font-medium text-raven-cyan"
                 >
                   {item}
                 </span>
@@ -285,7 +285,7 @@ export default function Home() {
               {tooling.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-raven-border/60 bg-raven-card/80 px-4 py-2 text-sm font-medium text-slate-200"
+                  className="rounded-full border border-raven-accent/60 bg-raven-accent/10 px-4 py-2 text-sm font-medium text-raven-accent"
                 >
                   {item}
                 </span>
@@ -298,7 +298,7 @@ export default function Home() {
               {languages.map((lang) => (
                 <span
                   key={lang}
-                  className="rounded-full border border-raven-border/60 bg-raven-surface/80 px-4 py-2 text-sm font-medium text-slate-200"
+                  className="rounded-full border border-raven-amber/60 bg-raven-amber/10 px-4 py-2 text-sm font-medium text-raven-amber"
                 >
                   {lang}
                 </span>

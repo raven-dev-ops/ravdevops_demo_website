@@ -2,6 +2,7 @@ import React from 'react';
 import { serviceAreas } from '../data/services';
 import SeoHead from '../components/SeoHead';
 import ravenHomeLogo from '../assets/raven_home_logo.png';
+import siteBackgroundDark from '../assets/site_background_dark.gif';
 
 const steps = [
   {
@@ -38,8 +39,53 @@ const steps = [
 
 export default function Services() {
   const [activeStep, setActiveStep] = React.useState(steps[0].number);
+  const [isPlaying, setIsPlaying] = React.useState(false);
+  const videoRef = React.useRef(null);
 
   const previewStep = steps.find((step) => step.number === activeStep) || steps[0];
+  const hasVideo = Boolean(previewStep.videoSrc);
+
+  React.useEffect(() => {
+    // Reset playback state whenever the step changes
+    setIsPlaying(false);
+    if (videoRef.current) {
+      try {
+        videoRef.current.pause();
+        // eslint-disable-next-line no-param-reassign
+        videoRef.current.currentTime = 0;
+      } catch {
+        // ignore if video element is not ready
+      }
+    }
+  }, [activeStep]);
+
+  const handlePlayClick = () => {
+    if (!hasVideo || !videoRef.current) return;
+    videoRef.current
+      .play()
+      .then(() => {
+        setIsPlaying(true);
+      })
+      .catch(() => {
+        // autoplay might be blocked; leave overlay visible
+      });
+  };
+
+  const handlePrevStep = (event) => {
+    event.stopPropagation();
+    const currentIndex = steps.findIndex((step) => step.number === activeStep);
+    const total = steps.length;
+    const prevIndex = (currentIndex - 1 + total) % total;
+    setActiveStep(steps[prevIndex].number);
+  };
+
+  const handleNextStep = (event) => {
+    event.stopPropagation();
+    const currentIndex = steps.findIndex((step) => step.number === activeStep);
+    const total = steps.length;
+    const nextIndex = (currentIndex + 1) % total;
+    setActiveStep(steps[nextIndex].number);
+  };
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-12 lg:px-6">
@@ -100,23 +146,85 @@ export default function Services() {
         <h2 className="text-2xl font-bold text-white">How engagements work</h2>
 
         <div className="video-frame mt-4">
-          <div className="video-frame-inner border border-black/60 bg-black/70">
-            {previewStep.videoSrc ? (
+          <div className="video-frame-inner relative border border-black/60 bg-black/70">
+            {hasVideo && (
               <video
+                ref={videoRef}
                 src={previewStep.videoSrc}
                 controls
                 className="h-full w-full object-cover"
+                onPlay={() => setIsPlaying(true)}
+                onPause={() => setIsPlaying(false)}
+                onEnded={() => setIsPlaying(false)}
               >
                 Your browser does not support the video tag.
               </video>
-            ) : (
-              <div className="flex h-full w-full items-center justify-center bg-black/40">
-                <img
-                  src={ravenHomeLogo}
-                  alt="Raven Development Operations"
-                  className="h-24 w-24 rounded-full object-contain opacity-80"
-                />
-              </div>
+            )}
+
+            {(!hasVideo || !isPlaying) && (
+              <button
+                type="button"
+                onClick={handlePlayClick}
+                className="absolute inset-0 flex items-center justify-center"
+                style={{
+                  backgroundImage: `url(${siteBackgroundDark})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                }}
+              >
+                <div className="absolute inset-0 bg-black/60" />
+                <div className="relative flex flex-col items-center gap-4">
+                  <div className="h-20 w-20 overflow-hidden rounded-full border border-raven-border/70 bg-black/60">
+                    <img
+                      src={ravenHomeLogo}
+                      alt="Raven Development Operations"
+                      className="h-full w-full object-contain"
+                    />
+                  </div>
+                  {hasVideo && (
+                    <div className="flex items-center gap-4">
+                      <button
+                        type="button"
+                        onClick={handlePrevStep}
+                        className="hidden rounded-full bg-black/60 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-black/80 sm:inline-flex"
+                      >
+                        ‹
+                      </button>
+                      <span className="flex h-12 w-12 items-center justify-center rounded-full bg-raven-accent text-lg font-bold text-black shadow-lg shadow-raven-accent/40">
+                        ▶
+                      </span>
+                      <button
+                        type="button"
+                        onClick={handleNextStep}
+                        className="hidden rounded-full bg-black/60 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-black/80 sm:inline-flex"
+                      >
+                        ›
+                      </button>
+                    </div>
+                  )}
+                  <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-200">
+                    {hasVideo ? 'Click to play step video' : 'Preview coming soon'}
+                  </p>
+                </div>
+                {hasVideo && (
+                  <>
+                    <button
+                      type="button"
+                      onClick={handlePrevStep}
+                      className="absolute left-3 top-1/2 hidden -translate-y-1/2 rounded-full bg-black/60 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-black/80 sm:flex"
+                    >
+                      ‹
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleNextStep}
+                      className="absolute right-3 top-1/2 hidden -translate-y-1/2 rounded-full bg-black/60 px-3 py-2 text-sm font-semibold text-white shadow-md hover:bg-black/80 sm:flex"
+                    >
+                      ›
+                    </button>
+                  </>
+                )}
+              </button>
             )}
           </div>
         </div>
