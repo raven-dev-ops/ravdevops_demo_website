@@ -18,7 +18,7 @@ const staffProfiles = [
   },
   {
     name: 'Charity Olivas',
-    title: 'Chief Secretary',
+    title: 'Chief Administrator',
     image: charityPortrait,
     funFact: 'Fun fact: I love tacos.',
     bullets: [
@@ -198,4 +198,3 @@ export default function About() {
     </div>
   );
 }
-
