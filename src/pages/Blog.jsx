@@ -1,14 +1,15 @@
-import React, { useMemo, useState } from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { blogPosts } from '../data/blogPosts';
 import SeoHead from '../components/SeoHead';
 import service1Banner from '../assets/service1_banner.png';
+import { SearchContext } from '../hooks/SearchContext';
 
 const tags = ['All', 'CI/CD', 'Cloud', 'SRE', 'Tooling'];
 
 export default function Blog() {
   const [activeTag, setActiveTag] = useState('All');
-  const [query, setQuery] = useState('');
+  const { query } = useContext(SearchContext);
 
   const filtered = useMemo(() => {
     let posts = blogPosts;
@@ -45,16 +46,6 @@ export default function Blog() {
         <h1 className="text-4xl font-bold text-white">Shipping notes from the DevOps desk</h1>
         <p className="text-lg text-slate-300">CI/CD, cloud, SRE, and tooling practices you can apply right away.</p>
       </header>
-
-      <div className="flex justify-center">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search posts by title, topic, or tag…"
-          className="w-full max-w-md rounded-full border border-raven-border/70 bg-raven-card/60 px-4 py-2 text-sm text-slate-100 placeholder:text-slate-400 shadow-inner shadow-black/20 focus:border-raven-accent focus:outline-none"
-        />
-      </div>
 
       <div className="flex flex-wrap justify-center gap-3">
         {tags.map((tag) => {

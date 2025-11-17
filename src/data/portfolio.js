@@ -19,9 +19,11 @@ export const portfolioItems = [
   {
     title: 'Galactic Phantom Taskforce Website',
     slug: 'galactic-phantom-taskforce',
+    date: '2025-04-20',
     description:
       'Helldivers clan platform with authentication, Discord automation, and cloud deployment built for resilience.',
     tech: ['Next.js', 'TypeScript', 'MongoDB', 'NextAuth', 'Docker', 'Heroku'],
+    tags: ['Cloud', 'Tooling'],
     outcomes: [
       'Containerized build and deploy pipeline with CI-ready Dockerfiles for consistent releases.',
       'Secrets management and environment configuration kept in sync across preview and production deployments.',
@@ -33,9 +35,11 @@ export const portfolioItems = [
   {
     title: 'Art Bay Backend',
     slug: 'ecommerce-backend',
+    date: '2025-05-25',
     description:
       'Modular Django backbone for storefronts with payments, orders, and CI-ready Docker images.',
     tech: ['Django', 'Docker', 'PostgreSQL', 'GitHub Actions'],
+    tags: ['Cloud', 'CI/CD'],
     outcomes: [
       'Production-grade container images with health checks and an automated static asset pipeline.',
       'Environment templates and .env.example files that make onboarding new developers straightforward.',
@@ -47,9 +51,11 @@ export const portfolioItems = [
   {
     title: 'Art Bay Frontend',
     slug: 'art-bay-frontend',
+    date: '2025-05-02',
     description:
       'Headless storefront with Stripe, JWT auth, and DRF integration shipped to Netlify.',
     tech: ['Next.js', 'Stripe', 'Netlify', 'JWT', 'DRF'],
+    tags: ['CI/CD', 'Tooling'],
     outcomes: [
       'Clear separation of public versus secret environment variables for safe, reproducible builds.',
       'Optimized static asset pipeline and CDN-friendly deployment tuned for fast page loads.',
@@ -61,9 +67,11 @@ export const portfolioItems = [
   {
     title: 'Helldivers 2 Discord Bot',
     slug: 'helldivers-bot',
+    date: '2025-11-16',
     description:
       'Python bot with OCR pipelines, scheduled leaderboards, and multi-guild configuration.',
     tech: ['Python', 'Docker', 'MongoDB', 'OCR', 'Heroku'],
+    tags: ['SRE', 'Tooling'],
     outcomes: [
       'Scheduled jobs for leaderboard generation and health checks so the bot remains reliable during peak usage.',
       'Background OCR processing with controlled concurrency to keep image queues flowing without overloading services.',

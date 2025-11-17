@@ -1,10 +1,12 @@
 import React from 'react';
 import { portfolioItems } from '../data/portfolio';
 import SeoHead from '../components/SeoHead';
+import { SearchContext } from '../hooks/SearchContext';
 
 export default function Portfolio() {
   const [lightbox, setLightbox] = React.useState(null);
-  const [query, setQuery] = React.useState('');
+  const [activeTag, setActiveTag] = React.useState('All');
+  const { query } = React.useContext(SearchContext);
 
   const handleCardClick = (github) => {
     if (!github) return;
@@ -55,9 +57,23 @@ export default function Portfolio() {
   };
 
   const normalizedQuery = query.trim().toLowerCase();
+
+  const allTech = React.useMemo(() => {
+    const set = new Set();
+    portfolioItems.forEach((item) => {
+      (item.tech || []).forEach((t) => set.add(t));
+    });
+    return Array.from(set);
+  }, []);
+
   const visibleItems = React.useMemo(() => {
-    if (!normalizedQuery) return portfolioItems;
     return portfolioItems.filter((item) => {
+      if (activeTag !== 'All' && !(item.tech || []).includes(activeTag)) {
+        return false;
+      }
+
+      if (!normalizedQuery) return true;
+
       const fields = [
         item.title,
         item.description,
@@ -70,7 +86,7 @@ export default function Portfolio() {
           value.toLowerCase().includes(normalizedQuery),
       );
     });
-  }, [normalizedQuery]);
+  }, [activeTag, normalizedQuery]);
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 py-12 lg:px-6">
@@ -86,14 +102,27 @@ export default function Portfolio() {
           Engineering work focused on automation, infrastructure, and reliability - not just the UI.
         </p>
       </header>
-      <div className="flex justify-center">
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Search portfolio by tag, tech, or keyword..."
-          className="w-full max-w-md rounded-full border border-raven-border/70 bg-raven-surface/70 px-4 py-2 text-sm text-white placeholder:text-slate-400 focus:border-raven-accent focus:outline-none"
-        />
+      <div className="flex flex-wrap justify-center gap-3">
+        {['All', ...allTech].map((tag) => {
+          const isActive = activeTag === tag;
+          const baseInactive =
+            'border-raven-border/60 bg-raven-card/70 text-slate-200 hover:border-raven-accent/60';
+          const activeClasses =
+            'border-raven-accent bg-raven-accent/20 text-raven-accent';
+
+          return (
+            <button
+              key={tag}
+              type="button"
+              onClick={() => setActiveTag(tag)}
+              className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors ${
+                isActive ? activeClasses : baseInactive
+              }`}
+            >
+              {tag}
+            </button>
+          );
+        })}
       </div>
 
       <div className="grid gap-6 md:grid-cols-2">
@@ -132,20 +161,40 @@ export default function Portfolio() {
                       Click to view gallery
                     </button>
                   </div>
+                  <div className="mt-2 flex items-center justify-between">
+                    {item.date && (
+                      <span className="text-xs uppercase tracking-[0.2em] text-raven-cyan">
+                        {item.date}
+                      </span>
+                    )}
+                    <div className="flex flex-wrap gap-2 text-xs">
+                      {(item.tags || []).map((tag) => {
+                        let tagClasses = 'rounded-full border px-2 py-1';
+
+                        if (tag === 'CI/CD') {
+                          tagClasses += ' border-emerald-400/70 bg-emerald-500/10 text-emerald-300';
+                        } else if (tag === 'Cloud') {
+                          tagClasses += ' border-sky-400/70 bg-sky-500/10 text-sky-300';
+                        } else if (tag === 'SRE') {
+                          tagClasses += ' border-amber-400/70 bg-amber-500/10 text-amber-200';
+                        } else if (tag === 'Tooling') {
+                          tagClasses += ' border-violet-400/70 bg-violet-500/10 text-violet-300';
+                        } else {
+                          tagClasses += ' border-raven-border/60 bg-raven-surface/60 text-slate-200';
+                        }
+
+                        return (
+                          <span key={tag} className={tagClasses}>
+                            {tag}
+                          </span>
+                        );
+                      })}
+                    </div>
+                  </div>
                 </div>
               )}
               <h2 className="text-2xl font-semibold text-white">{item.title}</h2>
               <p className="text-sm text-slate-300">{item.description}</p>
-              <div className="flex flex-wrap gap-2 text-xs text-slate-200">
-                {item.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="rounded-full border border-raven-accent/60 bg-raven-accent/10 px-3 py-1 font-medium text-raven-accent"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
               <div>
                 <h3 className="text-sm font-semibold text-white">DevOps outcomes</h3>
                 <ul className="mt-2 space-y-2 text-sm text-slate-300">
@@ -213,4 +262,3 @@ export default function Portfolio() {
     </div>
   );
 }
-

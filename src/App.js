@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from 'react-error-boundary';
 import Layout from './components/layout/Layout';
+import { SearchProvider } from './hooks/SearchContext';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';
@@ -36,21 +37,23 @@ function App() {
     <HelmetProvider>
       <BrowserRouter>
         <ErrorBoundary FallbackComponent={ErrorFallback}>
-          <Layout>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/services" element={<Services />} />
-              <Route path="/portfolio" element={<Portfolio />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:slug" element={<BlogPost />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/pricing" element={<Pricing />} />
-              <Route path="/privacy" element={<Legal type="privacy" />} />
-              <Route path="/terms" element={<Legal type="terms" />} />
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </Layout>
+          <SearchProvider>
+            <Layout>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/services" element={<Services />} />
+                <Route path="/portfolio" element={<Portfolio />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/privacy" element={<Legal type="privacy" />} />
+                <Route path="/terms" element={<Legal type="terms" />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Layout>
+          </SearchProvider>
         </ErrorBoundary>
       </BrowserRouter>
     </HelmetProvider>

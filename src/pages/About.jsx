@@ -89,6 +89,7 @@ export default function About() {
   const [openTimelineYear, setOpenTimelineYear] = React.useState(null);
   const [activeStaffIndex, setActiveStaffIndex] = React.useState(0);
   const [nextRotationDelay, setNextRotationDelay] = React.useState(5000);
+  const [profileVisible, setProfileVisible] = React.useState(true);
 
   const totalStaff = staffProfiles.length;
   const activeStaff = staffProfiles[activeStaffIndex];
@@ -107,12 +108,20 @@ export default function About() {
   React.useEffect(() => {
     if (totalStaff <= 1) return undefined;
 
+    setProfileVisible(false);
+    const fadeId = setTimeout(() => {
+      setProfileVisible(true);
+    }, 20);
+
     const id = setTimeout(() => {
       setActiveStaffIndex((prev) => (prev + 1) % totalStaff);
       setNextRotationDelay(5000);
     }, nextRotationDelay);
 
-    return () => clearTimeout(id);
+    return () => {
+      clearTimeout(id);
+      clearTimeout(fadeId);
+    };
   }, [activeStaffIndex, nextRotationDelay, totalStaff]);
 
   return (
@@ -129,12 +138,28 @@ export default function About() {
           We partner with CTOs, founders, and product teams to modernize delivery pipelines, cloud infrastructure, and observability
           so they can ship without heroics.
         </p>
+        <ul className="mx-auto mt-4 flex max-w-3xl flex-col items-center space-y-2 text-sm text-slate-300">
+          <li className="flex w-full max-w-xl items-start gap-2 text-left">
+            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
+            <span>DevOps-first partner focused on CI/CD, infrastructure, and reliability—not just UI polish.</span>
+          </li>
+          <li className="flex w-full max-w-xl items-start gap-2 text-left">
+            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
+            <span>Full-stack experience across Next.js, Django, Discord automation, and cloud platforms like Heroku and Netlify.</span>
+          </li>
+          <li className="flex w-full max-w-xl items-start gap-2 text-left">
+            <span className="mt-1 h-1.5 w-1.5 rounded-full bg-raven-accent" />
+            <span>Flexible engagements from focused audits to ongoing fractional DevOps support for growing teams.</span>
+          </li>
+        </ul>
       </header>
 
       <section className="grid min-h-[300px] gap-4 md:grid-cols-2 md:items-center">
         <div
           className={`flex h-full items-center justify-center ${
             isEven ? 'md:order-1' : 'md:order-2'
+          } transition-opacity duration-500 ease-out ${
+            profileVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <div className="flex h-56 w-56 items-center justify-center overflow-hidden rounded-full border border-raven-border/70 bg-raven-card/80 p-2 shadow-soft-glow sm:h-64 sm:w-64">
@@ -148,6 +173,8 @@ export default function About() {
         <div
           className={`flex h-full items-center ${
             isEven ? 'md:order-2' : 'md:order-1'
+          } transition-opacity duration-500 ease-out ${
+            profileVisible ? 'opacity-100' : 'opacity-0'
           }`}
         >
           <div className="flex w-full flex-col rounded-2xl border border-raven-border/70 bg-raven-card/70 p-5 sm:p-6">

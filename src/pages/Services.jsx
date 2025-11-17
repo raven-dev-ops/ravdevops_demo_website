@@ -9,30 +9,40 @@ const steps = [
     number: 1,
     title: 'Discovery call',
     description: 'A short call to understand your goals, current stack, and delivery pain points.',
+    goal: 'Align on what you’re trying to ship and where delivery hurts today.',
+    nextAction: 'Decide whether a deeper assessment makes sense.',
     videoSrc: '/videos/step1-discovery-call.mp4',
   },
   {
     number: 2,
     title: 'Assessment',
     description: 'Deep-dive into your repos, pipelines, and cloud accounts to map risks and opportunities.',
+    goal: 'Build a clear picture of your current pipelines, infra, and risks.',
+    nextAction: 'Summarize findings and proposed focus areas for a plan.',
     videoSrc: '/videos/step2-assessment.mp4',
   },
   {
     number: 3,
     title: 'Proposal',
     description: 'A clear, written plan with milestones, timelines, and success criteria you can react to.',
+    goal: 'Agree on scope, milestones, and what “success” looks like.',
+    nextAction: 'Lock in a start date and finalize the engagement details.',
     videoSrc: '/videos/step3-proposal.mp4',
   },
   {
     number: 4,
     title: 'Implementation',
     description: 'Hands-on delivery: CI/CD changes, infra updates, and reliability improvements tested in stages.',
+    goal: 'Ship the agreed improvements safely, in small, testable increments.',
+    nextAction: 'Demo changes, capture feedback, and iterate on anything that needs refinement.',
     videoSrc: '/videos/step4-implementation.mp4',
   },
   {
     number: 5,
     title: 'Handover / ongoing support',
     description: 'Documentation, runbooks, knowledge transfer, and optional ongoing fractional support.',
+    goal: 'Make sure your team can own the new setup confidently.',
+    nextAction: 'Confirm runbooks, answer open questions, and choose whether to continue with fractional support.',
     videoSrc: '/videos/step5-handover.mp4',
   },
 ];
@@ -204,6 +214,20 @@ export default function Services() {
               </button>
             )}
           </div>
+        </div>
+
+        <div className="mt-4 rounded-xl border border-raven-border/70 bg-raven-surface/80 px-4 py-3 text-sm text-slate-200">
+          <p className="font-semibold text-raven-cyan">
+            Step {previewStep.number}: {previewStep.title}
+          </p>
+          <p className="mt-1">
+            <span className="font-semibold text-slate-100">Goal:</span>{' '}
+            {previewStep.goal || previewStep.description}
+          </p>
+          <p className="mt-1">
+            <span className="font-semibold text-slate-100">Next action:</span>{' '}
+            {previewStep.nextAction || 'Move into the next step when you’re ready.'}
+          </p>
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-5">
