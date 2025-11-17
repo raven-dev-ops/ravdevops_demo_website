@@ -266,12 +266,14 @@ const ChatBot = ({ defaultOpen = false }) => {
             animate={wobble ? { rotate: [0, -6, 6, -6, 0] } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="h-12 w-12 overflow-hidden rounded-full bg-black/30">
-              <img
-                src={ravenAssistantIcon}
-                alt="Raven AI Assistant"
-                className="h-full w-full object-cover"
-              />
+            <div className="flex h-12 w-12 items-center justify-center rounded-full border border-white/40 bg-transparent dark:border-raven-border/60">
+              <div className="h-10 w-10 overflow-hidden rounded-full">
+                <img
+                  src={ravenAssistantIcon}
+                  alt="Raven AI Assistant"
+                  className="h-full w-full object-cover"
+                />
+              </div>
             </div>
           </motion.button>
         )}

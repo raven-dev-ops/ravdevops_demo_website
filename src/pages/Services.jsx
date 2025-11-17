@@ -30,21 +30,15 @@ const steps = [
   {
     number: 5,
     title: 'Handover / ongoing support',
-    description: 'Documentation, runbooks, and knowledge transfer — plus optional fractional support going forward.',
+    description: 'Documentation, runbooks, knowledge transfer, and optional ongoing fractional support.',
     videoSrc: '/videos/step5-handover.mp4',
   },
 ];
 
 export default function Services() {
-  const [activeStep, setActiveStep] = React.useState(null);
+  const [activeStep, setActiveStep] = React.useState(steps[0].number);
 
-  const selectedStep = React.useMemo(
-    () => steps.find((step) => step.number === activeStep) || null,
-    [activeStep],
-  );
-
-  const closeModal = () => setActiveStep(null);
-  const previewStep = selectedStep || steps[0];
+  const previewStep = steps.find((step) => step.number === activeStep) || steps[0];
 
   return (
     <div className="mx-auto flex max-w-6xl flex-col gap-12 px-4 py-12 lg:px-6">
@@ -57,7 +51,8 @@ export default function Services() {
         <p className="text-sm uppercase tracking-[0.3em] text-raven-cyan">Services</p>
         <h1 className="text-4xl font-bold text-white">How we ship confident software delivery</h1>
         <p className="text-lg text-slate-300">
-          Clear DevOps engagements with outcomes you can measure — from assessments to automation sprints to fractional support.
+          Clear DevOps engagements with outcomes you can measure—from assessments to automation sprints to fractional
+          support.
         </p>
       </header>
 
@@ -108,6 +103,7 @@ export default function Services() {
             <video
               src={previewStep.videoSrc}
               controls
+              className="h-full w-full object-cover"
             >
               Your browser does not support the video tag.
             </video>
@@ -115,46 +111,31 @@ export default function Services() {
         </div>
 
         <div className="mt-6 grid gap-4 md:grid-cols-5">
-          {steps.map((step) => (
-            <button
-              key={step.number}
-              type="button"
-              onClick={() => setActiveStep(step.number)}
-              className="flex flex-col items-center rounded-xl border border-raven-border/60 bg-raven-surface/50 p-4 text-center text-left transition transform hover:-translate-y-0.5 hover:scale-105 hover:border-raven-accent hover:shadow-soft-glow focus:outline-none focus-visible:ring-2 focus-visible:ring-raven-accent/70"
-            >
-              <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">Step {step.number}</p>
-              <p className="mt-2 text-sm font-semibold text-white">{step.title}</p>
-            </button>
-          ))}
+          {steps.map((step) => {
+            const isActive = step.number === activeStep;
+
+            return (
+              <button
+                key={step.number}
+                type="button"
+                onClick={() => setActiveStep(step.number)}
+                className={[
+                  'flex flex-col items-center rounded-xl border border-raven-border/60 bg-raven-surface/50 p-4 text-center transition transform focus:outline-none focus-visible:ring-2 focus-visible:ring-raven-accent/70',
+                  isActive
+                    ? 'scale-105 border-raven-accent/80 bg-raven-surface/80 shadow-soft-glow'
+                    : 'hover:-translate-y-0.5 hover:scale-105 hover:border-raven-accent hover:shadow-soft-glow',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+              >
+                <p className="text-xs uppercase tracking-[0.2em] text-raven-cyan">Step {step.number}</p>
+                <p className="mt-2 text-sm font-semibold text-white">{step.title}</p>
+              </button>
+            );
+          })}
         </div>
       </section>
-
-      {selectedStep && (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black/70 p-4">
-          <div className="relative w-full max-w-3xl rounded-2xl border border-raven-border/70 bg-raven-card/90 p-4 shadow-soft-glow">
-            <button
-              type="button"
-              onClick={closeModal}
-              className="absolute right-3 top-3 rounded-full border border-raven-border/70 bg-raven-surface/80 px-2 py-1 text-xs font-semibold text-slate-100 hover:border-raven-accent/70"
-              aria-label="Close video"
-            >
-              ✕
-            </button>
-            <h3 className="pr-8 text-xl font-semibold text-white">Step {selectedStep.number}: {selectedStep.title}</h3>
-            <p className="mt-2 text-sm text-slate-300">{selectedStep.description}</p>
-            <div className="mt-4 video-frame">
-              <div className="video-frame-inner border border-black/60">
-                <video
-                  src={selectedStep.videoSrc}
-                  controls
-                >
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
+
