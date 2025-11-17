@@ -29,7 +29,6 @@ const ChatBot = ({ defaultOpen = false }) => {
   const [userInput, setUserInput] = useState('');
   const [blurbVisible, setBlurbVisible] = useState(false); // CAWW! while running
   const [nevermoreVisible, setNevermoreVisible] = useState(false);
-  const [nevermoreCount, setNevermoreCount] = useState(0);
   const [isResponding, setIsResponding] = useState(false);
   const [status, setStatus] = useState('idle'); // idle | active | muted | standby
   const [lastInteraction, setLastInteraction] = useState(() => Date.now());
@@ -42,6 +41,7 @@ const ChatBot = ({ defaultOpen = false }) => {
   const runIntervalRef = useRef(null);
   const runTimeoutRef = useRef(null);
   const nevermoreRunTimeoutRef = useRef(null);
+  const nevermoreCountRef = useRef(0);
   const iconRef = useRef(null);
 
   // Timed behavior:
@@ -111,20 +111,18 @@ const ChatBot = ({ defaultOpen = false }) => {
         setWobble(false);
       }, 2000);
 
-      setNevermoreCount((prev) => {
-        const next = prev + 1;
-        if (next === 3) {
-          if (nevermoreRunTimeoutRef.current) {
-            clearTimeout(nevermoreRunTimeoutRef.current);
-          }
-          nevermoreRunTimeoutRef.current = setTimeout(() => {
-            if (!open && bubbleVisible && status !== 'muted') {
-              startRunningAway();
-            }
-          }, 59000);
+      const next = nevermoreCountRef.current + 1;
+      nevermoreCountRef.current = next;
+      if (next === 3) {
+        if (nevermoreRunTimeoutRef.current) {
+          clearTimeout(nevermoreRunTimeoutRef.current);
         }
-        return next;
-      });
+        nevermoreRunTimeoutRef.current = setTimeout(() => {
+          if (!open && bubbleVisible && status !== 'muted') {
+            startRunningAway();
+          }
+        }, 59000);
+      }
     }, 60000);
     return () => {
       clearInterval(interval);
