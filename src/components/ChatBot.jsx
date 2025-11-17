@@ -360,7 +360,7 @@ const ChatBot = ({ defaultOpen = false }) => {
 
         {bubbleVisible && !open && (
           <motion.button
-            className="group flex items-center justify-center rounded-full p-3 text-white shadow-lg transition bg-transparent focus:outline-none focus-visible:ring-2 focus-visible:ring-raven-accent/70"
+            className="group flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-raven-accent/70"
             whileHover={{ scale: 1.12, rotate: 3 }}
             onClick={() => {
               const nextOpen = !open;
@@ -377,16 +377,11 @@ const ChatBot = ({ defaultOpen = false }) => {
             animate={wobble ? { rotate: [0, -6, 6, -6, 0] } : {}}
             transition={{ duration: 0.6 }}
           >
-            <div className="relative flex h-14 w-14 items-center justify-center transition-transform group-hover:scale-110">
-              <div className="absolute inset-0 rounded-full border border-raven-blue/70 opacity-90 group-hover:border-raven-accent/80" />
-              <div className="relative flex h-12 w-12 items-center justify-center overflow-hidden rounded-full bg-slate-900">
-                <img
-                  src={ravenAssistantIcon}
-                  alt="Raven AI Assistant"
-                  className="h-12 w-12 object-cover"
-                />
-              </div>
-            </div>
+            <img
+              src={ravenAssistantIcon}
+              alt="Raven AI Assistant"
+              className="h-14 w-14 rounded-full object-cover transition-transform group-hover:scale-110"
+            />
           </motion.button>
         )}
       </div>
