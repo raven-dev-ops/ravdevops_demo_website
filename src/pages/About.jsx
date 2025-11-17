@@ -105,13 +105,10 @@ export default function About() {
     setNextRotationDelay(15000);
   };
 
+  // Auto-rotate staff profiles with a configurable delay.
+  // Clicking prev/next extends the delay before the next auto-advance.
   React.useEffect(() => {
     if (totalStaff <= 1) return undefined;
-
-    setProfileVisible(false);
-    const fadeId = setTimeout(() => {
-      setProfileVisible(true);
-    }, 20);
 
     const id = setTimeout(() => {
       setActiveStaffIndex((prev) => (prev + 1) % totalStaff);
@@ -120,9 +117,20 @@ export default function About() {
 
     return () => {
       clearTimeout(id);
-      clearTimeout(fadeId);
     };
   }, [activeStaffIndex, nextRotationDelay, totalStaff]);
+
+  // Handle fade-in / fade-out when the active staff profile changes
+  React.useEffect(() => {
+    setProfileVisible(false);
+    const fadeId = setTimeout(() => {
+      setProfileVisible(true);
+    }, 20);
+
+    return () => {
+      clearTimeout(fadeId);
+    };
+  }, [activeStaffIndex]);
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 lg:px-6">
