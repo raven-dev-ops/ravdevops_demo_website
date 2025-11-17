@@ -264,13 +264,13 @@ export default function Home() {
         <div className="grid gap-4 md:grid-cols-3">
           <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">
-              Platforms
+              Tooling
             </p>
             <div className="mt-3 flex flex-wrap gap-3">
-              {platforms.map((item) => (
+              {tooling.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-raven-cyan/60 bg-raven-cyan/10 px-4 py-2 text-sm font-medium text-raven-cyan"
+                  className="rounded-full border border-raven-accent/60 bg-raven-accent/10 px-4 py-2 text-sm font-medium text-raven-accent"
                 >
                   {item}
                 </span>
@@ -279,13 +279,13 @@ export default function Home() {
           </div>
           <div className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-4">
             <p className="text-xs font-semibold uppercase tracking-[0.2em] text-raven-cyan">
-              Tooling
+              Platforms
             </p>
             <div className="mt-3 flex flex-wrap gap-3">
-              {tooling.map((item) => (
+              {platforms.map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-raven-accent/60 bg-raven-accent/10 px-4 py-2 text-sm font-medium text-raven-accent"
+                  className="rounded-full border border-raven-cyan/60 bg-raven-cyan/10 px-4 py-2 text-sm font-medium text-raven-cyan"
                 >
                   {item}
                 </span>

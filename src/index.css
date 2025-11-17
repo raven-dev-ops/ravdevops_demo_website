@@ -7,8 +7,8 @@
 body {
   @apply font-sans antialiased bg-raven-navy;
   scroll-behavior: smooth;
-  /* Light theme base: use the dark texture, but with a slightly brighter base tint */
-  background-color: #0b1120; /* brighter than #020617 ~ +75% perceived brightness */
+  /* Light theme base: use the dark texture, but with a brighter base tint */
+  background-color: #1e293b; /* brighter than #0b1120, roughly +50% */
   background-image: url('./assets/site_background_dark.gif');
   background-size: cover;
   background-position: center;

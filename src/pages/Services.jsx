@@ -97,8 +97,7 @@ export default function Services() {
         <p className="text-sm uppercase tracking-[0.3em] text-raven-cyan">Services</p>
         <h1 className="text-4xl font-bold text-white">How we ship confident software delivery</h1>
         <p className="text-lg text-slate-300">
-          Clear DevOps engagements with outcomes you can measure—from assessments to automation sprints to fractional
-          support.
+          Clear DevOps engagements with outcomes you can measure.
         </p>
       </header>
 
@@ -173,18 +172,11 @@ export default function Services() {
               >
                 <div className="absolute inset-0 bg-black/60" />
                 <div className="relative flex flex-col items-center gap-4">
-                  <div className="relative flex items-center justify-center">
-                    <img
-                      src={ravenHomeLogo}
-                      alt="Raven Development Operations"
-                      className="h-28 w-28 object-contain opacity-80 sm:h-32 sm:w-32"
-                    />
-                    {hasVideo && (
-                      <span className="absolute flex h-18 w-18 items-center justify-center rounded-full bg-raven-accent/90 text-2xl font-bold text-black shadow-lg shadow-raven-accent/70">
-                        ▶
-                      </span>
-                    )}
-                  </div>
+                  <img
+                    src={ravenHomeLogo}
+                    alt="Raven Development Operations"
+                    className="h-32 w-32 object-contain opacity-90 sm:h-40 sm:w-40"
+                  />
                   <p className="mt-1 text-xs uppercase tracking-[0.2em] text-slate-200">
                     {hasVideo ? 'Click to play step video' : 'Preview coming soon'}
                   </p>

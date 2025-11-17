@@ -132,14 +132,10 @@ const ChatBot = ({ defaultOpen = false }) => {
           >
             <div className="flex items-center justify-between bg-raven-blue px-4 py-3 text-white">
               <div className="flex items-center gap-2">
-                <div className="h-8 w-8 overflow-hidden rounded-full bg-black/30">
-                  <img
-                    src={ravenAssistantIcon}
-                    alt="Raven AI Assistant"
-                    className="h-full w-full object-cover"
-                  />
-                </div>
                 <span className="text-sm font-semibold">Raven AI Assistant</span>
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-red-400 animate-pulse">
+                  ● Live
+                </span>
               </div>
               <button
                 aria-label="Close chat"
@@ -239,8 +235,10 @@ const ChatBot = ({ defaultOpen = false }) => {
                 <button
                   onClick={handleSend}
                   disabled={!userInput.trim()}
-                  className={`rounded-lg px-3 py-2 text-sm font-medium text-white ${
-                    userInput.trim() ? 'bg-raven-blue hover:bg-blue-800' : 'cursor-not-allowed bg-gray-300'
+                  className={`rounded-lg px-3 py-2 text-sm font-semibold ${
+                    userInput.trim()
+                      ? 'bg-raven-accent text-black hover:bg-emerald-400'
+                      : 'cursor-not-allowed bg-gray-300 text-slate-500'
                   }`}
                 >
                   Send
