@@ -1,0 +1,17 @@
+NO LICENSE (ALL RIGHTS RESERVED)
+
+Copyright (c) 2025 Raven Development Operations.
+
+This repository is proprietary. All rights are reserved.
+
+You may not use, copy, modify, merge, publish, distribute, sublicense,
+and/or sell copies of this software, in whole or in part, without prior
+written permission from the copyright holder.
+
+This NO LICENSE notice applies to the original source code, content,
+and assets in this repository authored for Raven Development Operations.
+Third-party dependencies (for example, packages in `node_modules`,
+generated build artifacts, and any vendored code) remain under their
+own respective licenses. Nothing in this file alters or removes those
+third-party licenses.
+

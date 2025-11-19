@@ -82,6 +82,19 @@ const platforms = ['AWS', 'Azure', 'GCP', 'Django', 'Next.js', 'MongoDB', 'Strip
 const tooling = ['Docker', 'Kubernetes', 'GitHub Actions'];
 const languages = ['Python', 'JavaScript', 'TypeScript'];
 
+const ownerDocTasks = [
+  {
+    id: 'timeline',
+    label: 'Draft and refine timeline',
+    description: 'Expand `timeline.md` with more detailed milestones and dates for the demo site and backend.',
+  },
+  {
+    id: 'roadmap',
+    label: 'Shape the roadmap',
+    description: 'Iterate on `roadmap.md` to capture near-, mid-, and long-term enhancements for the project.',
+  },
+];
+
 const pillDescriptions = {
   Docker: 'Ex: Package services into portable containers for consistent local and production behavior.',
   Kubernetes: 'Ex: Orchestrate containers for scaling, rollout strategies, and self-healing workloads.',
@@ -411,6 +424,27 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </section>
+
+      <section className="rounded-2xl border border-raven-border/60 bg-white/90 p-6 dark:bg-raven-card/60">
+        <h2 className="text-2xl font-bold text-white">Owner documentation tasks</h2>
+        <p className="mt-2 text-sm text-slate-300">
+          Internal TODOs for rounding out the documentation that lives alongside this demo:
+        </p>
+        <ul className="mt-4 space-y-3">
+          {ownerDocTasks.map((task) => (
+            <li
+              key={task.id}
+              className="flex items-start gap-3 rounded-xl border border-raven-border/60 bg-raven-card/80 p-3"
+            >
+              <CheckCircleIcon className="mt-0.5 h-5 w-5 text-raven-accent" />
+              <div>
+                <p className="text-sm font-semibold text-white">{task.label}</p>
+                <p className="text-xs text-slate-300">{task.description}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <section className="rounded-2xl border border-raven-border/60 bg-white/90 p-6 dark:bg-raven-card/60">

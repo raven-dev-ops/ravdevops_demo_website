@@ -150,6 +150,10 @@ npm test
 
 You can add component tests under `src/__tests__/` following the existing patterns.
 
+## License
+
+This project is provided under a **NO LICENSE** / all‑rights‑reserved model for the original Raven Development Operations code and content in this repository. See `LICENSE` for details. Third‑party dependencies remain under their own respective licenses.
+
 ## Notes
 
 - Secrets (Calendly tokens, model paths, etc.) should be stored in environment variables and never committed.
