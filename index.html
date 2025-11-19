@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1E3A8A" />
+    <meta
+      name="description"
+      content="Raven Development: Veteran-owned, US-based tech solutions for small businesses. Custom software, apps, & training to eliminate inefficiencies and drive growth. Expo showcase."
+    />
+    <title>Raven Development Operations</title>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script>
+      window.__APP_CONFIG__ = {
+        ASSISTANT_API_URL: window.VITE_ASSISTANT_API_URL || null,
+        OPENAUXILIUM_URL: window.VITE_OPENAUXILIUM_URL || null,
+      };
+    </script>
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+      <input type="hidden" name="form-name" value="contact" />
+      <p hidden>
+        <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+      </p>
+      <input type="text" name="name" />
+      <input type="email" name="email" />
+      <input type="text" name="interest" />
+      <textarea name="message"></textarea>
+    </form>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
+

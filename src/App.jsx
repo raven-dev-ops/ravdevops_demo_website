@@ -5,7 +5,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import { ErrorBoundary } from 'react-error-boundary';
 import Layout from './components/layout/Layout';
-import { SearchProvider } from './hooks/SearchContext';
+import { SearchProvider } from './hooks/SearchContext.jsx';
 import Home from './pages/Home';
 import Services from './pages/Services';
 import Portfolio from './pages/Portfolio';

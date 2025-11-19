@@ -19,8 +19,9 @@ const CATCH_MESSAGES = [
 ];
 
 const API_BASE =
-  process.env.REACT_APP_ASSISTANT_API_URL ||
-  process.env.REACT_APP_OPENAUXILIUM_URL ||
+  (typeof window !== 'undefined' &&
+    window.__APP_CONFIG__ &&
+    (window.__APP_CONFIG__.ASSISTANT_API_URL || window.__APP_CONFIG__.OPENAUXILIUM_URL)) ||
   'http://localhost:4000';
 
 const ChatBot = ({ defaultOpen = false }) => {
