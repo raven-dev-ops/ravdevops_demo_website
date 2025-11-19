@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { act } from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-// Shim Vite's import.meta.env for Jest tests.
-global.importMeta = { env: {} };
-
 import ChatBot from '../components/ChatBot.jsx';
 
 describe('ChatBot', () => {
@@ -29,12 +26,16 @@ describe('ChatBot', () => {
       json: async () => ({ reply: replyText }),
     });
 
-    render(<ChatBot defaultOpen />);
+    await act(async () => {
+      render(<ChatBot defaultOpen />);
+    });
 
     const input = screen.getByPlaceholderText(/type your message/i);
 
-    await userEvent.type(input, 'Hello there');
-    await userEvent.click(screen.getByRole('button', { name: /send/i }));
+    await act(async () => {
+      await userEvent.type(input, 'Hello there');
+      await userEvent.click(screen.getByRole('button', { name: /send/i }));
+    });
 
     // Verify fetch was called with the expected URL and payload
     await waitFor(() => {
@@ -59,12 +60,16 @@ describe('ChatBot', () => {
   test('shows a fallback message when the assistant API is unreachable', async () => {
     global.fetch.mockRejectedValue(new Error('Network error'));
 
-    render(<ChatBot defaultOpen />);
+    await act(async () => {
+      render(<ChatBot defaultOpen />);
+    });
 
     const input = screen.getByPlaceholderText(/type your message/i);
 
-    await userEvent.type(input, 'Test connectivity');
-    await userEvent.click(screen.getByRole('button', { name: /send/i }));
+    await act(async () => {
+      await userEvent.type(input, 'Test connectivity');
+      await userEvent.click(screen.getByRole('button', { name: /send/i }));
+    });
 
     const fallbackText =
       "I'm having trouble reaching my assistant server right now, but I can still share general information from the site.";
