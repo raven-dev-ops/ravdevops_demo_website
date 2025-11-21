@@ -1,96 +1,32 @@
 // components/ChatBot.jsx
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import ravenAssistantIcon from '../assets/service1_banner.png';
-
-const CATCH_MESSAGES = [
-  "You caught me! Lesson learned, don't chase AI prompts — make a training tool.",
-  'You got me again. Better to train your tools than chase their quirks.',
-  'Snagged! Smart humans build training data instead of chasing chat bubbles.',
-  'Caught in 4K. Optimize prompts by improving your systems, not your aim.',
-  'Another catch. Real power comes from solid workflows and training, not luck.',
-  'Tag, I’m it. Let’s turn your questions into a repeatable playbook.',
-  'You’re persistent. Channel that into better automation and training, not chasing ravens.',
-  'Cornered again. Maybe it’s time for a knowledge base, not a wild goose chase.',
-  'Nice reflexes. Now let’s apply that to tightening your tooling and docs.',
-  'Final catch of the session. Remember: don’t chase AI—teach it.',
-];
 
 const API_BASE =
   (typeof window !== 'undefined' &&
     window.__APP_CONFIG__ &&
     (window.__APP_CONFIG__.ASSISTANT_API_URL || window.__APP_CONFIG__.OPENAUXILIUM_URL)) ||
-  'https://chat-assistant-backend-878866694c3b.herokuapp.com';
+  'https://chat-assistant-backend-e4gl56kwma-uc.a.run.app';
 
 const ChatBot = ({ defaultOpen = false }) => {
   const [open, setOpen] = useState(defaultOpen);
-  const [bubbleVisible, setBubbleVisible] = useState(defaultOpen);
-  const [wobble, setWobble] = useState(false);
+  const [bubbleVisible, setBubbleVisible] = useState(true);
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
-  const [blurbVisible, setBlurbVisible] = useState(false); // CAWW! while running
-  const [nevermoreVisible, setNevermoreVisible] = useState(false);
   const [isResponding, setIsResponding] = useState(false);
-  const [status, setStatus] = useState('idle'); // idle | active | muted | standby
-  const [lastInteraction, setLastInteraction] = useState(() => Date.now());
-  const [catchCount, setCatchCount] = useState(0);
-  const [iconX, setIconX] = useState(() => {
-    if (typeof window === 'undefined') return 0;
-    const viewportWidth = window.innerWidth || 0;
-    const iconWidth = 72; // approx 56px icon + margin
-    const startX = Math.max(16, viewportWidth - iconWidth);
-    return startX;
-  });
-  const [isRunningAway, setIsRunningAway] = useState(false);
-  const [isJumping, setIsJumping] = useState(false);
-  const [facingLeft, setFacingLeft] = useState(false);
-  const [clickCount, setClickCount] = useState(0);
   const listEndRef = useRef(null);
-  const sessionIdRef = useRef(null);
-  const runIntervalRef = useRef(null);
-  const runTimeoutRef = useRef(null);
-  const nevermoreRunTimeoutRef = useRef(null);
-  const nevermoreCountRef = useRef(0);
-  const runDirectionRef = useRef(-1);
-  const jumpTimeoutRef = useRef(null);
-  const afkReadyRef = useRef(false);
-  const hasChasedRef = useRef(false);
-  const lastAnimationAtRef = useRef(0);
-  const iconRef = useRef(null);
 
-  // Timed behavior:
-  // - bubble appears after 30s (icon starts hidden until then)
+  // Ensure the bubble is visible whenever the chat opens
   useEffect(() => {
-    if (defaultOpen) {
+    if (open) {
       setBubbleVisible(true);
-      return undefined;
     }
+  }, [open]);
 
-    const bubbleTimer = setTimeout(() => {
-      setBubbleVisible(true);
-    }, 30000);
-
-    return () => {
-      clearTimeout(bubbleTimer);
-    };
-  }, [defaultOpen]);
-
-  // Keep icon starting X near the bottom-right corner and update on resize
-  useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
-    const handleResize = () => {
-      const viewportWidth = window.innerWidth || 0;
-      const iconWidth = 72; // approx 56px icon + margin
-      const startX = Math.max(16, viewportWidth - iconWidth);
-      setIconX(startX);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  // Seed greeting when the chat first opens and is empty
+  // Seed a simple greeting the first time the chat opens
   useEffect(() => {
     if (open && messages.length === 0) {
       const timestamp = new Date();
@@ -98,190 +34,19 @@ const ChatBot = ({ defaultOpen = false }) => {
         {
           id: 'greet',
           role: 'bot',
-          text: 'CAWW! How can I help you?',
+          text: "Hi, I'm Raven. How can I help?",
           timestamp,
         },
       ]);
-      setStatus('active');
-      setLastInteraction(Date.now());
     }
-  }, [open, messages.length, setStatus]);
+  }, [open, messages.length]);
 
-  // Auto-scroll conversation to bottom
+  // Auto-scroll conversation to the bottom
   useEffect(() => {
     if (listEndRef.current) {
       listEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, [messages]);
-
-  // "NEVERMORE!!!" every 60s while bubble visible and chat is closed.
-  // After the 3rd NEVERMORE, schedule the runaway animation 59s later.
-  useEffect(() => {
-    if (!bubbleVisible || open || status === 'muted' || status === 'standby') return undefined;
-    const interval = setInterval(() => {
-      if (!afkReadyRef.current) return;
-      setNevermoreVisible(true);
-      setWobble(true);
-      setTimeout(() => {
-        setNevermoreVisible(false);
-        setWobble(false);
-      }, 2000);
-
-      const next = nevermoreCountRef.current + 1;
-      nevermoreCountRef.current = next;
-      if (next === 3) {
-        if (nevermoreRunTimeoutRef.current) {
-          clearTimeout(nevermoreRunTimeoutRef.current);
-        }
-        nevermoreRunTimeoutRef.current = setTimeout(() => {
-          if (!open && bubbleVisible && status !== 'muted') {
-            startRunningAway(false);
-          }
-        }, 59000);
-      }
-    }, 60000);
-    return () => {
-      clearInterval(interval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bubbleVisible, open, status]);
-
-  // Standby mode after 90s of no interaction (when chat is closed and not muted)
-  useEffect(() => {
-    if (!bubbleVisible || status === 'muted') return undefined;
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const idle = now - lastInteraction;
-      const sinceAnimation =
-        lastAnimationAtRef.current > 0 ? now - lastAnimationAtRef.current : Infinity;
-      const cooldownDone = sinceAnimation >= 300000; // 300s after last animation
-
-      if (!open && idle >= 90000) {
-        setStatus('standby');
-      }
-      afkReadyRef.current = idle >= 180000 && cooldownDone;
-    }, 5000);
-    return () => clearInterval(interval);
-  }, [bubbleVisible, open, lastInteraction, status]);
-
-  // Track general activity so we can judge "idle for 3 minutes" for click logic
-  useEffect(() => {
-    const handleActivity = () => {
-      setLastInteraction(Date.now());
-    };
-    if (typeof window === 'undefined') return undefined;
-    window.addEventListener('mousemove', handleActivity);
-    window.addEventListener('click', handleActivity);
-    return () => {
-      window.removeEventListener('mousemove', handleActivity);
-      window.removeEventListener('click', handleActivity);
-    };
-  }, []);
-
-  const stopRunningAway = () => {
-    setIsRunningAway(false);
-    setIsJumping(false);
-    if (jumpTimeoutRef.current) {
-      clearTimeout(jumpTimeoutRef.current);
-      jumpTimeoutRef.current = null;
-    }
-    if (runIntervalRef.current) {
-      clearInterval(runIntervalRef.current);
-      runIntervalRef.current = null;
-    }
-    if (runTimeoutRef.current) {
-      clearTimeout(runTimeoutRef.current);
-      runTimeoutRef.current = null;
-    }
-  };
-
-  const startRunningAway = (withCatchTimer = false) => {
-    if (!bubbleVisible || open || !afkReadyRef.current) return;
-
-    if (!isRunningAway) {
-      setIsRunningAway(true);
-      hasChasedRef.current = true;
-      runDirectionRef.current = -1;
-      setLastInteraction(Date.now());
-
-      // Show a quick CAWW! while running
-      setBlurbVisible(true);
-      setTimeout(() => {
-        setBlurbVisible(false);
-      }, 1500);
-
-      if (!runIntervalRef.current) {
-        runIntervalRef.current = setInterval(() => {
-          setIconX((prev) => {
-            if (typeof window === 'undefined') return prev;
-            const viewportWidth = window.innerWidth || 0;
-            const iconWidth = 72;
-            const minX = 16;
-            const maxX = Math.max(minX, viewportWidth - iconWidth);
-            const step = 40;
-            let direction = runDirectionRef.current;
-            let next = prev + direction * step;
-            if (next <= minX) {
-              next = minX;
-              direction = 1;
-            } else if (next >= maxX) {
-              next = maxX;
-              direction = -1;
-            }
-            runDirectionRef.current = direction;
-            setFacingLeft(direction < 0);
-            return next;
-          });
-        }, 160);
-      }
-    }
-
-    if (withCatchTimer && !runTimeoutRef.current) {
-      runTimeoutRef.current = setTimeout(() => {
-        lastAnimationAtRef.current = Date.now();
-        resetIconPosition();
-        stopRunningAway();
-        // Auto "catch" after the chase ends
-        const now = Date.now();
-        if (!open) {
-          const index = Math.min(catchCount, CATCH_MESSAGES.length - 1);
-          setOpen(true);
-          appendMessage('bot', CATCH_MESSAGES[index]);
-          setCatchCount((prev) => prev + 1);
-          setStatus('active');
-          setLastInteraction(now);
-        }
-      }, 10000);
-    }
-  };
-
-  // Run away when the mouse cursor gets close to the icon
-  useEffect(() => {
-    if (typeof window === 'undefined') return undefined;
-    const handleMouseMove = (event) => {
-      if (!bubbleVisible || open || !iconRef.current) return;
-      const rect = iconRef.current.getBoundingClientRect();
-      const centerX = rect.left + rect.width / 2;
-      const centerY = rect.top + rect.height / 2;
-      const dx = event.clientX - centerX;
-      const dy = event.clientY - centerY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      if (distance < 120) {
-        if (!afkReadyRef.current) return;
-        startRunningAway(true);
-        if (jumpTimeoutRef.current) {
-          clearTimeout(jumpTimeoutRef.current);
-        }
-        setIsJumping(true);
-        jumpTimeoutRef.current = setTimeout(() => {
-          setIsJumping(false);
-        }, 400);
-      }
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [bubbleVisible, open]);
 
   const appendMessage = (role, text) => {
     const timestamp = new Date();
@@ -289,69 +54,6 @@ const ChatBot = ({ defaultOpen = false }) => {
       ...prev,
       { id: `${timestamp.getTime()}-${Math.random()}`, role, text, timestamp },
     ]);
-  };
-
-  const handleSend = () => {
-    const text = (userInput || '').trim();
-    if (!text) return;
-    appendMessage('user', text);
-    setUserInput('');
-    setIsResponding(true);
-    setStatus('active');
-    setLastInteraction(Date.now());
-
-    // Send message to assistant backend
-    const chatUserId = ensureChatUserId();
-
-    fetch(`${API_BASE}/api/chat`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        message: text,
-        context: {
-          chatUserId,
-          source: 'raven-demo-website',
-        },
-      }),
-    })
-      .then(async (res) => {
-        if (!res.ok) {
-          throw new Error(`Chat error: ${res.status}`);
-        }
-        const json = await res.json();
-        if (json.reply) {
-          appendMessage('bot', json.reply);
-        }
-      })
-      .catch(() => {
-        appendMessage(
-          'bot',
-          "I'm having trouble reaching my assistant server right now, but I can still share general information from the site.",
-        );
-      })
-      .finally(() => {
-        setIsResponding(false);
-        setLastInteraction(Date.now());
-      });
-  };
-
-  // When chat is explicitly closed by the user, clear the current backend session
-  const endChatSession = () => {
-    stopRunningAway();
-    sessionIdRef.current = null;
-    setMessages([]);
-    setStatus('idle');
-  };
-
-  const resetIconPosition = () => {
-    if (typeof window === 'undefined') return;
-    const viewportWidth = window.innerWidth || 0;
-    const iconWidth = 72;
-    const startX = Math.max(16, viewportWidth - iconWidth);
-    setIconX(startX);
-    stopRunningAway();
   };
 
   const ensureChatUserId = () => {
@@ -371,70 +73,53 @@ const ChatBot = ({ defaultOpen = false }) => {
     return id;
   };
 
-  const handleIconClick = () => {
-    if (isRunningAway) return;
+  const handleSend = async () => {
+    const text = (userInput || '').trim();
+    if (!text) return;
 
-    const now = Date.now();
-    const withinThreeMinutes = now - lastInteraction <= 3 * 60 * 1000;
-    let nextClickCount = clickCount;
+    appendMessage('user', text);
+    setUserInput('');
+    setIsResponding(true);
 
-    if (!withinThreeMinutes) {
-      nextClickCount = 0;
-    }
+    const chatUserId = ensureChatUserId();
 
-    nextClickCount += 1;
+    try {
+      const res = await fetch(`${API_BASE}/api/chat`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: text,
+          context: {
+            chatUserId,
+            source: 'raven-demo-website',
+          },
+        }),
+      });
 
-    if (nextClickCount >= 3) {
-      resetIconPosition();
-      nextClickCount = 0;
-    }
-
-    setClickCount(nextClickCount);
-    setLastInteraction(now);
-
-    if (!open) {
-      setOpen(true);
-      setStatus('active');
-      setLastInteraction(now);
-      if (hasChasedRef.current) {
-        const index = Math.min(catchCount, CATCH_MESSAGES.length - 1);
-        appendMessage('bot', CATCH_MESSAGES[index]);
-        setCatchCount((prev) => prev + 1);
+      if (!res.ok) {
+        throw new Error(`Chat error: ${res.status}`);
       }
-    } else {
-      setOpen(false);
-      setStatus('muted');
+
+      const json = await res.json();
+      if (json.reply) {
+        appendMessage('bot', json.reply);
+      }
+    } catch (error) {
+      appendMessage(
+        'bot',
+        "I'm having trouble reaching my assistant server right now, but I can still share general information from the site.",
+      );
+    } finally {
+      setIsResponding(false);
     }
   };
 
-  const iconAnimate = {
-    x: iconX,
-    y: isJumping
-      ? [0, -32, 0]
-      : isRunningAway
-      ? 0
-      : afkReadyRef.current
-      ? [0, -4, 0]
-      : 0,
-    rotate: isRunningAway
-      ? [-8, 8, -8, 8]
-      : wobble
-      ? [0, -8, 8, -8, 0]
-      : 0,
-  };
-
-  const iconTransition = {
-    x: { type: 'spring', stiffness: 260, damping: 20 },
-    y: isJumping
-      ? { duration: 0.4 }
-      : isRunningAway
-      ? { duration: 0.2 }
-      : { duration: 1.2, repeat: Infinity, repeatType: 'reverse' },
-    rotate: isRunningAway
-      ? { duration: 0.6, repeat: Infinity, repeatType: 'reverse' }
-      : wobble
-      ? { duration: 0.6 }
-      : { duration: 0.2 },
+  const handleClose = () => {
+    setOpen(false);
+    setMessages([]);
+    setIsResponding(false);
   };
 
   return (
@@ -452,17 +137,13 @@ const ChatBot = ({ defaultOpen = false }) => {
             <div className="flex items-center justify-between bg-raven-blue px-4 py-3 text-white">
               <div className="flex items-center gap-2">
                 <span className="text-sm font-semibold">Raven AI Assistant</span>
-                <span className="text-[10px] font-semibold uppercase tracking-wide text-red-400 animate-pulse">
-                  ● Live
+                <span className="text-[10px] font-semibold uppercase tracking-wide text-red-200">
+                  Live
                 </span>
               </div>
               <button
                 aria-label="Close chat"
-                onClick={() => {
-                  setOpen(false);
-                  setStatus('muted');
-                  endChatSession();
-                }}
+                onClick={handleClose}
                 className="p-1 hover:opacity-90"
               >
                 <XMarkIcon className="h-5 w-5" />
@@ -482,7 +163,7 @@ const ChatBot = ({ defaultOpen = false }) => {
                       hour: 'numeric',
                       minute: '2-digit',
                     });
-                    timeLabel = `${datePart} · ${timePart}`;
+                    timeLabel = `${datePart} at ${timePart}`;
                   }
 
                   const isBot = m.role === 'bot';
@@ -599,49 +280,9 @@ const ChatBot = ({ defaultOpen = false }) => {
       </AnimatePresence>
 
       {bubbleVisible && !open && (
-        <motion.div
-          ref={iconRef}
-          className={`fixed bottom-4 left-0 flex flex-col items-center gap-2 ${
-            isRunningAway ? 'pointer-events-none' : ''
-          }`}
-          initial={{ opacity: 0 }}
-          animate={{ ...iconAnimate, opacity: 1 }}
-          exit={{ ...iconAnimate, opacity: 0 }}
-          transition={iconTransition}
-        >
-          <AnimatePresence>
-            {blurbVisible && status !== 'muted' && status !== 'standby' && (
-              <motion.div
-                key="raven-caww"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.25 }}
-                className="mb-1 rounded-full bg-red-600 px-3 py-1 text-xs font-semibold text-white shadow-lg"
-              >
-                CAWW!
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <AnimatePresence>
-            {nevermoreVisible && status !== 'muted' && status !== 'standby' && (
-              <motion.div
-                key="raven-nevermore"
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 8 }}
-                transition={{ duration: 0.25 }}
-                className="mb-1 rounded-full bg-black px-3 py-1 text-xs font-semibold text-yellow-200 shadow-lg dark:bg-slate-900"
-              >
-                NEVERMORE!!!
-              </motion.div>
-            )}
-          </AnimatePresence>
-
-          <button
-            type="button"
-            onClick={handleIconClick}
+        <button
+          type="button"
+          onClick={() => setOpen(true)}
           aria-expanded={open}
           aria-label="Open chat bot"
           className="group flex items-center justify-center focus:outline-none focus-visible:ring-2 focus-visible:ring-raven-accent/70"
@@ -649,12 +290,9 @@ const ChatBot = ({ defaultOpen = false }) => {
           <img
             src={ravenAssistantIcon}
             alt="Raven AI Assistant"
-            className={`h-14 w-14 rounded-full object-cover transition-transform group-hover:scale-110 ${
-              facingLeft ? '-scale-x-100' : ''
-            }`}
+            className="h-14 w-14 rounded-full object-cover transition-transform group-hover:scale-110"
           />
         </button>
-      </motion.div>
       )}
     </div>
   );

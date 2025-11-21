@@ -43,7 +43,7 @@ describe('ChatBot', () => {
     });
 
     const [url, options] = global.fetch.mock.calls[0];
-    expect(url).toBe('https://chat-assistant-backend-878866694c3b.herokuapp.com/api/chat');
+    expect(url).toBe('https://chat-assistant-backend-e4gl56kwma-uc.a.run.app/api/chat');
     expect(options.method).toBe('POST');
     expect(options.headers).toEqual({ 'Content-Type': 'application/json' });
 

@@ -15,7 +15,7 @@ export default function Contact() {
       window.__APP_CONFIG__ &&
       (window.__APP_CONFIG__.ASSISTANT_API_URL ||
         window.__APP_CONFIG__.OPENAUXILIUM_URL)) ||
-    'http://localhost:4000';
+    'https://chat-assistant-backend-e4gl56kwma-uc.a.run.app';
   const { theme } = React.useContext(ThemeContext);
   const isDarkMode = theme === 'dark';
   const calendlyBase = 'https://calendly.com/charityolivas/discovery-call';
