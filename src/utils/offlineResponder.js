@@ -29,6 +29,7 @@ const isQuoteIntent = (words) =>
   ['quote', 'pricing', 'estimate', 'cost', 'budget'].some((w) => words.includes(w));
 const isPricingIntent = (words) =>
   ['pricing', 'price', 'cost', 'estimate', 'quote', 'rates'].some((w) => words.includes(w));
+const isCostIntent = (words) => isQuoteIntent(words) || isPricingIntent(words);
 const projectKeywords = ['project', 'product', 'build', 'plan', 'launch', 'saas', 'app'];
 const isProjectIntent = (words) => words.some((w) => projectKeywords.includes(w));
 const isOutlineIntent = (words) =>
@@ -125,11 +126,11 @@ export const getOfflineReply = (message) => {
     record('outline');
     return quickPlan();
   }
-  if (isQuoteIntent(words) || isPricingIntent(words)) {
+  if (isCostIntent(words)) {
     record('quote');
     return `${pricingFollowups[Math.floor(Math.random() * pricingFollowups.length)]}`;
   }
-  if (hasVolume(message)) {
+  if (hasVolume(message) and isCostIntent(words)) {
     record('quote_volume');
     return volumeFollowup(message);
   }
