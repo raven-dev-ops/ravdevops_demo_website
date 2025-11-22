@@ -63,6 +63,12 @@ const faqs = [
 
 export default function Pricing() {
   const [openFaqIndex, setOpenFaqIndex] = React.useState(null);
+  const orderedTiers = React.useMemo(() => {
+    const featuredTier = tiers.find((tier) => tier.featured);
+    if (!featuredTier) return tiers;
+    const others = tiers.filter((tier) => !tier.featured);
+    return [featuredTier, ...others];
+  }, []);
 
   return (
     <div className="mx-auto flex max-w-5xl flex-col gap-12 px-4 py-12 lg:px-6">
@@ -78,9 +84,18 @@ export default function Pricing() {
       </header>
 
       <div className="grid gap-6 md:grid-cols-3">
-        {tiers.map((tier, index) => {
-          const orderClass =
-            tier.featured ? 'md:order-2' : index === 0 ? 'md:order-1' : 'md:order-3';
+        {orderedTiers.map((tier) => {
+          const mobileOrderClass = tier.featured
+            ? 'order-1'
+            : tier.name === 'CI/CD Kickstart'
+            ? 'order-2'
+            : 'order-3';
+          const desktopOrderClass = tier.featured
+            ? 'md:order-2'
+            : tier.name === 'CI/CD Kickstart'
+            ? 'md:order-1'
+            : 'md:order-3';
+          const orderClass = `${mobileOrderClass} ${desktopOrderClass}`;
 
           return (
             <Link

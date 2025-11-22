@@ -103,26 +103,8 @@ export default function Header({ theme, toggleTheme }) {
 
   return (
     <header className="sticky top-0 z-30 border-b border-raven-border/70 bg-raven-navy/80 backdrop-blur relative">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 lg:px-6">
-        <nav className="hidden flex-wrap items-center gap-4 text-sm font-medium text-slate-200 md:flex">
-          {navItems.map((item) => renderNavItem(item, 'desktop'))}
-        </nav>
-
-        <div className="flex flex-1 items-center justify-end gap-2">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search posts & case studies..."
-            className="hidden w-40 rounded-full border border-raven-border/70 bg-raven-card/70 px-3 py-1.5 text-xs text-slate-100 placeholder:text-slate-400 shadow-inner shadow-black/20 transition-colors hover:border-raven-accent/80 hover:bg-raven-card hover:outline hover:outline-1 hover:outline-raven-accent/60 focus:border-raven-accent focus:outline-none sm:block sm:w-56"
-          />
-          <button
-            onClick={toggleTheme}
-            aria-label="Toggle theme"
-            className="rounded-full border border-raven-border/70 bg-raven-card p-2 text-slate-200 hover:border-raven-accent/80 hover:text-white"
-          >
-            {theme === 'dark' ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
-          </button>
+      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3 lg:px-6">
+        <div className="flex flex-shrink-0 items-center gap-2">
           <button
             type="button"
             aria-label="Toggle navigation menu"
@@ -131,6 +113,29 @@ export default function Header({ theme, toggleTheme }) {
             className="flex h-10 w-10 items-center justify-center rounded-full border border-raven-border/70 bg-raven-card/80 text-slate-200 hover:border-raven-accent/70 hover:text-white md:hidden"
           >
             {menuOpen ? <XMarkIcon className="h-5 w-5" /> : <Bars3Icon className="h-5 w-5" />}
+          </button>
+          <nav className="hidden flex-wrap items-center gap-4 text-sm font-medium text-slate-200 md:flex">
+            {navItems.map((item) => renderNavItem(item, 'desktop'))}
+          </nav>
+        </div>
+
+        <div className="flex flex-1 justify-center px-1">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="Search posts & case studies..."
+            className="w-full min-w-0 max-w-xs rounded-full border border-raven-border/70 bg-raven-card/70 px-3 py-1.5 text-xs text-slate-100 placeholder:text-slate-400 shadow-inner shadow-black/20 transition-colors hover:border-raven-accent/80 hover:bg-raven-card hover:outline hover:outline-1 hover:outline-raven-accent/60 focus:border-raven-accent focus:outline-none sm:max-w-sm md:max-w-md"
+          />
+        </div>
+
+        <div className="flex flex-shrink-0 items-center gap-2">
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="rounded-full border border-raven-border/70 bg-raven-card p-2 text-slate-200 hover:border-raven-accent/80 hover:text-white"
+          >
+            {theme === 'dark' ? <SunIcon className="h-5 w-5" /> : <MoonIcon className="h-5 w-5" />}
           </button>
         </div>
       </div>

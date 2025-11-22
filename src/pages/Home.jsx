@@ -284,7 +284,7 @@ export default function Home() {
               </div>
             </div>
             <div className="grid grid-cols-2 gap-3">
-              {['PR previews', 'Policy as code', 'Observability', 'Cost guardrails'].map((item) => (
+              {['PR previews', 'Policy as code', 'Monitoring', 'Cost guardrails'].map((item) => (
                 <div
                   key={item}
                   className="rounded-xl border border-raven-border/60 bg-slate-50/90 text-slate-800 p-4 dark:bg-raven-card/80 dark:text-slate-200"
