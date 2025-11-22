@@ -27,6 +27,7 @@ const resolveApiBase = () => {
 const API_BASE = resolveApiBase();
 export const CHAT_STATE_STORAGE_KEY = 'raven-chatbot-state';
 const normalizeMode = (value) => (value === 'offline' ? 'offline' : 'live');
+const delay = (ms = 250) => new Promise((resolve) => setTimeout(resolve, ms));
 
 const ChatBot = ({ defaultOpen = false }) => {
   const [open, setOpen] = useState(defaultOpen);
@@ -168,6 +169,10 @@ const ChatBot = ({ defaultOpen = false }) => {
       let replyText = json.reply;
 
       if (resolvedMode === 'offline') {
+        await delay();
+      }
+
+      if (resolvedMode === 'offline') {
         const offlineAnswer = getOfflineReply(text);
         if (offlineAnswer) {
           replyText = offlineAnswer;
@@ -179,6 +184,7 @@ const ChatBot = ({ defaultOpen = false }) => {
       }
     } catch (error) {
       setMode('offline');
+      await delay();
       const offlineAnswer = getOfflineReply(text);
       appendMessage(
         'bot',
