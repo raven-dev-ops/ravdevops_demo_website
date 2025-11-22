@@ -48,7 +48,12 @@ export const getOfflineReply = (message) => {
   }
 
   if (best.answer) {
-    return `${best.answer}\n\nWant to go deeper on services, pricing, or your project? Just say which and I'll focus there.`;
+    const topic = best.title || best.question || 'this topic';
+    return [
+      `Here's what I know about ${topic}:`,
+      best.answer,
+      'Want me to focus on services, pricing, or a project you have in mind?',
+    ].join('\n\n');
   }
 
   return promptForDetails;
