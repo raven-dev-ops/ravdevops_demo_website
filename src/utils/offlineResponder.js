@@ -40,9 +40,16 @@ export const getOfflineReply = (message) => {
     }
   }
 
+  const promptForDetails =
+    "I'm offline right now, but I can still help. Tell me if you want services, pricing, or contact details and I'll point you in the right direction.";
+
   if (!best || bestScore === 0) {
-    return "I'm offline right now. You can ask about our services, pricing, or how to contact us.";
+    return promptForDetails;
   }
 
-  return best.answer || null;
+  if (best.answer) {
+    return `${best.answer}\n\n${promptForDetails}`;
+  }
+
+  return promptForDetails;
 };
