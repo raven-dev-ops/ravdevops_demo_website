@@ -153,28 +153,6 @@ export default function About() {
         })}
       </section>
 
-      <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6 text-sm text-slate-300">
-        <h2 className="text-xl font-semibold text-white">Releases and versions</h2>
-        <p className="mt-2">
-          The demo website and assistant backends are versioned and tagged in Git so changes stay traceable over time. The current
-          website release is <span className="font-mono">1.0.0</span> (tagged as <span className="font-mono">website-v1.0.0</span>),
-          and the optional OpenAuxilium backend is <span className="font-mono">0.1.0</span> (tagged as{' '}
-          <span className="font-mono">openauxilium-v0.1.0</span>) when those tags are created.
-        </p>
-        <p className="mt-2">
-          For full release notes and any future tags, see the GitHub releases for this demo website repository and the separate{' '}
-          <a
-            href="https://github.com/raven-dev-ops/chat-assistant-backend"
-            target="_blank"
-            rel="noreferrer"
-            className="text-raven-cyan hover:text-white"
-          >
-            chat-assistant-backend
-          </a>{' '}
-          project.
-        </p>
-      </section>
-
       {false && (
         <section className="rounded-2xl border border-raven-border/70 bg-raven-card/60 p-6">
           <h2 className="text-2xl font-semibold text-white">Timeline</h2>
