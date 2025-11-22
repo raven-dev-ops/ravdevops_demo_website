@@ -41,7 +41,7 @@ export const getOfflineReply = (message) => {
   }
 
   const promptForDetails =
-    "I'm offline but still here to help. Want services, pricing, or a way to get in touch? Tell me what you're looking for and I'll point you to the right details.";
+    "Happy to help. Tell me what you're curious about—services, pricing, or how to connect—and I'll share the right details.";
 
   if (!best || bestScore === 0) {
     return promptForDetails;
