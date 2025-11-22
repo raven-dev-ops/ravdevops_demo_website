@@ -27,6 +27,9 @@ const firstSentence = (text) => {
   return parts[0] || text;
 };
 
+const projectFollowUp =
+  'Tell me a sentence about your project (what it does, who uses it, timeframe) and I’ll suggest a plan.';
+
 const scoreEntry = (words, entry) => {
   const fields = [];
 
@@ -77,7 +80,7 @@ export const getOfflineReply = (message) => {
   if (best.answer) {
     const topic = best.title || best.question || 'this topic';
     const trimmed = truncate(firstSentence(best.answer));
-    return `For ${topic}: ${trimmed} What should we focus on—services, pricing, or your project?`;
+    return `For ${topic}: ${trimmed} ${projectFollowUp}`;
   }
 
   return promptForDetails;
