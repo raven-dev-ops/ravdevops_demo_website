@@ -295,29 +295,15 @@ const ChatBot = ({ defaultOpen = false }) => {
             transition={{ duration: 0.18 }}
             className="mb-3 w-[30rem] max-w-[95vw] overflow-hidden rounded-xl border border-gray-200 bg-white text-slate-900 shadow-2xl dark:border-raven-border/70 dark:bg-raven-card/95 dark:text-slate-100"
           >
-            <div className="flex items-center justify-between bg-raven-blue px-4 py-3 text-white">
-              <div className="flex items-center gap-2">
-                <span className="text-sm font-semibold">Raven AI Assistant</span>
-                <span
-                  className={`text-[10px] font-semibold uppercase tracking-wide ${
-                    mode === 'offline'
-                      ? 'rounded-md bg-red-500/90 px-2 py-0.5 text-white'
-                      : 'rounded-md bg-emerald-500/90 px-2 py-0.5 text-white'
-                  }`}
-                  title={
-                    mode === 'offline'
-                      ? 'Offline: using cached knowledge base responses'
-                      : 'Live: connected to OpenAI via assistant API'
-                  }
+              <div className="flex items-center justify-between bg-raven-blue px-4 py-3 text-white">
+                <div className="flex items-center gap-2">
+                  <span className="text-sm font-semibold">Raven AI Assistant</span>
+                </div>
+                <button
+                  aria-label="Close chat"
+                  onClick={handleClose}
+                  className="p-1 hover:opacity-90"
                 >
-                  {mode === 'offline' ? 'OFFLINE' : 'LIVE'}
-                </span>
-              </div>
-              <button
-                aria-label="Close chat"
-                onClick={handleClose}
-                className="p-1 hover:opacity-90"
-              >
                 <XMarkIcon className="h-5 w-5" />
               </button>
             </div>

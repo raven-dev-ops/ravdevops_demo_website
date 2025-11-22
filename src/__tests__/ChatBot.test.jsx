@@ -69,7 +69,6 @@ describe('ChatBot', () => {
     expect(body).toHaveProperty('chatUserId', body.context.chatUserId);
     expect(body).not.toHaveProperty('sessionId');
 
-    await waitFor(() => expect(screen.getByText('LIVE')).toBeInTheDocument());
     // The assistant reply should eventually appear in the chat transcript.
     expect(await screen.findByText(replyText)).toBeInTheDocument();
   });
@@ -122,7 +121,6 @@ describe('ChatBot', () => {
     await actAsync(() => userEvent.type(input, 'Are you online?'));
     await actAsync(() => userEvent.click(screen.getByRole('button', { name: /send/i })));
 
-    expect(await screen.findByText('OFFLINE')).toBeInTheDocument();
     expect(await screen.findByText(replyText)).toBeInTheDocument();
   });
 
@@ -169,7 +167,6 @@ describe('ChatBot', () => {
     await actAsync(() => userEvent.type(input, 'What services do you offer?'));
     await actAsync(() => userEvent.click(screen.getByRole('button', { name: /send/i })));
 
-    expect(await screen.findByText('OFFLINE')).toBeInTheDocument();
     expect(await screen.findByText(/short offline answer/i)).toBeInTheDocument();
     expect(screen.queryByText(/very long fallback payload/i)).not.toBeInTheDocument();
   });
@@ -187,7 +184,6 @@ describe('ChatBot', () => {
     const fallbackText =
       'What should we focus on—services, pricing, or your project? I will keep it short.';
 
-    expect(await screen.findByText('OFFLINE')).toBeInTheDocument();
     expect(await screen.findByText(fallbackText)).toBeInTheDocument();
   });
 
