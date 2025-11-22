@@ -140,6 +140,24 @@ describe('ChatBot', () => {
     expect(await screen.findByText(/calendly\.com\/ravdevops\/discovery-meeting/i)).toBeInTheDocument();
   });
 
+  test('inline quick replies render and respond without hitting the API', async () => {
+    await act(async () => {
+      render(<ChatBot defaultOpen />);
+    });
+
+    expect(await screen.findByRole('button', { name: /email us/i })).toBeInTheDocument();
+    expect(await screen.findByRole('button', { name: /pricing page/i })).toBeInTheDocument();
+
+    const emailButton = await screen.findByRole('button', { name: /email us/i });
+
+    await act(async () => {
+      await userEvent.click(emailButton);
+    });
+
+    expect(global.fetch).not.toHaveBeenCalled();
+    expect(await screen.findByText(/business@ravdevops\.com/i)).toBeInTheDocument();
+  });
+
   test('uses a conversational offline reply instead of a wall of text', async () => {
     getOfflineReply.mockReturnValueOnce('Here is a short offline answer about our services.');
 
