@@ -495,7 +495,7 @@ const ChatBot = ({ defaultOpen = false }) => {
               scale: 1,
               rotate: bubbleHover ? [0, -3, 3, -2, 2, 0] : 0,
             }}
-            exit={{ opacity: 0, scale: 0.8 }}
+            exit={{ opacity: 1, scale: 1, transition: { duration: 0 } }}
             transition={{
               duration: 0.35,
               ease: 'easeOut',
