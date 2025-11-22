@@ -14,11 +14,13 @@ const isGreeting = (words) => words.some((w) => ['hi', 'hey', 'hello'].includes(
 const isHowAreYou = (words) => words.join(' ').includes('how are you') || words.includes('hru');
 const isQuoteIntent = (words) =>
   ['quote', 'pricing', 'estimate', 'cost', 'budget'].some((w) => words.includes(w));
+const projectKeywords = ['project', 'product', 'build', 'plan', 'launch', 'saas', 'app'];
+const isProjectIntent = (words) => words.some((w) => projectKeywords.includes(w));
 
-const truncate = (text, max = 160) => {
+const truncate = (text, max = 140) => {
   if (!text) return '';
   if (text.length <= max) return text;
-  return `${text.slice(0, max).trim()}…`;
+  return `${text.slice(0, max).trim()}...`;
 };
 
 const firstSentence = (text) => {
@@ -28,7 +30,10 @@ const firstSentence = (text) => {
 };
 
 const projectFollowUp =
-  'Tell me a sentence about your project (what it does, who uses it, timeframe) and I’ll suggest a plan.';
+  'Give me one line on what it does, who uses it, and your timeframe. I will suggest a next step.';
+const promptForDetails =
+  'Tell me what you need—services, pricing, or your project—and I will point you to the right details.';
+const MIN_MATCH_SCORE = 2;
 
 const scoreEntry = (words, entry) => {
   const fields = [];
@@ -50,13 +55,16 @@ export const getOfflineReply = (message) => {
   if (!words.length) return null;
 
   if (isHowAreYou(words)) {
-    return "Doing well and ready to help. What should we focus on—services, pricing, or your project?";
+    return 'Doing well and ready to help. Should we talk services, pricing, or your project?';
   }
   if (isGreeting(words)) {
-    return 'Hey! What are you working on—services, pricing, or a project plan?';
+    return 'Hey! What are you working on—services, pricing, or a project idea?';
   }
   if (isQuoteIntent(words)) {
-    return 'I can help scope a quote. Share your SaaS idea (key features, users, timeline) and I’ll suggest next steps.';
+    return 'I can help scope a quote. Share the idea, target users, and timeline, and I will suggest next steps.';
+  }
+  if (isProjectIntent(words)) {
+    return projectFollowUp;
   }
 
   let best = null;
@@ -70,10 +78,7 @@ export const getOfflineReply = (message) => {
     }
   }
 
-  const promptForDetails =
-    "Tell me what you're after—services, pricing, or your project—and I'll point you to details.";
-
-  if (!best || bestScore === 0) {
+  if (!best || bestScore < MIN_MATCH_SCORE) {
     return promptForDetails;
   }
 
