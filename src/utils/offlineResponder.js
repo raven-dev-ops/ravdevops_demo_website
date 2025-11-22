@@ -11,8 +11,11 @@ const normalize = (text) =>
     .filter(Boolean);
 
 const isGreeting = (words) =>
-  ['hi', 'hey', 'hello', 'yo', 'sup', "whats", "what's", 'whatsup'].some((g) => words.includes(g));
-const isHowAreYou = (words) => words.join(' ').includes('how are you') || words.includes('hru');
+  ['hi', 'hey', 'hello', 'yo', 'sup', "whats", "what's", 'whatsup', 'howdy'].some((g) =>
+    words.includes(g)
+  );
+const isHowAreYou = (words) =>
+  words.join(' ').includes('how are you') || words.includes('hru') || words.includes('howdy');
 const isQuoteIntent = (words) =>
   ['quote', 'pricing', 'estimate', 'cost', 'budget'].some((w) => words.includes(w));
 const projectKeywords = ['project', 'product', 'build', 'plan', 'launch', 'saas', 'app'];
@@ -69,10 +72,10 @@ export const getOfflineReply = (message) => {
   if (!words.length) return null;
 
   if (isHowAreYou(words)) {
-    return 'Doing well and ready to help. Services, pricing, or your project?';
+    return 'Doing well and here to help. Want to talk services, pricing, or your project?';
   }
   if (isGreeting(words)) {
-    return 'All good here. Want to talk services, pricing, or your project?';
+    return 'Howdy! What are you working on—services, pricing, or your project?';
   }
   if (isOutlineIntent(words)) {
     return quickPlan();
