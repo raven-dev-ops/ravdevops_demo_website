@@ -7,6 +7,7 @@ Lightweight hub for the demo website and assistant backend wiring.
 - **Frontend:** React 18 + Vite + React Router + Tailwind + Netlify Functions.
 - **Assistant backend (production):** `chat-assistant-backend/` FastAPI service backed by Cloud SQL (Postgres) + OpenAI; rate-limited per IP.
 - **Assistant backend (legacy/local):** `OpenAuxilium/` Node + Express (kept for experimentation only).
+- **Content:** Portfolio and blog data in `src/data/portfolio.js` and `src/data/blogPosts.js` now list every public repo from [github.com/raven-dev-ops](https://github.com/raven-dev-ops/).
 
 ## Key Areas
 - **Architecture:** see `README.md` for stack, deployment, and assistant wiring.

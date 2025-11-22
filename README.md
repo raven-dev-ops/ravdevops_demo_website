@@ -25,6 +25,10 @@ Marketing/demo site for Raven Development Operations. Built with React, Vite, Ta
 - `OpenAuxilium/` - optional legacy Node assistant backend (not used in production)
 - `wiki.md`, `roadmap.md`, `timeline.md` - internal docs and planning notes
 
+## Content Data
+- Portfolio and blog entries (`src/data/portfolio.js`, `src/data/blogPosts.js`) enumerate every public repo under [https://github.com/raven-dev-ops](https://github.com/raven-dev-ops) with direct GitHub links.
+- Screenshot galleries remain on the flagship projects; other cards render without images but keep tech/outcomes and links.
+
 ## Getting Started (Frontend)
 Prereqs: Node.js 18+
 
@@ -60,7 +64,7 @@ VITE_CHAT_API_BASE
   -> VITE_OPENAUXILIUM_URL
   -> https://chat-assistant-backend-gw-3j4dip0k.uc.gateway.dev (default)
 ```
-- Chat endpoint: `POST ${VITE_CHAT_API_BASE}/api/chat` with body `{ "message": "<text>", "context": { ... } }`. Response returns `{ reply: string, mode: "live" | "offline" }`, and the UI shows a Live/Offline badge based on `mode`.
+- Chat endpoint: `POST ${VITE_CHAT_API_BASE}/api/chat` with body `{ "message": "<text>", "context": { ... } }`. Response returns `{ reply: string, mode: "live" | "offline" }` to drive typing cadence; the UI no longer shows a live/offline badge but still adapts behavior.
 - Optional health check: `GET ${VITE_CHAT_API_BASE}/health`.
 - CORS is restricted to `https://ravdevops.com` and `https://www.ravdevops.com`; host the frontend on those origins.
 
