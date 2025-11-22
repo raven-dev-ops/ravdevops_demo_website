@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { XMarkIcon } from '@heroicons/react/24/solid';
 import ravenAssistantIcon from '../assets/service1_banner.png';
 import { getViteEnv } from '../utils/env';
+import { getOfflineReply } from '../utils/offlineResponder';
 
 const resolveApiBase = () => {
   const appConfig =
@@ -29,10 +30,35 @@ const ChatBot = ({ defaultOpen = false }) => {
   const [open, setOpen] = useState(defaultOpen);
   const [bubbleVisible, setBubbleVisible] = useState(true);
   const [messages, setMessages] = useState([]);
+  const [sessionId, setSessionId] = useState(null);
   const [userInput, setUserInput] = useState('');
   const [isResponding, setIsResponding] = useState(false);
   const [mode, setMode] = useState('offline');
   const listEndRef = useRef(null);
+  const quickReplies = [
+    {
+      id: 'calendly-link',
+      label: 'Calendly link',
+      text: 'Can you send the Calendly link?',
+      inlineReply:
+        'Sure thing. Here is my Calendly link: https://calendly.com/ravdevops/discovery-meeting',
+    },
+    { id: 'book-call', label: 'Book a call', text: 'Can you send a Calendly link?' },
+    { id: 'pricing', label: 'Pricing', text: 'What are your pricing options?' },
+    { id: 'services', label: 'Services', text: 'Which services do you offer?' },
+    {
+      id: 'email',
+      label: 'Email us',
+      text: 'What is your email address?',
+      inlineReply: 'You can email business@ravdevops.com and we will reply within one business day.',
+    },
+    {
+      id: 'pricing-page',
+      label: 'Pricing page',
+      text: 'Where is your pricing page?',
+      inlineReply: 'You can review detailed packages here: https://ravdevops.com/pricing',
+    },
+  ];
 
   // Ensure the bubble is visible whenever the chat opens
   useEffect(() => {
@@ -90,8 +116,10 @@ const ChatBot = ({ defaultOpen = false }) => {
 
   const normalizeMode = (value) => (value === 'offline' ? 'offline' : 'live');
 
-  const handleSend = async () => {
-    const text = (userInput || '').trim();
+  const handleSend = async (overrideText) => {
+    const candidate =
+      typeof overrideText === 'string' && overrideText.length > 0 ? overrideText : userInput;
+    const text = (candidate || '').trim();
     if (!text) return;
 
     appendMessage('user', text);
@@ -108,6 +136,8 @@ const ChatBot = ({ defaultOpen = false }) => {
         },
         body: JSON.stringify({
           message: text,
+          chatUserId,
+          sessionId: sessionId || undefined,
           context: {
             chatUserId,
             source: 'raven-demo-website',
@@ -121,15 +151,32 @@ const ChatBot = ({ defaultOpen = false }) => {
       }
 
       const json = await res.json();
-      setMode(normalizeMode(json.mode));
-      if (json.reply) {
-        appendMessage('bot', json.reply);
+      if (json.sessionId) {
+        setSessionId(json.sessionId);
+      }
+
+      const resolvedMode = normalizeMode(json.mode);
+      setMode(resolvedMode);
+
+      let replyText = json.reply;
+
+      if (resolvedMode === 'offline') {
+        const offlineAnswer = getOfflineReply(text);
+        if (offlineAnswer) {
+          replyText = offlineAnswer;
+        }
+      }
+
+      if (replyText) {
+        appendMessage('bot', replyText);
       }
     } catch (error) {
       setMode('offline');
+      const offlineAnswer = getOfflineReply(text);
       appendMessage(
         'bot',
-        "I'm having trouble reaching my assistant server right now, but I can still share general information from the site.",
+        offlineAnswer ||
+          "I'm having trouble reaching my assistant server right now, but I can still share general information from the site.",
       );
     } finally {
       setIsResponding(false);
@@ -139,7 +186,19 @@ const ChatBot = ({ defaultOpen = false }) => {
   const handleClose = () => {
     setOpen(false);
     setMessages([]);
+    setSessionId(null);
     setIsResponding(false);
+  };
+
+  const handleQuickReply = (qr) => {
+    if (!qr) return;
+    if (qr.inlineReply) {
+      const promptText = qr.text || 'Share the Calendly link.';
+      appendMessage('user', promptText);
+      appendMessage('bot', qr.inlineReply);
+      return;
+    }
+    handleSend(qr.text);
   };
 
   return (
@@ -278,6 +337,24 @@ const ChatBot = ({ defaultOpen = false }) => {
                   </div>
                 </div>
               )}
+
+              <div className="flex flex-wrap gap-2 pt-1">
+                {quickReplies.map((qr) => (
+                  <button
+                    key={qr.id}
+                    type="button"
+                    onClick={() => handleQuickReply(qr)}
+                    disabled={isResponding}
+                    className={`rounded-full border px-3 py-1 text-xs font-semibold transition ${
+                      isResponding
+                        ? 'cursor-not-allowed border-gray-300 text-gray-400'
+                        : 'border-raven-accent/60 text-raven-accent hover:bg-raven-accent/10'
+                    }`}
+                  >
+                    {qr.label}
+                  </button>
+                ))}
+              </div>
 
               <div className="flex items-center gap-2 pt-1">
                 <input

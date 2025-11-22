@@ -20,7 +20,7 @@
         "Tell me about Raven Development.",
         "What does RavDevOps do?"
       ],
-      "answer": "Raven Development Operations (RavDevOps) is a veteran-owned, US-based technology company that provides fractional DevOps and custom software solutions for small businesses. The company focuses on eliminating inefficiencies, improving automation, and giving teams clear delivery timelines so they can ship changes faster and with fewer outages.",
+      "answer": "Raven Development Operations (RavDevOps) is a veteran-owned US shop doing fractional DevOps and custom software for small businesses. We strip waste, automate delivery, and give teams clear timelines so they ship faster with fewer outages.",
       "tags": [
         "company",
         "about",
@@ -40,7 +40,7 @@
         "What city is Raven Development in?",
         "Are you based in Kansas City?"
       ],
-      "answer": "RavDevOps is based in Kansas City, Missouri, in the United States.",
+      "answer": "We are based in Kansas City, Missouri, USA.",
       "tags": [
         "location",
         "kansas city",
@@ -58,7 +58,7 @@
         "What problems does RavDevOps solve?",
         "How can you help my business?"
       ],
-      "answer": "RavDevOps\u2019 core offering is fractional DevOps: part-time or project-based DevOps support that helps teams modernize their delivery pipelines without hiring a full-time engineer. Typical work includes designing and automating CI/CD pipelines, improving branching strategies, adding preview deployments for pull requests, and stabilizing releases to reduce outages. In addition, RavDevOps builds custom software and web apps, Discord bots, and e-commerce systems for small businesses and online communities.",
+      "answer": "Our core lane is fractional DevOps: part-time or project help to modernize pipelines and releases. Typical work includes GitHub Actions CI/CD, preview deploys, safer rollouts, plus custom web apps or bots when needed.",
       "tags": [
         "services",
         "offerings",
@@ -79,7 +79,7 @@
         "List your services.",
         "What kind of DevOps work do you do?"
       ],
-      "answer": "RavDevOps offers DevOps Assessment & Roadmap, CI/CD Pipelines & Automation, Infrastructure as Code & Cloud, Observability & Reliability, Dev Environment & Tooling, and Custom Software Development.",
+      "answer": "We offer DevOps Assessment & Roadmap, CI/CD Pipelines & Automation, Infrastructure as Code & Cloud, Observability & Reliability, Dev Environment & Tooling, and Custom Software Development.",
       "tags": [
         "services",
         "devops assessment",
@@ -102,7 +102,7 @@
         "How does fractional DevOps work?",
         "What does fractional DevOps mean at RavDevOps?"
       ],
-      "answer": "Fractional DevOps means getting dedicated DevOps expertise for a fraction of a full-time role. Instead of hiring an in-house DevOps engineer, you work with RavDevOps on a scoped engagement where they help you automate builds and deployments, design reliable branching and release processes, and train your team so it can maintain the system after the engagement ends.",
+      "answer": "Fractional DevOps means you get an experienced DevOps partner without hiring full-time. We design or fix pipelines, automate builds and deploys, and coach your team to own it afterward.",
       "tags": [
         "fractional devops",
         "devops consulting",
@@ -119,7 +119,7 @@
         "What kinds of customers do you serve?",
         "Do you focus on small businesses?"
       ],
-      "answer": "RavDevOps primarily works with small businesses and entrepreneurs who want modern DevOps and software practices without hiring a large in-house team. The brand is active in the Kansas City small-business ecosystem and publishes the RavDevOps KCMO Event Report, which highlights events and resources for local entrepreneurs and small business owners. RavDevOps also supports online communities and gaming clans through custom Discord bots, web apps, and marketplace-style projects.",
+      "answer": "We mostly help small businesses and entrepreneurs, plus online communities. KC roots with a local event report, and we also support gaming clans with bots and web apps.",
       "tags": [
         "customers",
         "small business",
@@ -138,7 +138,7 @@
         "Where can I see your code?",
         "What is your GitHub organization?"
       ],
-      "answer": "RavDevOps maintains a public GitHub organization at https://github.com/raven-dev-ops. The pinned repositories include the ravdevops_demo_website, an Art Bay e-commerce frontend, a Django-based e-commerce backend, a Helldivers 2 clan website, and a Helldivers 2 Discord OCR LFG and mission-stats bot. Some projects are fully open source, while others are public but not open source and require written permission before reuse.",
+      "answer": "Our public GitHub org is https://github.com/raven-dev-ops. You will see this website, sample e-commerce frontend/backend, Helldivers 2 projects, and other public-but-proprietary repos.",
       "tags": [
         "github",
         "open source",
@@ -156,7 +156,7 @@
         "How is the RavDevOps website built?",
         "What tech stack powers ravdevops.com?"
       ],
-      "answer": "The ravdevops_demo_website repository is the public codebase for the RavDevOps marketing site at ravdevops.com. It is a JavaScript frontend project deployed with modern tooling and styles. The site is implemented as a single-page application that promotes RavDevOps\u2019 fractional DevOps services and links to the GitHub organization and other content.",
+      "answer": "The ravdevops_demo_website repo powers ravdevops.com ? a React/Vite marketing site for our fractional DevOps services.",
       "tags": [
         "website",
         "ravdevops.com",
@@ -174,7 +174,7 @@
         "Do you help with Discord communities?",
         "What kind of Discord work does RavDevOps do?"
       ],
-      "answer": "RavDevOps also operates as a Discord development team, building tools that enhance engagement in online communities. This includes advanced Discord bots, clan and community websites, and integrations that connect game stats, leaderboards, and marketplaces back into Discord servers.",
+      "answer": "Yes, Discord work is a core lane. We build bots and integrations that drive engagement, stats, leaderboards, and marketplace-style tools for communities.",
       "tags": [
         "discord",
         "discord bots",
@@ -192,7 +192,7 @@
         "Do you specialize in Discord tools?",
         "How do you describe your Discord work?"
       ],
-      "answer": "RavDevOps describes itself as a Discord development team and GitHub organization, creating tools that enhance engagement in online communities. This includes bots that manage registrations, stats, and leaderboards, as well as web applications integrated with Discord via OAuth, webhooks, and role synchronization.",
+      "answer": "We act as a Discord development team: bots, integrations, and web apps that sync roles, stats, leaderboards, and community workflows.",
       "tags": [
         "discord development",
         "discord integrations",
@@ -209,7 +209,7 @@
         "Tell me about your Helldivers 2 bot.",
         "What does the Helldivers 2 LFG and mission-stats bot do?"
       ],
-      "answer": "The Helldivers 2 Discord Bot \u2013 LFG and Mission Stats is a Discord bot designed for Helldivers 2 communities. It provides a clan hub where players can register and upload scoreboard screenshots, then uses an OCR pipeline to turn those screenshots into structured mission stats stored in a database. The bot builds monthly leaderboards, awards medals and MVP roles, manages LFG ping and region roles, and offers utilities for guild configuration and automated message cleanup.",
+      "answer": "Helldivers 2 LFG and mission-stats bot: players upload scoreboard screenshots, OCR turns them into stats, leaderboards and medals update automatically, with LFG pings and utilities.",
       "tags": [
         "helldivers 2",
         "discord bot",
@@ -228,7 +228,7 @@
         "What is the Helldivers 2 clan website project?",
         "Tell me about your Helldivers 2 clan site."
       ],
-      "answer": "The Galactic Phantom Division website is a web application for a Helldivers 2 clan. It integrates with Discord for authentication and roles, stores data in a database, and includes features like leaderboards, a merch shop, profile views for roles and awards, rotating alert bars, and Discord webhooks for reporting stats and updates. The repository is public for viewing and collaboration, but the code is proprietary and may not be reused or forked without written permission from the owner.",
+      "answer": "Galactic Phantom Division site: Discord auth and roles, leaderboards, merch, profile pages, rotating alerts, and webhooks for stats. Public to view but not for reuse without permission.",
       "tags": [
         "helldivers 2",
         "clan website",
@@ -247,7 +247,7 @@
         "How is your example e-commerce backend built?",
         "Do you have a backend for online stores?"
       ],
-      "answer": "The E-Commerce Backend repository is a backend for an example online marketplace. It provides APIs for typical e-commerce concerns like products, carts, orders, payments, reviews, and user accounts, and is designed to integrate with external systems such as payment providers and ERP platforms. The project is public but not open source and requires written permission from the owner before using, copying, modifying, or redistributing any part of the codebase.",
+      "answer": "E-commerce backend with APIs for products, carts, orders, payments, reviews, and users. Designed to plug into payment providers and ERPs; public to view under a proprietary license.",
       "tags": [
         "e-commerce backend",
         "api",
@@ -265,7 +265,7 @@
         "What does the e-commerce frontend project do?",
         "How does your example storefront work?"
       ],
-      "answer": "The Art Bay frontend is a web storefront that connects to a marketplace API. It supports authentication, checkout with a payment provider, and includes routes for browsing products, viewing details, managing a cart, completing checkout, and managing profiles, addresses, and orders. The repository is public but uses a custom license that allows cloning and local evaluation while prohibiting commercial use or creating forks without prior written permission.",
+      "answer": "Art Bay frontend: storefront for a marketplace API with auth, checkout, profiles, addresses, and orders. Public repo with a custom non-commercial license; no forks without permission.",
       "tags": [
         "art bay",
         "e-commerce frontend",
@@ -283,7 +283,7 @@
         "Do you cover Kansas City business events?",
         "Where can I find your KCMO event updates?"
       ],
-      "answer": "The RavDevOps KCMO Event Report is a newsletter that highlights events in Kansas City that are relevant to entrepreneurs and small business owners. It curates local events and reviews as part of RavDevOps\u2019 broader effort to support and connect the regional small-business community.",
+      "answer": "RavDevOps KCMO Event Report is a newsletter that rounds up Kansas City events and resources for entrepreneurs and small businesses.",
       "tags": [
         "newsletter",
         "kansas city",
@@ -302,7 +302,7 @@
         "How do I work with you?",
         "Where can I get more information?"
       ],
-      "answer": "To learn more or start a project with RavDevOps, visit https://ravdevops.com for the latest information about services and offerings. You can also explore public projects at https://github.com/raven-dev-ops and connect via LinkedIn or the contact options linked from the site.",
+      "answer": "Reach us at https://ravdevops.com, see projects at https://github.com/raven-dev-ops, or use the contact links and LinkedIn.",
       "tags": [
         "contact",
         "hire",
@@ -321,7 +321,7 @@
         "What is your DevOps audit?",
         "How do you assess our DevOps maturity?"
       ],
-      "answer": "DevOps Assessment and Roadmap audits CI/CD, infrastructure, observability, and delivery practices to build a pragmatic plan. You get a clear, honest view of your delivery and operations maturity, prioritized low-risk improvements you can start on immediately, and an executive-ready roadmap that ties technical work to business outcomes. This typically includes an assessment plus a roadmap workshop.",
+      "answer": "DevOps Assessment & Roadmap audits CI/CD, infra, observability, and ops, then delivers a prioritized, executive-ready roadmap with quick wins and a plan.",
       "tags": [
         "services",
         "devops assessment",
@@ -340,7 +340,7 @@
         "Can you set up CI/CD for us?",
         "What do you do for GitHub Actions pipelines?"
       ],
-      "answer": "CI/CD Pipelines and Automation focuses on GitHub Actions pipelines for testing, container builds, and zero-downtime deploys. The goal is CI/CD pipelines that keep every change testable and traceable, deployment patterns with safe rollback paths when something misbehaves, and automated quality gates for tests, security scans, and policy checks. This can be delivered as an implementation sprint or retainer.",
+      "answer": "CI/CD Pipelines & Automation: GitHub Actions pipelines for tests, lint, container builds, and zero-downtime deploys with rollback and policy-backed quality gates.",
       "tags": [
         "services",
         "ci/cd",
@@ -360,7 +360,7 @@
         "Can you help with Terraform and cloud?",
         "Do you manage secrets and cloud security?"
       ],
-      "answer": "Infrastructure as Code and Cloud covers Terraform, container orchestration, and secrets management for resilient cloud stacks. You get repeatable environments defined in code from development to production, cloud configurations aligned with security and compliance policies, and hardened secrets management plus least-privilege access patterns. This can be delivered as a fixed-scope deployment or ongoing support.",
+      "answer": "Infrastructure as Code & Cloud: Terraform and cloud hardening with least-privilege access, secrets management, and repeatable environments from dev through prod.",
       "tags": [
         "services",
         "infrastructure as code",
@@ -381,7 +381,7 @@
         "Can you help with logging and metrics?",
         "Do you tune dashboards and alerts?"
       ],
-      "answer": "Observability and Reliability focuses on logging, metrics, dashboards, and alerting tuned to your service-level objectives and on-call reality. You get dashboards and alerts tuned to SLOs instead of noise, faster incident detection and response supported by clear telemetry, and runbooks and reliability practices that reduce weekend fire drills. This is typically delivered as a reliability sprint plus training.",
+      "answer": "Observability & Reliability: logging, metrics, and traces with SLO-based alerts, tuned dashboards, and runbooks for faster detection and response.",
       "tags": [
         "services",
         "observability",
@@ -402,7 +402,7 @@
         "Can you improve our developer experience?",
         "Do you set up linting and testing?"
       ],
-      "answer": "Dev Environment and Tooling focuses on developer experience upgrades such as local environments, pre-commit hooks, linting, and testing. The outcomes are fast, consistent local environments that mirror production where it matters, pre-commit checks and CI linting to keep the main branch healthy, and developer workflows that reduce context switching and review friction. This is often delivered via pairing sessions or an enablement workshop.",
+      "answer": "Dev Environment & Tooling: speed up developer experience with consistent local environments, pre-commit plus CI lint/tests, and workflows that cut review friction.",
       "tags": [
         "services",
         "developer experience",
@@ -423,7 +423,7 @@
         "Do you build custom web apps?",
         "Can you replace our spreadsheets with tools?"
       ],
-      "answer": "Custom Software Development delivers tailored web apps, APIs, and internal tools that replace spreadsheets and brittle scripts. The focus is on modern applications designed around your real-world processes, automation and integrations that remove manual handoffs and repetitive tasks, and quality-focused delivery with tests, monitoring, and clear deployment paths. Work can be fixed-scope builds or ongoing product support.",
+      "answer": "Custom Software Development: web apps, APIs, and internal tools that replace spreadsheets and manual scripts, with automation and integrations around real processes.",
       "tags": [
         "services",
         "custom software",
@@ -443,7 +443,7 @@
         "How much is your CI/CD Kickstart?",
         "Can you describe the CI/CD Kickstart?"
       ],
-      "answer": "The CI/CD Kickstart is a fixed-scope pipeline setup for one service, such as a Next.js site or a Django API. It starts at $2,400. The engagement is designed to establish or repair a CI/CD pipeline that runs tests and linting on every change, harden secrets and environment configuration so deployments are safe and repeatable, and implement a simple, zero-downtime deployment flow with clear rollback steps.",
+      "answer": "CI/CD Kickstart: fixed-scope pipeline setup or repair for one service (for example Next.js or Django). Starts at $2,400 and includes tests/lint, secrets hardening, and zero-downtime deploy with rollback.",
       "tags": [
         "pricing",
         "ci/cd kickstart",
@@ -462,7 +462,7 @@
         "How much is your DevOps Modernization Sprint?",
         "Can you describe the modernization sprint?"
       ],
-      "answer": "The DevOps Modernization Sprint combines an assessment with a 2\u20133 week implementation across pipelines, infrastructure, and observability. It starts at $7,600. The sprint delivers a practical roadmap plus quick-win improvements to pipelines and infrastructure, introduces or improves infrastructure-as-code and cloud hardening aligned to your policies, and stands up or refines dashboards and alerts so on-call engineers see issues early instead of after the fact.",
+      "answer": "DevOps Modernization Sprint: assessment plus 2?3 week implementation across pipelines, infra, and observability. Starts at $7,600 and delivers a roadmap with concrete upgrades.",
       "tags": [
         "pricing",
         "devops modernization sprint",
@@ -481,7 +481,7 @@
         "Should I choose CI/CD Kickstart or the modernization sprint?",
         "How do I pick between your offerings?"
       ],
-      "answer": "If you need to stand up or fix a single pipeline, the CI/CD Kickstart is usually the best fit. If you want a broader modernization across infrastructure, observability, and delivery, the DevOps Modernization Sprint is a better fit. For ongoing help, the Fractional DevOps Partner option keeps a veteran operator embedded with your team each month.",
+      "answer": "Pick Kickstart for one pipeline. Choose the Modernization Sprint for a broader refresh across infra, observability, and delivery. Go Fractional DevOps Partner if you want ongoing embedded help.",
       "tags": [
         "faq",
         "which engagement",
@@ -499,7 +499,7 @@
         "Do you offer a smaller pilot?",
         "Can we test things before a big engagement?"
       ],
-      "answer": "Yes. Many teams start with a focused assessment or CI/CD Kickstart, then decide whether to extend into a modernization sprint or a fractional engagement once there are real results and trust in place.",
+      "answer": "Yes. Start small with an assessment or Kickstart, then extend into a sprint or fractional plan once you see results.",
       "tags": [
         "faq",
         "start small",
@@ -517,7 +517,7 @@
         "Can you support our current platform?",
         "Do you only use your own tools?"
       ],
-      "answer": "In most cases, yes. RavDevOps regularly works with GitHub Actions, Docker, Kubernetes, Terraform, Heroku, Netlify, AWS, and Azure across TypeScript, JavaScript, Python, and Node.js services. During the discovery call, you confirm fit with your stack and constraints.",
+      "answer": "We work with your stack: GitHub Actions, Docker, Kubernetes, Terraform, Heroku, Netlify, AWS, Azure, and JS/TS/Python/Node. We confirm fit on a discovery call.",
       "tags": [
         "faq",
         "existing tools",
@@ -541,7 +541,7 @@
         "How do you handle billing?",
         "What are your payment terms?"
       ],
-      "answer": "Work is scoped with a short proposal or statement of work. Fixed-scope projects are typically billed 50% up front and 50% on delivery. Fractional DevOps partnerships are billed monthly with clear goals and an option to revisit scope each quarter.",
+      "answer": "Work is scoped with a short proposal or SOW. Fixed projects are typically 50% up front and 50% on delivery. Fractional partnerships are billed monthly with quarterly scope check-ins.",
       "tags": [
         "faq",
         "contracts",
@@ -550,7 +550,117 @@
         "billing",
         "scope"
       ]
+    },
+    {
+      "id": "faq_offline_mode",
+      "title": "Offline Mode Behavior",
+      "category": "faq",
+      "questions": [
+        "What happens if you are offline?",
+        "How do you respond in offline mode?",
+        "Do you still answer when the assistant is down?"
+      ],
+      "answer": "If I am offline, I use a short built-in knowledge base so you still get concise answers about services, pricing, and how to contact or schedule.",
+      "tags": [
+        "offline",
+        "fallback",
+        "chat",
+        "assistant",
+        "availability"
+      ]
+    },
+    {
+      "id": "faq_schedule_call",
+      "title": "How to Schedule a Call",
+      "category": "faq",
+      "questions": [
+        "How do I schedule a call?",
+        "Can you send a Calendly link?",
+        "How do I book time?"
+      ],
+      "answer": "Use the Schedule buttons or the Calendly embed on the Contact page. If you ask here, I can drop the scheduling link too.",
+      "tags": [
+        "schedule",
+        "calendly",
+        "book",
+        "call",
+        "meeting"
+      ]
+    },
+    {
+      "id": "faq_response_time",
+      "title": "Response Time",
+      "category": "faq",
+      "questions": [
+        "How fast do you respond?",
+        "When will I hear back?",
+        "What is your SLA?"
+      ],
+      "answer": "Contact form or Calendly bookings get a response within one business day. Fractional partners get faster help via Slack or Teams.",
+      "tags": [
+        "response time",
+        "sla",
+        "support",
+        "contact",
+        "slack"
+      ]
+    },
+    {
+      "id": "faq_security_privacy",
+      "title": "Security and Privacy",
+      "category": "faq",
+      "questions": [
+        "How do you handle security?",
+        "Do you protect credentials?",
+        "What about privacy?"
+      ],
+      "answer": "We follow least-privilege access, keep secrets in managed stores, and avoid leaving credentials in repos. Share sensitive details over secure channels, not plain chat.",
+      "tags": [
+        "security",
+        "privacy",
+        "secrets",
+        "least privilege",
+        "compliance"
+      ]
+    },
+    {
+      "id": "faq_stack_fit",
+      "title": "Tech Stack Fit",
+      "category": "faq",
+      "questions": [
+        "Do you support our stack?",
+        "Which languages do you use?",
+        "Can you work with Next.js or Django?"
+      ],
+      "answer": "Common stacks include Next.js/React, Django/Flask, and Node/Express. Clouds: AWS, Azure, GCP, Netlify, Heroku. We adapt to your tooling.",
+      "tags": [
+        "stack",
+        "next.js",
+        "django",
+        "node",
+        "aws",
+        "azure",
+        "gcp"
+      ]
+    },
+    {
+      "id": "faq_industries_clients",
+      "title": "Industries and Teams",
+      "category": "faq",
+      "questions": [
+        "Who do you work with?",
+        "Do you help SaaS or e-commerce?",
+        "Do you support gaming communities?"
+      ],
+      "answer": "We help SaaS and B2B teams, e-commerce shops, and online communities including gaming clans that need bots, web apps, or delivery help.",
+      "tags": [
+        "industries",
+        "saas",
+        "b2b",
+        "ecommerce",
+        "gaming",
+        "communities"
+      ]
     }
   ]
 }
-
