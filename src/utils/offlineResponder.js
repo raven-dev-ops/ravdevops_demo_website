@@ -19,9 +19,8 @@ const isProjectIntent = (words) => words.some((w) => projectKeywords.includes(w)
 const hasTimeframe = (text) => /\b(day|week|month|deadline|today|tomorrow|next)\b/i.test(text);
 
 const buildProjectAck = (raw) => {
-  const summary = raw.trim();
   const timeframeMention = hasTimeframe(raw) ? ' this week' : '';
-  return `Got it—you need help on that project${timeframeMention}. We can handle design, build, and ops. Want a free discovery call this week? I can drop the Calendly link.`;
+  return `Got it—you need help on that project${timeframeMention}. Want a quick outline or a Calendly link to chat live?`;
 };
 
 const truncate = (text, max = 140) => {
@@ -40,6 +39,10 @@ const projectFollowUp =
   'Give me one line on what it does, who uses it, and your timeframe. I will suggest a next step.';
 const promptForDetails =
   'Tell me what you need—services, pricing, or your project—and I will point you to the right details.';
+const nextStep = () =>
+  Math.random() < 0.5
+    ? 'Want me to outline next steps or send a Calendly link for this week?'
+    : 'Should I share a quick plan or drop a Calendly link to chat live?';
 const MIN_MATCH_SCORE = 2;
 
 const scoreEntry = (words, entry) => {
@@ -92,7 +95,7 @@ export const getOfflineReply = (message) => {
   if (best.answer) {
     const topic = best.title || best.question || 'this topic';
     const trimmed = truncate(firstSentence(best.answer));
-    return `For ${topic}: ${trimmed} ${projectFollowUp}`;
+    return `For ${topic}: ${trimmed} ${nextStep()}`;
   }
 
   return promptForDetails;
